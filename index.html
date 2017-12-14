@@ -1,17 +1,260 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-</head>
-<body>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Mario Vizcaino</title>
+
+    <meta name="keywords" content="Barranquilla, Colombia, Developer, FullStack, Full-Stack, Full Stack, Web development, code, programador, desarrollador, ingeniero de sistemas">
+    <meta name="description" content="Full Stack developer">
   
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-</body>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    
+  </head>
+  <body>
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="navbar-fixed">
+      <nav class="light-blue accent-3 z-depth-1">
+        <div class="nav-wrapper">
+          <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>  
+          <ul class="right hide-on-med-and-down">
+            <li class="trans-element"><a href="#intro">Home</a></li>
+            <li class="trans-element"><a href="#about">About</a></li>
+            <li class="trans-element"><a href="#portfolio">PortFolio</a></li>
+            <li class="trans-element"><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div><!-- NAVIGATION BAR END -->
+    <div id="intro"  class="intro light-blue accent-2 z-depth-1" >
+      <h1 class="grey-text text-lighten-5 pin-top title" id="intro" data-target="intro" >Mario Vizcaino</h1>
+      <h5 clas="grey lighten-4 grey-text text-darken-1">Full Stack Developer</h5>
+      <div class="social">
+        <a href="https://github.com/mariovzc" target="_blank"><img src="images/github.svg" onerror="this.onerror=null; this.src='images/github.png'"></a>
+        <a href="https://codepen.io/mariovzc/pens/public/" target="_blank"><img src="images/codepen.svg" onerror="this.onerror=null; this.src='images/codepen.png'"></a>
+        <a href="https://twitter.com/mvskhs" target="_blank"><img src="images/twitter.svg" onerror="this.onerror=null; this.src='images/twitter.png'"></a>
+        <a href="https://www.linkedin.com/in/mariovizcaino/" target="_blank"><img src="images/linkedin.svg" onerror="this.onerror=null; this.src='images/linkedin.png'"></a>
+      </div>      
+    </div><!-- INTRO END -->
+    <div id="about"  class="container about block">
+      <h2 >about me</h2>
+      <h6>let me introduce my self</h6>
+      <hr>
+      <div class="row">
+        <div class="col s12 m4 l4">
+          <h6>Story</h6>
+          <p>Hi, my name is mario vizcaino, I am a systems engineer and computer security specialist, I am currently living in Barranquilla and I love programming and reading about new technologies</p>
+          <p>I love video games, reading books, football and <strong>Game of thrones</strong></p>
+        </div>
+        <div class="col s12 m4 l4">
+          <h6>Profile</h6>
+          <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+              <img src="https://avatars1.githubusercontent.com/u/7216999?v=4&s=460" width="64" height="64">
+              <p>Check out my github and my codepen</p>
+            </div>
+            <div class="card-action">
+              <a href="https://github.com/mariovzc">Github</a>
+              <a href='https://codepen.io/mariovzc/pens/public/'>Codepen</a>
+            </div>
+          </div>
+        </div>
+        <div class="col s12 m4 l4">
+          <h6>Experience</h6>
+          <ul class="collapsible">
+            <li class="active">
+              <div class="collapsible-header"><i class="mdi-av-web"></i>Web Developer</div>
+              <div class="collapsible-body">
+                <p class="text-center company">Company: <strong>Saludtec S.A.S</strong></p>
+                <p>Duration: August 2015 - May 2017</p> 
+                <p>Used: </p>
+                <div class="chip">Phonegap</div>
+                <div class="chip">JQuery</div>
+                <div class="chip">Javascript</div> 
+                <div class="chip">HTML</div>
+                <div class="chip">CSS</div>
+                <div class="chip">Bootstrap</div>
+                <div class="chip">Ruby On Rails</div>
+                <div class="chip">APIs REST</div>
+              </div>
+            </li>
+            <li>
+              <div class="collapsible-header"><i class="mdi-editor-format-align-justify"></i>iOS Developer</div>
+              <div class="collapsible-body">
+                <p class="text-center company">Company: <strong>Saludtec S.A.S</strong></p>
+                <p>Duration: August 2015 - May 2017</p> 
+                <p>Used: </p>
+                <div class="chip">Xcode</div>
+                <div class="chip">Swift</div>
+                <div class="chip">Objective-C</div> 
+                <div class="chip">Cocoapods</div>
+                <div class="chip">C++</div>
+                <div class="chip">Coredata</div>
+                <div class="chip">REST</div>
+              </div>
+            </li>
+            <li>
+              <div class="collapsible-header"><i class="mdi-av-play-shopping-bag"></i>Full Stack Developer</div>
+              <div class="collapsible-body">
+                <p class="text-center company">Company: <strong>GhettoSoft S.A.S.</strong></p>
+                <p>Duration: March 2015 - June 2015</p> 
+                <p>Used: </p>
+                <div class="chip">Ruby on Rails</div>
+                <div class="chip">JQuery</div>
+                <div class="chip">Bootstrap</div> 
+                <div class="chip">Foundation</div>
+                <div class="chip">HTML</div>
+                <div class="chip">CSS</div>
+                <div class="chip">JavaScript</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div><!-- ABOUT END -->
+    <div id="portfolio" class=" portfolio block">
+      <div class="cont">
+        <h2>portfolio</h2>
+        <h6>MY PROJECTS</h6>
+        <hr>
+        <div class="row">
+          <div class="col s12 m4">
+            <div class="card">
+              <div class="card-image">
+                <img class="materialboxed" src="images/jaguar.png" data-caption="Jaguar XE Example">
+              </div>
+            </div>
+          </div>
+          <div class="col s12 m4">
+            <div class="card">
+              <div class="card-image">
+                <img class="materialboxed" src="images/ecommerce.png" data-caption="E-Commerce emplate in bootstrap">
+              </div>
+            </div>
+          </div>
+          <div class="col s12 m4">
+            <div class="card">
+              <div class="card-image">
+                <img class="materialboxed " src="images/studiodev.png" data-caption="Studio Dev page template">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12 m4">
+            <div class="card">
+              <div class="card-image">
+                <img class="materialboxed" src="images/tinoco.png" data-caption="Pagina tinoco.co">
+              </div>
+            </div>
+          </div>
+          <div class="col s12 m4">
+            <div class="card">
+              <div class="card-image">
+                <img class="materialboxed" src="images/picas_fijas.png" data-caption="Ejemplo de picas y fijas">
+              </div>
+            </div>
+          </div>
+          <div class="col s12 m4">
+            <div class="card">
+              <div class="card-image">
+                <img class="materialboxed " src="images/alin.png" data-caption="Pagina alin.digital">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12 m4">
+            <div class="card">
+              <div class="card-image">
+                <img class="materialboxed" src="images/blog.png" data-caption="Blog creado usando ruby on rails">
+              </div>
+            </div>
+          </div>
+          <div class="col s12 m4">
+            <div class="card">
+              <div class="card-image">
+                <img class="materialboxed" src="images/zcenter.png" data-caption="Pagina aling.digital/zcenter">
+              </div>
+            </div>
+          </div>
+          <div class="col s12 m4">
+            <div class="card">
+              <div class="card-image">
+                <img class="materialboxed " src="images/studiodev.png" data-caption="Studio Dev page template">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!--Projects END -->
+    <div  id="contact" class="container contact block">
+      <h2>contact</h2>
+      <h6>get in touch with me</h6>
+      <hr>
+      <div class="row">
+        <div class="col s12 m6 l6">
+          <div class="row">
+            <form class="col s12" action="https://formspree.io/vzcdeveloper@gmail.com" method="POST">
+              <input type="hidden" name="_next" value="/thanks" />
+              <div class="row">
+                <div class="input-field col s6">
+                  <input name="first_name" id="first_name" type="text" class="validate" required>
+                  <label for="first_name">First Name</label>
+                </div>
+                <div class="input-field col s6">
+                  <input name="last_name" id="last_name" type="text" class="validate" required>
+                  <label for="last_name">Last Name</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input name="email" id="email" type="email" class="validate" required>
+                  <label for="email">E-Mail</label>
+                </div>
+              </div>
+              <textarea name="message" class="materialize-textarea" placeholder="Your Message" required></textarea>
+              <button class="btn waves-effect waves-light light-blue accent-2" type="submit">Submit
+                <i class="mdi-content-send right"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="col s12 m6 l6 contact-holder">
+          <h6 class="mdi-action-home">Skype</h6>
+          <p>mario.vizcainos</p>
+          <h6 class="mdi-hardware-phone-android">Email</h6>
+          <p>vzcdeveloper@gmail.com</p>
+        </div>
+      </div>
+    </div><!--CONTACT END-->
+    <ul id="slide-out" class="side-nav">
+      <li><div class="user-view">
+        <div class="background light-blue accent-3 z-depth-1">
+        </div>
+        <a href="#!user"><img class="circle" src="https://avatars1.githubusercontent.com/u/7216999?v=4&s=460"></a>
+        <a href="#!name"><span class="white-text name">Mario Vizcaino</span></a>
+        <a href="#!email"><span class="white-text email">mario.vizcainos@gmail.com</span></a>
+      </div></li>
+      <li class="trans-element"><a class="waves-effect" href="#intro">Home</a></li>
+      <li><div class="divider"></div></li>
+      <li class="trans-element"><a class="waves-effect" href="#about">About</a></li>
+      <li><div class="divider"></div></li>
+      <li class="trans-element"><a class="waves-effect" href="#portfolio">Portfolio</a></li>
+      <li><div class="divider"></div></li>
+      <li class="trans-element"><a class="waves-effect" href="#contact">Contact</a></li>
+      <li><div class="divider"></div></li>
+    </ul><!-- RESPONSIVE NAVBAR-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>          
+    <script src="js/main.js"></script>
+  </body>
 </html>

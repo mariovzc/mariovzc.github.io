@@ -1,10 +1,6 @@
-*{
-  box-sizing: border-box;
-}
-
-html, body, .block {
-	height: auto;
-	background-color: #EDEDED;
+body, html
+{
+	background-color: #EDEDED !important;
 }
 
 .intro
@@ -12,8 +8,7 @@ html, body, .block {
 	text-align: center;
 	padding-top: 13%;
 	padding-bottom: 13%;
-  margin-bottom: 50px;
-  height: 100%;
+	margin-bottom: 50px;
 }
 
 .intro h1
@@ -31,9 +26,7 @@ html, body, .block {
 	display: inline-block;
 	font-size: 1.2rem;
 }
-.social{
-	margin-top: 5%;	
-}
+
 .intro .social a{
 	margin: 5px;
 }
@@ -53,12 +46,11 @@ html, body, .block {
 	margin-bottom: 24px;
 }
 
-.about h2
+.about h5
 {
 	text-align: center;
 	text-transform: uppercase;
-  margin-bottom: 15px;
-  font-size: 50px;
+	margin-bottom: 15px;
 }
 
 .about h6
@@ -72,7 +64,6 @@ html, body, .block {
 {
 	width: 40px;
 	margin-bottom: 45px;
-	
 }
 
 .about .card
@@ -83,21 +74,14 @@ html, body, .block {
 .about .card img
 {
 	margin-bottom: 15px;
-	border-radius: 30px;
-}
-.company{
-  margin-top: -10px;
 }
 
 .portfolio .col
 {
 	margin-bottom: 24px;
 }
-.cont{
-	margin: 30px;
-	padding: 20px;
-}
-.portfolio h2
+
+.portfolio h5
 {
 	text-align: center;
 	text-transform: uppercase;
@@ -117,18 +101,25 @@ html, body, .block {
 	margin-bottom: 45px;
 }
 
-.card-action{
+.portfolio .portfolio-holder
+{
+	clear: both;
 	text-align: center;
 }
-.cont .card-action a{
-	color: #40C4FF !important;
+
+.portfolio img
+{
+	width: 33%;
+	display: inline-block;
+	float: left;
 }
+
 .contact .col
 {
 	margin-bottom: 24px;
 }
 
-.contact h2
+.contact h5
 {
 	text-align: center;
 	text-transform: uppercase;
@@ -164,34 +155,7 @@ html, body, .block {
 {
 	margin-bottom: 30px;
 }
-
-
-
-@media screen 
-and (min-device-width: 1200px) 
-and (max-device-width: 1600px) 
-and (-webkit-min-device-pixel-ratio: 1) { 
-	html, body, .block {
-		height: 100%;
-	}
-	.block{
-		padding: 80px;
-	}
-	
+footer
+{
+	padding-top: 0px;
 }
-
-/* ----------- Retina Screens ----------- */
-@media screen 
-and (min-device-width: 1200px) 
-and (max-device-width: 1600px) 
-and (-webkit-min-device-pixel-ratio: 2)
-and (min-resolution: 192dpi) { 
-	html, body, .block {
-		height: 100%;
-	}
-	.block{
-		padding: 80px;
-	}
-	
-}
-

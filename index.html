@@ -21,20 +21,7 @@
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <div class="navbar-fixed">
-      <nav class="light-blue accent-3 z-depth-1">
-        <div class="nav-wrapper">
-          <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>  
-          <ul class="right hide-on-med-and-down">
-            <li class="trans-element"><a href="#intro">Home</a></li>
-            <li class="trans-element"><a href="#about">About</a></li>
-            <li class="trans-element"><a href="#portfolio">PortFolio</a></li>
-            <li class="trans-element"><a href="#contact">Contact</a></li>
-          </ul>
-        </div>
-      </nav>
-    </div><!-- NAVIGATION BAR END -->
-    <div id="intro"  class="intro light-blue accent-2 z-depth-1" >
+    <div id="intro"  class="intro green lighten-2" >
       <h1 class="grey-text text-lighten-5 pin-top title" id="intro" data-target="intro" >Mario Vizcaino</h1>
       <h5 clas="grey lighten-4 grey-text text-darken-1">Full Stack Developer</h5>
       <div class="social">
@@ -45,14 +32,13 @@
       </div>      
     </div><!-- INTRO END -->
     <div id="about"  class="container about block">
-      <h2 >about me</h2>
+      <h2 class="center" >about me</h2>
       <h6>let me introduce my self</h6>
       <hr>
       <div class="row">
         <div class="col s12 m4 l4">
           <h6>Story</h6>
           <p>Hi, my name is mario vizcaino, I am a systems engineer and computer security specialist, I am currently living in Barranquilla and I love programming and reading about new technologies</p>
-          <p>I love video games, reading books, football and <strong>Game of thrones</strong></p>
         </div>
         <div class="col s12 m4 l4">
           <h6>Profile</h6>
@@ -82,22 +68,12 @@
                 <div class="chip">HTML</div>
                 <div class="chip">CSS</div>
                 <div class="chip">Bootstrap</div>
-                <div class="chip">Ruby On Rails</div>
                 <div class="chip">APIs REST</div>
-              </div>
-            </li>
-            <li>
-              <div class="collapsible-header"><i class="mdi-editor-format-align-justify"></i>iOS Developer</div>
-              <div class="collapsible-body">
-                <p class="text-center company">Company: <strong>Saludtec S.A.S</strong></p>
-                <p>Duration: August 2015 - May 2017</p> 
-                <p>Used: </p>
                 <div class="chip">Xcode</div>
                 <div class="chip">Swift</div>
                 <div class="chip">Objective-C</div> 
                 <div class="chip">Cocoapods</div>
                 <div class="chip">C++</div>
-                <div class="chip">Coredata</div>
                 <div class="chip">REST</div>
               </div>
             </li>
@@ -120,84 +96,29 @@
         </div>
       </div>
     </div><!-- ABOUT END -->
-    <div id="portfolio" class=" portfolio block">
-      <div class="cont">
-        <h2>portfolio</h2>
-        <h6>MY PROJECTS</h6>
-        <hr>
-        <div class="row">
-          <div class="col s12 m4">
-            <div class="card">
-              <div class="card-image">
-                <img class="materialboxed" src="images/jaguar.png" data-caption="Jaguar XE Example">
-              </div>
-            </div>
-          </div>
-          <div class="col s12 m4">
-            <div class="card">
-              <div class="card-image">
-                <img class="materialboxed" src="images/ecommerce.png" data-caption="E-Commerce emplate in bootstrap">
-              </div>
-            </div>
-          </div>
-          <div class="col s12 m4">
-            <div class="card">
-              <div class="card-image">
-                <img class="materialboxed " src="images/studiodev.png" data-caption="Studio Dev page template">
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col s12 m4">
-            <div class="card">
-              <div class="card-image">
-                <img class="materialboxed" src="images/tinoco.png" data-caption="Pagina tinoco.co">
-              </div>
-            </div>
-          </div>
-          <div class="col s12 m4">
-            <div class="card">
-              <div class="card-image">
-                <img class="materialboxed" src="images/picas_fijas.png" data-caption="Ejemplo de picas y fijas">
-              </div>
-            </div>
-          </div>
-          <div class="col s12 m4">
-            <div class="card">
-              <div class="card-image">
-                <img class="materialboxed " src="images/alin.png" data-caption="Pagina alin.digital">
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col s12 m4">
-            <div class="card">
-              <div class="card-image">
-                <img class="materialboxed" src="images/blog.png" data-caption="Blog creado usando ruby on rails">
-              </div>
-            </div>
-          </div>
-          <div class="col s12 m4">
-            <div class="card">
-              <div class="card-image">
-                <img class="materialboxed" src="images/zcenter.png" data-caption="Pagina aling.digital/zcenter">
-              </div>
-            </div>
-          </div>
-          <div class="col s12 m4">
-            <div class="card">
-              <div class="card-image">
-                <img class="materialboxed " src="images/studiodev.png" data-caption="Studio Dev page template">
-              </div>
-            </div>
-          </div>
+    <div id="portfolio" class=" container portfolio">
+      <h2 class="center">portfolio</h2>
+      <h6>MY PROJECTS</h6>
+      <hr>
+      <div class="row">
+        <div class="col s12 m12 l12 portfolio-holder">
+          <img class="materialboxed responsive-img" src="images/projects/alin.png">
+          <img class="materialboxed responsive-img" src="images/projects/askflow.png">
+          <img class="materialboxed responsive-img" src="images/projects/cocktailsapp.png">
+          <img class="materialboxed responsive-img" src="images/projects/ecommerce.png">
+          <img class="materialboxed responsive-img" src="images/projects/expensify.png">
+          <img class="materialboxed responsive-img" src="images/projects/jaguar.png">
+          <img class="materialboxed responsive-img" src="images/projects/personalpage.png">
+          <img class="materialboxed responsive-img" src="images/projects/picas_fijas.png">
+          <img class="materialboxed responsive-img" src="images/projects/studiodev.png">
+          <img class="materialboxed responsive-img" src="images/projects/tinoco.png">
+          <img class="materialboxed responsive-img" src="images/projects/todoApp.png">
+          <img class="materialboxed responsive-img" src="images/projects/zcenter.png">
         </div>
       </div>
     </div><!--Projects END -->
     <div  id="contact" class="container contact block">
-      <h2>contact</h2>
+      <h2 class="center">contact</h2>
       <h6>get in touch with me</h6>
       <hr>
       <div class="row">
@@ -222,7 +143,7 @@
                 </div>
               </div>
               <textarea name="message" class="materialize-textarea" placeholder="Your Message" required></textarea>
-              <button class="btn waves-effect waves-light light-blue accent-2" type="submit">Submit
+              <button class="btn waves-effect waves-light green lighten-2" type="submit">Submit
                 <i class="mdi-content-send right"></i>
               </button>
             </form>
@@ -236,23 +157,6 @@
         </div>
       </div>
     </div><!--CONTACT END-->
-    <ul id="slide-out" class="side-nav">
-      <li><div class="user-view">
-        <div class="background light-blue accent-3 z-depth-1">
-        </div>
-        <a href="#!user"><img class="circle" src="https://avatars1.githubusercontent.com/u/7216999?v=4&s=460"></a>
-        <a href="#!name"><span class="white-text name">Mario Vizcaino</span></a>
-        <a href="#!email"><span class="white-text email">vzcdeveloper@gmail.com</span></a>
-      </div></li>
-      <li class="trans-element"><a class="waves-effect" href="#intro">Home</a></li>
-      <li><div class="divider"></div></li>
-      <li class="trans-element"><a class="waves-effect" href="#about">About</a></li>
-      <li><div class="divider"></div></li>
-      <li class="trans-element"><a class="waves-effect" href="#portfolio">Portfolio</a></li>
-      <li><div class="divider"></div></li>
-      <li class="trans-element"><a class="waves-effect" href="#contact">Contact</a></li>
-      <li><div class="divider"></div></li>
-    </ul><!-- RESPONSIVE NAVBAR-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>          
     <script src="js/main.js"></script>

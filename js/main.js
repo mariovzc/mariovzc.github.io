@@ -32,3 +32,4 @@ function stack () {
   let x = '<div class="chip green darken-2 white-text">Phonegap</div>'
 }
 stack()
+$('.materialboxed').materialbox()

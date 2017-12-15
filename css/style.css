@@ -76,6 +76,11 @@ body, html
 	margin-bottom: 15px;
 }
 
+.about .chip
+{
+	margin: 5px;
+}
+
 .portfolio .col
 {
 	margin-bottom: 24px;

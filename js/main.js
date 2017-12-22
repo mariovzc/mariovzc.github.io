@@ -19,17 +19,16 @@ function stack () {
     'JQuery',
     'Objective-C',
     'Ajax',
-    'Scrum'
-
+    'Scrum',
+    'Phonegap'
   ]
   let container = document.getElementsByClassName('stack')[0]
-  skills.forEach( (element) => {
+  skills.forEach((element) => {
     let chip = document.createElement('div')
     chip.className = 'chip green darken-2 white-text'
     chip.appendChild(document.createTextNode(element))
     container.appendChild(chip)
   })
-  let x = '<div class="chip green darken-2 white-text">Phonegap</div>'
 }
 stack()
 $('.materialboxed').materialbox()

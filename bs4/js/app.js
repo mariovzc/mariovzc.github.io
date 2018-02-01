@@ -77,7 +77,7 @@ function displayCards (cards) {
   let html = ''
   cards.forEach((card, index) => {
     html += `
-    <div class="col-6 col-md-4 col-lg-4">
+    <div class="col-6 col-md-4 col-lg-4 mt-5">
       <div class="card">
         <img class="card-img-top" src="https://s3.amazonaws.com/makeitreal/projects/e-commerce/camiseta-${index + 1}.jpg" alt="Card image cap">
         <div class="card-body">

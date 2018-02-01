@@ -1,5 +1,5 @@
 function stack () {
-  let skills = [
+  const skills = [
     'Ruby on rails',
     'Javascript',
     'HTML5',

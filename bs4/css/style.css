@@ -1,0 +1,49 @@
+.navbar{
+  padding-left: 60px;
+  padding-right: 60px;
+}
+
+.nav-link{
+  margin-right: 10px;
+  display: -webkit-flex;
+  display: flex;
+}
+.nav-link > i{
+  font-size: 25px;
+  margin-right: 5px;
+}
+
+/*MAIN*/
+.main{
+  margin-top: 40px;
+}
+.search-bar{
+  margin-bottom: 40px;
+}
+.elements-list{
+  margin-top: 50px;
+}
+#cards{
+  margin-top: 20px;
+}
+.card-actions{
+  display: flex;
+  display: -webkit-flex;
+}
+.card-actions button{
+  margin-right: 5px;
+}
+.buy-btn i{
+  font-size: 18px;
+  vertical-align: bottom;
+  margin-left: 2px;
+}
+.modal-icon {
+  vertical-align: middle;
+}
+.modal-tabs{
+  margin-top: 20px;
+}
+.modal-text-area{
+  margin-top: 10px;
+}

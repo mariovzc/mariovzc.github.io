@@ -1,0 +1,161 @@
+---
+import { Image, getImage } from 'astro:assets';
+import { render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ImageGallery from '../components/react/ImageGallery';
+import { localizePath, t, type Locale } from '../i18n/utils';
+import { adjacentProjects, type LocalizedProject } from '../lib/projects';
+import { getProfile, toSummary, type ProjectEntry } from '../lib/site-data';
+import { projectJsonLd } from '../lib/seo';
+
+interface Props {
+  lang: Locale;
+  project: LocalizedProject<ProjectEntry>;
+  all: LocalizedProject<ProjectEntry>[];
+}
+
+const { lang, project, all } = Astro.props;
+const d = project.entry.data;
+const { Content } = await render(project.entry);
+const profile = await getProfile(lang);
+const summary = toSummary(project, Astro.site!);
+const { prev, next } = adjacentProjects(all, project.slug);
+const og = await getImage({ src: d.cover, width: 1200, height: 630, fit: 'cover', format: 'png' });
+const gallery = await Promise.all(
+  d.gallery.map(async (g) => {
+    const thumb = await getImage({ src: g.src, width: 800, format: 'webp' });
+    const full = await getImage({ src: g.src, width: 1600, format: 'webp' });
+    return {
+      thumb: thumb.src,
+      full: full.src,
+      alt: g.alt,
+      width: Number(thumb.attributes.width ?? 800),
+      height: Number(thumb.attributes.height ?? 500),
+    };
+  }),
+);
+const projectHref = (slug: string) => localizePath(`/projects/${slug}/`, lang);
+---
+
+<BaseLayout
+  lang={lang}
+  title={`${d.title} — ${profile.name}`}
+  description={d.summary}
+  path={`/projects/${project.slug}/`}
+  translations={project.translations}
+  image={og.src}
+  type="article"
+  jsonLd={[projectJsonLd(summary, profile)]}
+>
+  <article class="py-16">
+    <a href={`${localizePath('/', lang)}#work`} class="text-sm text-muted hover:text-fg">
+      ← {t(lang, 'project.back')}
+    </a>
+
+    {project.isFallback && (
+      <p
+        data-testid="fallback-notice"
+        class="mt-6 rounded-lg border border-line bg-surface px-4 py-3 text-sm"
+      >
+        {t(lang, 'project.fallbackNotice')}
+      </p>
+    )}
+
+    <div lang={project.contentLang}>
+      <h1 class="mt-6 font-serif text-4xl leading-tight sm:text-6xl">{d.title}</h1>
+      <p class="mt-4 max-w-2xl text-xl text-muted">{d.summary}</p>
+
+      <dl class="mt-10 grid gap-6 border-y border-line py-6 text-sm sm:grid-cols-3">
+        <div>
+          <dt class="text-muted">{t(lang, 'project.year')}</dt>
+          <dd class="mt-1">{d.year}</dd>
+        </div>
+        <div>
+          <dt class="text-muted">{t(lang, 'project.role')}</dt>
+          <dd class="mt-1">{d.role}</dd>
+        </div>
+        <div>
+          <dt class="text-muted">{t(lang, 'project.stack')}</dt>
+          <dd class="mt-1">{d.stack.join(' · ')}</dd>
+        </div>
+      </dl>
+
+      {(d.links.live || d.links.repo) && (
+        <p class="mt-6 flex gap-6 text-sm">
+          {d.links.live && (
+            <a
+              href={d.links.live}
+              data-testid="project-live"
+              target="_blank"
+              rel="noopener"
+              class="text-accent underline underline-offset-4"
+            >
+              {t(lang, 'project.live')} ↗
+            </a>
+          )}
+          {d.links.repo && (
+            <a
+              href={d.links.repo}
+              data-testid="project-repo"
+              target="_blank"
+              rel="noopener"
+              class="text-accent underline underline-offset-4"
+            >
+              {t(lang, 'project.repo')} ↗
+            </a>
+          )}
+        </p>
+      )}
+
+      <div class="mt-10 overflow-hidden rounded-lg bg-surface">
+        <Image
+          src={d.cover}
+          alt={d.coverAlt}
+          widths={[800, 1600]}
+          sizes="(min-width: 1024px) 1024px, 100vw"
+          class="w-full"
+          loading="eager"
+        />
+      </div>
+
+      <div class="prose-content mt-12 max-w-2xl">
+        <Content />
+      </div>
+
+      {gallery.length > 0 && (
+        <section data-testid="project-gallery" class="mt-16">
+          <h2 class="mb-6 font-serif text-2xl">{t(lang, 'project.gallery')}</h2>
+          <ImageGallery
+            client:visible
+            images={gallery}
+            labels={{ open: t(lang, 'gallery.open'), close: t(lang, 'gallery.close') }}
+          />
+        </section>
+      )}
+    </div>
+
+    <nav
+      class="mt-20 flex justify-between gap-6 border-t border-line pt-8 text-sm"
+      aria-label="Projects"
+    >
+      {prev ? (
+        <a href={projectHref(prev.slug)} data-testid="project-prev" class="hover:text-accent">
+          ← {t(lang, 'project.prev')}
+          <span class="block font-serif text-lg">{prev.entry.data.title}</span>
+        </a>
+      ) : (
+        <span />
+      )}
+      {next && (
+        <a
+          href={projectHref(next.slug)}
+          data-testid="project-next"
+          class="text-right hover:text-accent"
+        >
+          {t(lang, 'project.next')} →
+          <span class="block font-serif text-lg">{next.entry.data.title}</span>
+        </a>
+      )}
+    </nav>
+  </article>
+</BaseLayout>

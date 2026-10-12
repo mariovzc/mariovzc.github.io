@@ -32,6 +32,7 @@ const excluded = fallbackUrls();
 export default defineConfig({
   site: SITE,
   trailingSlash: 'always',
+  image: { dangerouslyProcessSVG: true },
   i18n: {
     locales: ['en', 'es'],
     defaultLocale: 'en',

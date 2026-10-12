@@ -1,0 +1,45 @@
+---
+title: Background check reports for people and vehicles
+summary: Integration with the TusDatos.co API that generates background reports for people (by ID document) and vehicles, with batch and background processing.
+year: 2025
+role: Project lead & developer
+stack: [Python, Flask, React, MongoDB, Airflow]
+tags: [integration, data, automation]
+cover: ../../../assets/projects/background-check-reports/cover.png
+coverAlt: Pipeline diagram — request by ID document or plate, Flask report API with a per-country processor, query launched on the TusDatos.co API, Airflow status checker, transformer that normalizes and enriches with internal data, report in React
+featured: true
+confidential: true
+order: 1
+---
+
+## The challenge
+
+Before working with a person or a vehicle, the operation needed to know their **background** — records in
+official and restrictive lists, and the status of vehicles — and to do it for many people and vehicles at
+once, without someone checking each source by hand.
+
+## How it works
+
+1. **Request.** A user asks for a report by **ID document** (people) or **plate** (vehicles), one at a time
+   or as a batch.
+2. **Report API.** A **Flask** service receives the request and hands it to a **per-country processor**
+   (starting with Colombia), so each country's rules and sources stay isolated and new ones can be added.
+3. **Launch.** The processor submits the query to the **TusDatos.co** API, which aggregates hundreds of
+   official sources. Lookups take time, so the query runs asynchronously instead of making the user wait.
+4. **Status checker.** **Airflow** background and batch jobs poll the status of each query until its
+   results are ready — large batches never block the platform.
+5. **Transformer.** A transformation step normalizes the raw results into a single report structure and
+   **enriches them with our own internal data**, giving a more complete picture than the external source
+   alone. Results are stored in **MongoDB**.
+6. **Report.** A **React** view presents the final background report for the person or vehicle.
+
+## My role
+
+I **led the project and developed it**: designed the integration and the processing flow, defined how jobs
+run in batch and in the background, and built the service, the pipelines and the report view.
+
+## Result
+
+**Reliable, enriched background reports** on demand — for a single person or vehicle or for whole batches —
+combining official sources with internal data, and generated in the background without slowing down the
+platform.

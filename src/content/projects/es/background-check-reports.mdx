@@ -1,0 +1,47 @@
+---
+title: Reportes de antecedentes de personas y vehículos
+summary: Integración con la API de TusDatos.co que genera reportes de antecedentes de personas y vehículos, con procesos batch y en segundo plano.
+year: 2025
+role: Líder de proyecto y desarrollador
+stack: [Python, Flask, React, MongoDB, Airflow]
+tags: [integration, data, automation]
+cover: ../../../assets/projects/background-check-reports/cover-es.png
+coverAlt: Diagrama del pipeline — solicitud por documento o placa, API de reportes en Flask con un procesador por país, consulta lanzada en la API de TusDatos.co, verificador de estado en Airflow, transformador que normaliza y enriquece con datos internos, reporte en React
+featured: true
+confidential: true
+order: 1
+---
+
+## El reto
+
+Antes de trabajar con una persona o un vehículo, la operación necesitaba conocer sus **antecedentes** —
+registros en fuentes oficiales y listas restrictivas, y el estado de los vehículos — y hacerlo para muchas
+personas y vehículos a la vez, sin que alguien revisara cada fuente a mano.
+
+## Cómo funciona
+
+1. **Solicitud.** Un usuario pide un reporte por **documento de identidad** (personas) o por **placa**
+   (vehículos), uno a uno o por lotes.
+2. **API de reportes.** Un servicio en **Flask** recibe la solicitud y la entrega a un **procesador por país**
+   (empezando por Colombia), para que las reglas y fuentes de cada país queden aisladas y se puedan agregar
+   nuevos.
+3. **Lanzamiento.** El procesador envía la consulta a la API de **TusDatos.co**, que agrega cientos de
+   fuentes oficiales. Las consultas toman tiempo, así que se ejecutan de forma asíncrona en lugar de hacer
+   esperar al usuario.
+4. **Verificador de estado.** Trabajos batch y en segundo plano con **Airflow** consultan el estado de cada
+   solicitud hasta que los resultados están listos — los lotes grandes nunca bloquean la plataforma.
+5. **Transformador.** Un paso de transformación normaliza los resultados en una sola estructura de reporte y
+   los **enriquece con datos internos propios**, dando una visión más completa que la fuente externa por sí
+   sola. Los resultados se guardan en **MongoDB**.
+6. **Reporte.** Una vista en **React** presenta el reporte final de antecedentes de la persona o del vehículo.
+
+## Mi rol
+
+**Lideré el proyecto y lo desarrollé**: diseñé la integración y el flujo de procesamiento, definí cómo corren
+los trabajos en batch y en segundo plano, y construí el servicio, los pipelines y la vista del reporte.
+
+## Resultado
+
+**Reportes de antecedentes confiables y enriquecidos** bajo demanda — para una persona o vehículo o para
+lotes completos — que combinan fuentes oficiales con datos internos y se generan en segundo plano sin afectar
+el rendimiento de la plataforma.

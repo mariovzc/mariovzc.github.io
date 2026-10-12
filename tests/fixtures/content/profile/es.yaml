@@ -1,0 +1,41 @@
+name: Persona de Ejemplo
+headline: Titular de ejemplo para pruebas end-to-end.
+role: Ingeniero de Ejemplo
+location: Ciudad de Ejemplo
+bio: >-
+  Biografía de ejemplo usada solo por los fixtures end-to-end. Nunca se publica con el sitio real.
+availability: Abierto a conversaciones de ejemplo
+services:
+  - title: Servicio de ejemplo uno
+    description: Descripción del primer servicio de ejemplo.
+  - title: Servicio de ejemplo dos
+    description: Descripción del segundo servicio de ejemplo.
+experience:
+  - company: Sample Co
+    role: Ingeniero Líder
+    start: '2022'
+    summary: Entrada de experiencia de ejemplo, cargo actual.
+  - company: Example Inc
+    role: Desarrollador
+    start: '2018'
+    end: '2022'
+    summary: Entrada de experiencia de ejemplo, cargo anterior.
+education:
+  - institution: Universidad de Ejemplo
+    degree: Ingeniería en Estudios de Ejemplo
+    start: '2012'
+    end: '2016'
+certifications:
+  - name: Certificación de Ejemplo
+    issuer: Emisor de Ejemplo
+    year: '2024'
+    url: https://example.com/certification
+highlights: [TypeScript, Python, Docker]
+stack:
+  frontend: [React, TypeScript]
+  backend: [Node.js, Python]
+  tools: [Docker, CI/CD]
+contact:
+  email: sample@example.com
+  github: https://github.com/example
+  linkedin: https://www.linkedin.com/in/example/

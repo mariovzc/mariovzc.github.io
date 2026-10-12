@@ -4,6 +4,7 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
+import { contentRoot } from './src/lib/content-root.ts';
 import { fallbackUrls } from './src/lib/sitemap.ts';
 import { comingSoonSitemapAllows, isComingSoon } from './src/lib/site-mode.ts';
 
@@ -13,7 +14,7 @@ const SITE = 'https://mariovzc.github.io';
 // file name equals the glob-loader slug.
 function projectFiles() {
   return ['en', 'es'].flatMap((lang) => {
-    const dir = `./src/content/projects/${lang}`;
+    const dir = `./${contentRoot()}/projects/${lang}`;
     if (!existsSync(dir)) return [];
     return readdirSync(dir)
       .filter((f) => f.endsWith('.mdx'))

@@ -221,7 +221,7 @@ Mejora progresiva; sin efecto en navegadores sin soporte.
 | Navegador | Playwright | Home y detalle cargan en ambos idiomas, el selector de idioma mantiene la página, `ThemeToggle` persiste, sin enlaces internos rotos, 404 funciona, meta tags SEO presentes |
 | Calidad | Lighthouse (local) | Objetivo ≥ 95 en las cuatro categorías |
 
-Mientras no haya contenido real, se usan 2 proyectos de ejemplo marcados como tales, uno solo en EN para probar el fallback. Se reemplazan en la fase de contenido.
+Los proyectos de ejemplo ya no viven en `src/content`: las pruebas E2E usan un set de fixtures propio en `tests/fixtures/content` (proyecto completo, uno solo en EN para el fallback y uno confidencial, más un perfil de prueba). `make test-e2e` compila con `CONTENT_ROOT=tests/fixtures/content`; el resto de targets y el deploy usan el contenido real.
 
 ## 14. Deploy
 

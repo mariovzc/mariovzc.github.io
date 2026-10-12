@@ -1,9 +1,12 @@
 import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
+import { contentRoot } from './lib/content-root.ts';
+
+const root = contentRoot();
 
 const projects = defineCollection({
-  loader: glob({ pattern: '**/*.mdx', base: './src/content/projects' }),
+  loader: glob({ pattern: '**/*.mdx', base: `./${root}/projects` }),
   schema: ({ image }) =>
     z.object({
       title: z.string().min(1),
@@ -24,7 +27,7 @@ const projects = defineCollection({
 });
 
 const profile = defineCollection({
-  loader: glob({ pattern: '*.yaml', base: './src/content/profile' }),
+  loader: glob({ pattern: '*.yaml', base: `./${root}/profile` }),
   schema: z.object({
     name: z.string().min(1),
     headline: z.string().min(1),

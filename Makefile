@@ -34,8 +34,9 @@ test: test-unit test-e2e
 test-unit:
 	$(RUN) npm run test:unit
 
-test-e2e: build
-	$(E2E) npm run test:e2e
+test-e2e: ## E2E against tests/fixtures/content (never the real content)
+	$(DC) run --rm -e CONTENT_ROOT=tests/fixtures/content app npm run build
+	$(DC) run --rm -e CONTENT_ROOT=tests/fixtures/content e2e npm run test:e2e
 
 lighthouse: build ## Lighthouse audit, reports in reports/
 	$(E2E) npm run lighthouse

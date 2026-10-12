@@ -32,10 +32,12 @@ describe('fallbackUrls', () => {
 
 describe('project file names', () => {
   it('are lowercase kebab-case so slugs match the glob loader', () => {
-    for (const lang of ['en', 'es']) {
-      const dir = `src/content/projects/${lang}`;
-      for (const file of readdirSync(dir)) {
-        expect(file, `${dir}/${file}`).toMatch(/^[a-z0-9]+(-[a-z0-9]+)*\.mdx$/);
+    for (const root of ['src/content', 'tests/fixtures/content']) {
+      for (const lang of ['en', 'es']) {
+        const dir = `${root}/projects/${lang}`;
+        for (const file of readdirSync(dir)) {
+          expect(file, `${dir}/${file}`).toMatch(/^[a-z0-9]+(-[a-z0-9]+)*\.mdx$/);
+        }
       }
     }
   });

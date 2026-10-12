@@ -7,7 +7,7 @@ import lighthouse from 'lighthouse';
 
 const PORT = 4323;
 const BASE = `http://localhost:${PORT}`;
-const PAGES = ['/', '/es/', '/projects/sample-full/'];
+const PAGES = ['/', '/es/', '/projects/ai-document-extraction/'];
 const CATEGORIES = ['performance', 'accessibility', 'best-practices', 'seo'];
 const MIN = 0.95;
 

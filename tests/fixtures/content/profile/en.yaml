@@ -1,0 +1,41 @@
+name: Sample Person
+headline: Sample headline for end-to-end tests.
+role: Sample Engineer
+location: Sample City
+bio: >-
+  Sample biography used only by the end-to-end fixtures. It never ships with the real site.
+availability: Open to sample conversations
+services:
+  - title: Sample service one
+    description: Description of the first sample service.
+  - title: Sample service two
+    description: Description of the second sample service.
+experience:
+  - company: Sample Co
+    role: Lead Engineer
+    start: '2022'
+    summary: Sample experience entry, current role.
+  - company: Example Inc
+    role: Developer
+    start: '2018'
+    end: '2022'
+    summary: Sample experience entry, past role.
+education:
+  - institution: Sample University
+    degree: B.S. in Sample Studies
+    start: '2012'
+    end: '2016'
+certifications:
+  - name: Sample Certification
+    issuer: Sample Issuer
+    year: '2024'
+    url: https://example.com/certification
+highlights: [TypeScript, Python, Docker]
+stack:
+  frontend: [React, TypeScript]
+  backend: [Node.js, Python]
+  tools: [Docker, CI/CD]
+contact:
+  email: sample@example.com
+  github: https://github.com/example
+  linkedin: https://www.linkedin.com/in/example/

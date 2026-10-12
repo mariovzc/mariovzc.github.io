@@ -11,7 +11,7 @@ Personal portfolio of Mario Vizcaino. Astro 7 static site, bilingual (EN default
 - Astro 7 uses a Rust compiler: close every non-void tag; no block elements inside `<p>`.
 - Internal links always end with `/` (`trailingSlash: 'always'`). Build them with `localizePath()`.
 - Keep logic in pure functions under `src/lib/` or `src/i18n/` with Vitest tests; `.astro` files only render.
-- `astro.config.mjs` sets `image: { dangerouslyProcessSVG: true }` because the sample/placeholder project covers are SVG: sharp rasterizes them to WebP/PNG (covers use `format="webp"`), which requires the flag. Do not remove it until every project image is raster (PNG/JPG/WebP).
+- `astro.config.mjs` sets `image: { dangerouslyProcessSVG: true }` because the fixture project covers are SVG: sharp rasterizes them to WebP/PNG (covers use `format="webp"`), which requires the flag. Do not remove it until every project image is raster (PNG/JPG/WebP).
 - Playwright (`playwright.config.ts`) and `scripts/lighthouse.mjs` run `astro preview --ignore-lock` because a stale preview lock can persist in the shared Docker node_modules volume. Keep the flag.
 
 ## Layout
@@ -24,6 +24,12 @@ Personal portfolio of Mario Vizcaino. Astro 7 static site, bilingual (EN default
 - Design tokens in `src/styles/global.css` ("Bento verde": light gray canvas, white rounded tiles, green accent and gradient, Plus Jakarta Sans 800 headings). Shared component classes there: `.tile`, `.tile-hover`, `.pill*`, `.chip`, `.eyebrow`, `.hero-surface`, `heavy` utility.
 - Favicons (`public/favicon-{32,48}.png`, `apple-touch-icon.png`, `icon-{192,512}.png`) are generated from `src/assets/brand/avatar.png` by `scripts/favicons.mjs` (`make favicons`); `public/site.webmanifest` references the 192/512 icons. Regenerate after changing the avatar.
 - `src/lib/profile.ts` — `yearsOfExperience()` and `stackHighlights()` for the home bento tiles.
+
+## E2E fixtures
+
+- The real site only ever contains the projects in `src/content/` (`make dev`, `make build`, deploy, `make lighthouse`). Sample projects do not belong there.
+- `make test-e2e` builds with `CONTENT_ROOT=tests/fixtures/content` (resolved by `src/lib/content-root.ts`, used by `src/content.config.ts` and the sitemap scan in `astro.config.mjs`) and runs Playwright against that build. Fixtures: `tests/fixtures/content/{projects,profile}` (full, EN-only and confidential projects; fixture profile "Sample Person") and `tests/fixtures/assets/projects/sample/`. Fixture mdx image paths are relative (`../../../assets/...`).
+- E2E specs assert on fixture content, never on real content. Add new e2e scenarios as fixtures, not as real projects.
 
 ## Common tasks
 

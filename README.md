@@ -31,6 +31,7 @@ make dev       # http://localhost:4321 with hot reload
 - Projects: `src/content/projects/{en,es}/<slug>.mdx`
 - Profile: `src/content/profile/{en,es}.yaml` (no CV download by design: visitors contact first)
 - UI strings: `src/i18n/{en,es}.json`
+- E2E fixtures: `tests/fixtures/content/` (sample projects + profile). `make test-e2e` builds with `CONTENT_ROOT=tests/fixtures/content`; every other target uses the real `src/content`.
 
 ## Deploy
 

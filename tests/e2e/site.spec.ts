@@ -6,7 +6,7 @@ test.describe('home', () => {
   test('english home has SEO essentials', async ({ page }) => {
     await page.goto('/');
     await expect(page.locator('html')).toHaveAttribute('lang', 'en');
-    await expect(page.locator('h1')).toContainText('Mario Vizcaino');
+    await expect(page.locator('h1')).toContainText('Sample Person');
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `${SITE}/`);
     await expect(page.locator('link[hreflang="es"]')).toHaveAttribute('href', `${SITE}/es/`);
     await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /.+/);
@@ -50,6 +50,17 @@ test.describe('projects', () => {
     await expect(page.getByTestId('project-live')).toHaveCount(0);
     await expect(page.getByTestId('project-repo')).toHaveCount(0);
     await expect(page.getByTestId('project-gallery')).toHaveCount(0);
+  });
+
+  test('confidential project shows badge on its card and notice on its page', async ({ page }) => {
+    await page.goto('/');
+    await expect(page.getByTestId('confidential-badge')).toHaveCount(1);
+    await page.goto('/projects/sample-confidential/');
+    await expect(page.getByTestId('confidential-notice')).toBeVisible();
+    await expect(page.getByTestId('project-live')).toHaveCount(0);
+    await expect(page.getByTestId('project-gallery')).toHaveCount(0);
+    await page.goto('/es/projects/sample-confidential/');
+    await expect(page.getByTestId('confidential-notice')).toBeVisible();
   });
 
   test('full project shows links, gallery and next/prev', async ({ page }) => {
@@ -154,7 +165,7 @@ test.describe('site files', () => {
   test('llms.txt, robots.txt and sitemap', async ({ request }) => {
     const llms = await request.get('/llms.txt');
     expect(llms.status()).toBe(200);
-    expect(await llms.text()).toMatch(/^# Mario Vizcaino/);
+    expect(await llms.text()).toMatch(/^# Sample Person/);
 
     const robots = await (await request.get('/robots.txt')).text();
     expect(robots).toContain('User-agent: ClaudeBot');

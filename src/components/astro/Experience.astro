@@ -25,7 +25,9 @@ const { lang, profile } = Astro.props;
               aria-hidden="true"
             ></span>
             <p class="text-sm font-semibold text-muted">
-              {e.start} – {e.end ?? t(lang, 'experience.present')}
+              {e.end === e.start
+                ? e.start
+                : `${e.start} – ${e.end ?? t(lang, 'experience.present')}`}
             </p>
             <h3 class="heavy mt-1 text-lg">
               {e.role} · {e.company}

@@ -28,6 +28,8 @@ export interface ProjectSummary {
   /** Absolute URL of the project page in the requested locale. */
   url: string;
   links: { live?: string; repo?: string };
+  /** Anonymized case study: no screenshots or code shared. */
+  confidential: boolean;
   contentLang: Locale;
 }
 

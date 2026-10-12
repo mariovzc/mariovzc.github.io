@@ -27,6 +27,7 @@ export function toSummary(p: LocalizedProject<ProjectEntry>, site: URL | string)
     tags: d.tags,
     url: new URL(localizePath(`/projects/${p.slug}/`, p.lang), site).href,
     links: d.links,
+    confidential: d.confidential,
     contentLang: p.contentLang,
   };
 }

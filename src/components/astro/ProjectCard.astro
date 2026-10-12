@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import Icon from './Icon.astro';
 import { localizePath, t, type Locale } from '../../i18n/utils';
 import type { LocalizedProject } from '../../lib/projects';
 import type { ProjectEntry } from '../../lib/site-data';
@@ -33,6 +34,15 @@ const href = localizePath(`/projects/${project.slug}/`, lang);
       <p class="mt-2 text-muted" lang={project.contentLang}>
         {d.summary}
       </p>
+      {d.confidential && (
+        <span
+          data-testid="confidential-badge"
+          class="pill mt-3 inline-flex items-center gap-1.5 bg-chip-orange-bg px-2.5 py-0.5 text-xs font-semibold text-chip-orange"
+        >
+          <Icon name="lock" />
+          {t(lang, 'project.confidential')}
+        </span>
+      )}
       <ul class="mt-4 flex flex-wrap gap-1.5">
         {d.stack.map((s) => (
           <li class="pill pill-soft px-2.5 py-0.5 text-xs">{s}</li>

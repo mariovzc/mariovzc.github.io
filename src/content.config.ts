@@ -16,6 +16,7 @@ const projects = defineCollection({
       coverAlt: z.string().min(1),
       gallery: z.array(z.object({ src: image(), alt: z.string().min(1) })).default([]),
       links: z.object({ live: z.url().optional(), repo: z.url().optional() }).default({}),
+      confidential: z.boolean().default(false),
       featured: z.boolean().default(false),
       order: z.number().default(100),
       draft: z.boolean().default(false),

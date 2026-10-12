@@ -26,6 +26,7 @@ const project = (slug: string, stack: string[], tags: string[] = []): ProjectSum
   tags,
   url: `https://mariovzc.github.io/projects/${slug}/`,
   links: {},
+  confidential: false,
   contentLang: 'en',
 });
 
@@ -67,6 +68,11 @@ describe('createTools', () => {
       (await json('list_projects', { stack: 'react' })).map((p: ProjectSummary) => p.slug),
     ).toEqual(['alpha']);
     expect((await json('list_projects', { tag: 'WEB' })).length).toBe(1);
+  });
+
+  it('list_projects exposes the confidential flag', async () => {
+    const list = await json('list_projects');
+    expect(list.every((p: ProjectSummary) => p.confidential === false)).toBe(true);
   });
 
   it('list_projects honours lang and ignores invalid lang', async () => {

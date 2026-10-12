@@ -28,6 +28,8 @@
   "project.navLabel": "Más proyectos",
   "project.back": "Todos los proyectos",
   "project.gallery": "Galería",
+  "project.confidential": "Confidencial",
+  "project.confidentialNotice": "Proyecto confidencial — los detalles están anonimizados y no se comparten capturas ni código.",
   "project.fallbackNotice": "Este proyecto solo está disponible en inglés.",
   "gallery.open": "Abrir imagen",
   "gallery.close": "Cerrar",

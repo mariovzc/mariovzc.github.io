@@ -27,7 +27,8 @@ export function buildLlmsTxt(data: SiteData): string {
 
   if (data.projects.en.length) {
     const items = data.projects.en.map(
-      (x) => `- [${x.title}](${x.url}): ${x.summary} (${x.year}; ${x.stack.join(', ')})`,
+      (x) =>
+        `- [${x.title}](${x.url}): ${x.summary} (${x.year}; ${x.stack.join(', ')})${x.confidential ? ' (confidential, anonymized)' : ''}`,
     );
     sections.push(`## Projects\n\n${items.join('\n')}`);
   }

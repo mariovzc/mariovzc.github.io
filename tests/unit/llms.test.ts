@@ -31,6 +31,7 @@ const data: SiteData = {
         tags: [],
         url: 'https://mariovzc.github.io/projects/x/',
         links: {},
+        confidential: false,
         contentLang: 'en',
       },
     ],
@@ -55,6 +56,22 @@ describe('buildLlmsTxt', () => {
     expect(txt).toContain('- Email: a@b.co');
     expect(txt).toContain('- GitHub: https://github.com/mariovzc');
     expect(txt).not.toContain('CV');
+  });
+
+  it('marks confidential projects in the project bullet only', () => {
+    const conf = {
+      ...data,
+      projects: {
+        ...data.projects,
+        en: [
+          { ...data.projects.en[0]!, confidential: true },
+          { ...data.projects.en[0]!, slug: 'y', title: 'Project Y' },
+        ],
+      },
+    };
+    const out = buildLlmsTxt(conf);
+    expect(out).toContain('(2025; React, Node.js) (confidential, anonymized)');
+    expect(out).toMatch(/\[Project Y\].*React, Node\.js\)\n/);
   });
 
   it('links the Spanish version under Optional', () => {

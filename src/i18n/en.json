@@ -28,6 +28,8 @@
   "project.navLabel": "More projects",
   "project.back": "All projects",
   "project.gallery": "Gallery",
+  "project.confidential": "Confidential",
+  "project.confidentialNotice": "Confidential project — details are anonymized and no screenshots or code are shared.",
   "project.fallbackNotice": "This project is only available in Spanish.",
   "gallery.open": "Open image",
   "gallery.close": "Close",

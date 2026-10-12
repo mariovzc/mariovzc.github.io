@@ -116,6 +116,7 @@ describe('json-ld', () => {
       tags: [],
       url: `${SITE}projects/x/`,
       links: {},
+      confidential: false,
       contentLang: 'en',
     };
     const j = projectJsonLd(summary, profile);

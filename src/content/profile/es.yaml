@@ -1,26 +1,58 @@
-# CONTENIDO DE EJEMPLO — se reemplaza en la fase de contenido (spec §16).
 name: Mario Vizcaino
-headline: Software que se siente simple.
-role: Desarrollador full-stack
-location: Colombia
+headline: Software seguro y escalable — de la API a la nube.
+role: Full Stack Engineer y Tech Leader
+location: Barranquilla, Colombia
 bio: >-
-  Diseño y construyo productos web de punta a punta, desde la interfaz hasta los
-  servicios que la sostienen. Bio de ejemplo — se reemplaza.
-availability: Disponible para proyectos freelance
+  Soy Full Stack Engineer y Tech Leader con más de diez años construyendo software.
+  Diseño sistemas cloud-native en Google Cloud con Docker y Kubernetes, conecto
+  plataformas mediante integraciones de APIs seguras y pipelines de datos, y lidero
+  equipos de desarrollo en auditorías ISO 27001. Me importa el software seguro por
+  defecto y simple de usar.
+availability: Abierto a nuevas conversaciones
 services:
-  - title: Aplicaciones web
-    description: Apps web de nivel producto con React y un backend sólido.
-  - title: Consultoría técnica
-    description: Revisión de arquitectura, rendimiento y calidad de código.
+  - title: Desarrollo full-stack
+    description: Plataformas web de punta a punta — APIs REST, backends escalables en Python y Node.js, y frontends en React.
+  - title: Cloud y DevOps
+    description: Microservicios en contenedores sobre Google Cloud con Docker, Kubernetes y CI/CD, pensados para alta disponibilidad.
+  - title: Seguridad e ISO 27001
+    description: Código seguro (OWASP), control de accesos y procesos de desarrollo alineados con auditorías ISO 27001.
+  - title: Integraciones y datos
+    description: Integraciones de APIs con sistemas de terceros y pipelines automatizados de web scraping para inteligencia de negocio.
 experience:
-  - company: Empresa de ejemplo
-    role: Desarrollador senior
-    start: '2022'
-    summary: Entrada de ejemplo — se reemplaza.
+  - company: Alto
+    role: Tech Leader
+    start: '2021'
+    summary: >-
+      Lideré al equipo que alineó el desarrollo con ISO 27001 y aprobó la auditoría; diseñé
+      microservicios en contenedores sobre GCP; diseñé integraciones de APIs con
+      proveedores logísticos y pipelines de datos automatizados; facilito ceremonias Agile y
+      code reviews.
+  - company: Alto
+    role: Desarrollador IT
+    start: '2018'
+    end: '2021'
+    summary: >-
+      Construí funcionalidades clave de las plataformas de Alto US en Python y JavaScript,
+      herramientas de extracción de datos para decisiones operativas y funcionalidades
+      adaptadas a la regulación de cada país junto a equipos multidisciplinarios.
+  - company: Saludtec
+    role: Desarrollador de software
+    start: '2015'
+    end: '2017'
+    summary: >-
+      Desarrollé aplicaciones full-stack para el sector salud con Ruby on Rails y
+      JavaScript, y apps móviles multiplataforma para iOS y Android con PhoneGap.
+  - company: Ghettosoft
+    role: Desarrollador de software
+    start: '2015'
+    end: '2015'
+    summary: >-
+      Construí un sistema de gestión de proyectos de construcción con Ruby on Rails y
+      jQuery, desde el diseño de la base de datos hasta el front end.
 stack:
-  frontend: [React, TypeScript, Astro]
-  backend: [Node.js, Ruby on Rails, PostgreSQL]
-  tools: [Docker, Git, GitHub Actions]
+  frontend: [React, JavaScript, Dart]
+  backend: [Python, Node.js, Ruby on Rails, APIs REST, Microservicios]
+  tools: [Google Cloud, Docker, Kubernetes, CI/CD, ISO 27001, OWASP]
 contact:
   email: vzcdeveloper@gmail.com
   github: https://github.com/mariovzc

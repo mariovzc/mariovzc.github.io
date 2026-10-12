@@ -1,8 +1,11 @@
 ---
 import ProjectPage from '../../views/ProjectPage.astro';
 import { getProjects } from '../../lib/site-data';
+import { isComingSoon } from '../../lib/site-mode';
 
 export async function getStaticPaths() {
+  // Coming-soon mode publishes no project URLs.
+  if (isComingSoon(import.meta.env)) return [];
   const all = await getProjects('en');
   return all.map((project) => ({ params: { slug: project.slug }, props: { project, all } }));
 }

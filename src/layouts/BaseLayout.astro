@@ -22,6 +22,8 @@ interface Props {
   contentLang?: Locale;
   /** Overrides the language-switch target (e.g. the 404 page). */
   langSwitchHref?: string;
+  /** Coming-soon mode: no nav, footer or WebMCP data; the page renders its own controls. */
+  minimal?: boolean;
 }
 
 const {
@@ -36,10 +38,11 @@ const {
   noindex = false,
   contentLang = lang,
   langSwitchHref,
+  minimal = false,
 } = Astro.props;
 
 const profile = await getProfile(lang);
-const siteData = await getSiteData(Astro.site!);
+const siteData = minimal ? null : await getSiteData(Astro.site!);
 const originTrialToken = import.meta.env.PUBLIC_WEBMCP_OT_TOKEN;
 ---
 
@@ -86,14 +89,22 @@ const originTrialToken = import.meta.env.PUBLIC_WEBMCP_OT_TOKEN;
     >
       {t(lang, 'nav.skip')}
     </a>
-    <Nav lang={lang} path={path} name={profile.name} langSwitchHref={langSwitchHref} />
-    <main id="main" class="mx-auto max-w-6xl px-4 sm:px-6">
-      <slot />
-    </main>
-    <Footer name={profile.name} />
-    <script type="application/json" id="webmcp-data" set:html={safeJson(siteData)} />
-    <script>
+    {minimal ? (
+      <main id="main" class="mx-auto flex min-h-screen max-w-3xl flex-col px-4 py-6 sm:px-6">
+        <slot />
+      </main>
+    ) : (
+      <>
+        <Nav lang={lang} path={path} name={profile.name} langSwitchHref={langSwitchHref} />
+        <main id="main" class="mx-auto max-w-6xl px-4 sm:px-6">
+          <slot />
+        </main>
+        <Footer name={profile.name} />
+        <script type="application/json" id="webmcp-data" set:html={safeJson(siteData)} />
+      </>
+    )}
+    {!minimal && <script>
       import '../scripts/webmcp.ts';
-    </script>
+    </script>}
   </body>
 </html>

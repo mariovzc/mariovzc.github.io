@@ -5,7 +5,7 @@ Personal portfolio of Mario Vizcaino. Astro 7 static site, bilingual (EN default
 ## Hard rules
 
 - **Never run `node`, `npm` or `npx` on the host.** Everything runs in Docker via `make`:
-  `make install | dev | stop | build | preview | check | test | test-unit | test-e2e | lighthouse | og | favicons | add pkg="x" | add-dev pkg="x" | format | clean`.
+  `make install | dev | stop | build | preview | check | test | test-unit | test-e2e | build-soon | preview-soon | lighthouse | og | favicons | add pkg="x" | add-dev pkg="x" | format | clean`.
 - Never commit `resume2026.pdf` or any root `*.pdf` (personal data).
 - Zod comes from `astro/zod`, not `astro:content`.
 - Astro 7 uses a Rust compiler: close every non-void tag; no block elements inside `<p>`.
@@ -33,6 +33,4 @@ Personal portfolio of Mario Vizcaino. Astro 7 static site, bilingual (EN default
 - **Add a UI string:** add the key to both `en.json` and `es.json`.
 - **Change domain:** update `SITE` in `astro.config.mjs` and the `SITE` constant in `tests/e2e/site.spec.ts`, add `public/CNAME`, configure DNS (see README), then regenerate the OG image with `make og` (it reads the domain from `astro.config.mjs` and name/role/headline from `src/content/profile/en.yaml`).
 
-## AI surfaces
-
-- `/llms.txt`
+##

@@ -1,4 +1,15 @@
-import type { SiteData } from './types';
+import type { ProfileData, SiteData } from './types';
+
+function contactLines(p: ProfileData): string {
+  return [
+    `- Email: ${p.contact.email}`,
+    p.contact.github && `- GitHub: ${p.contact.github}`,
+    p.contact.linkedin && `- LinkedIn: ${p.contact.linkedin}`,
+    p.contact.x && `- X: ${p.contact.x}`,
+  ]
+    .filter(Boolean)
+    .join('\n');
+}
 
 /** https://llmstxt.org format, English as primary language. */
 export function buildLlmsTxt(data: SiteData): string {
@@ -35,17 +46,16 @@ export function buildLlmsTxt(data: SiteData): string {
     sections.push(`## Certifications\n\n${items.join('\n')}`);
   }
 
-  const contact = [
-    `- Email: ${p.contact.email}`,
-    p.contact.github && `- GitHub: ${p.contact.github}`,
-    p.contact.linkedin && `- LinkedIn: ${p.contact.linkedin}`,
-    p.contact.x && `- X: ${p.contact.x}`,
-  ].filter(Boolean);
-  sections.push(`## Contact\n\n${contact.join('\n')}`);
+  sections.push(`## Contact\n\n${contactLines(p)}`);
 
   sections.push(
     `## Optional\n\n- [Versión en español](${abs('/es/')}): Spanish version of this site`,
   );
 
   return `${sections.join('\n\n')}\n`;
+}
+
+/** Minimal llms.txt while the site is in coming-soon mode (see site-mode.ts). */
+export function buildComingSoonLlmsTxt(p: ProfileData): string {
+  return `# ${p.name}\n\n> ${p.role}\n\nPortfolio coming soon.\n\n## Contact\n\n${contactLines(p)}\n`;
 }

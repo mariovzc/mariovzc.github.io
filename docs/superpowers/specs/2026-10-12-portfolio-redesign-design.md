@@ -233,6 +233,8 @@ Workflow `.github/workflows/deploy.yml` en push a `master`:
 
 Si cualquier paso falla, no se publica y el sitio anterior sigue en línea. Playwright y Lighthouse no se ejecutan en CI en esta fase.
 
+Mientras el contenido no sea definitivo, el build de producción usa `PUBLIC_COMING_SOON: 'true'` (modo "próximamente", ver §17). Para lanzar el sitio completo se cambia a `'false'` en `deploy.yml`.
+
 ## 15. Migración
 
 1. Trabajo en la rama `redesign`; `master` sigue sirviendo la versión anterior.
@@ -258,3 +260,4 @@ Si cualquier paso falla, no se publica y el sitio anterior sigue en línea. Play
 - Las páginas `noindex` (404) no emiten canonical ni hreflang.
 - **2026-10-12 — Restyle "Bento verde":** la dirección visual B1 se sustituye por "Bento verde" (§3). Fraunces + Inter se reemplazan por Plus Jakarta Sans. Se añade `src/lib/profile.ts` (`yearsOfExperience`) para el mosaico de años. Varios tonos se ajustaron respecto a la propuesta para cumplir AA: acento claro `#248a3d → #207936`, chip naranja claro `#b36200 → #9f5700`, chip morado oscuro `#bf5af2 → #c973f4`.
 - **2026-10-12 — Sin CV descargable:** por decisión del usuario el sitio no ofrece CV (los visitantes deben contactar primero). Se eliminan el campo `cv` del perfil, el enlace en Experiencia, la clave `experience.downloadCv`, la línea CV de `llms.txt` y el campo `cv` de `get_contact`.
+- **2026-10-12 — Destacados, favicon y modo "próximamente":** campo opcional `highlights[]` en el perfil para el mosaico Stack (`stackHighlights()`). Favicons e iconos de app generados desde el avatar de GitHub (`src/assets/brand/avatar.png`) con `scripts/favicons.mjs` (`make favicons`); se elimina `favicon.svg` y se añade `site.webmanifest`. Modo "próximamente" con la variable de build `PUBLIC_COMING_SOON === 'true'` (`isComingSoon()` en `src/lib/site-mode.ts`): `/` y `/es/` muestran `ComingSoonPage` (`noindex`, sin nav/footer/WebMCP), no se publican páginas de proyecto, `llms.txt` mínimo y el sitemap solo lista las dos home. Activo en `deploy.yml`; en local siempre se construye el sitio completo (`make build-soon`/`preview-soon` para verlo).

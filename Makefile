@@ -2,7 +2,7 @@ DC  := docker compose
 RUN := $(DC) run --rm app
 E2E := $(DC) run --rm e2e
 
-.PHONY: install dev stop build preview check test test-unit test-e2e lighthouse og favicons add add-dev format clean
+.PHONY: install dev stop build preview build-soon preview-soon check test test-unit test-e2e lighthouse og favicons add add-dev format clean
 
 install: ## Install dependencies inside the container
 	$(DC) build app
@@ -18,6 +18,12 @@ build:
 	$(RUN) npm run build
 
 preview: build ## Serve the production build on http://localhost:4321
+	$(DC) run --rm --service-ports app npm run preview
+
+build-soon: ## Production build in coming-soon mode (as deployed while PUBLIC_COMING_SOON='true')
+	$(DC) run --rm -e PUBLIC_COMING_SOON=true app npm run build
+
+preview-soon: build-soon ## Serve the coming-soon build on http://localhost:4321
 	$(DC) run --rm --service-ports app npm run preview
 
 check: ## Types, content schemas and formatting

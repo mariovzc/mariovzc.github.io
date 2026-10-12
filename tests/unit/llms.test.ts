@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { buildLlmsTxt } from '../../src/lib/llms';
+import { buildComingSoonLlmsTxt, buildLlmsTxt } from '../../src/lib/llms';
 import type { ProfileData, SiteData } from '../../src/lib/types';
 
 const profile: ProfileData = {
@@ -89,5 +89,27 @@ describe('buildLlmsTxt', () => {
     );
     expect(full.indexOf('## Projects')).toBeLessThan(full.indexOf('## Education'));
     expect(full.indexOf('## Certifications')).toBeLessThan(full.indexOf('## Contact'));
+  });
+});
+
+describe('buildComingSoonLlmsTxt', () => {
+  const txt = buildComingSoonLlmsTxt(profile);
+
+  it('has name, role and the coming-soon note', () => {
+    expect(txt.startsWith('# Mario Vizcaino\n')).toBe(true);
+    expect(txt).toContain('> Full-stack developer');
+    expect(txt).toContain('Portfolio coming soon');
+  });
+
+  it('lists only the contact links that exist', () => {
+    expect(txt).toContain('- Email: a@b.co');
+    expect(txt).toContain('- GitHub: https://github.com/mariovzc');
+    expect(txt).not.toContain('LinkedIn');
+  });
+
+  it('does not leak bio, services or projects', () => {
+    expect(txt).not.toContain('I build web products.');
+    expect(txt).not.toContain('## Services');
+    expect(txt).not.toContain('## Projects');
   });
 });

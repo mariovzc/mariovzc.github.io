@@ -5,6 +5,7 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { fallbackUrls } from './src/lib/sitemap.ts';
+import { comingSoonSitemapAllows, isComingSoon } from './src/lib/site-mode.ts';
 
 const SITE = 'https://mariovzc.github.io';
 
@@ -30,6 +31,8 @@ function projectFiles() {
 // Pages that only exist as a fallback (other locale's content) are canonicalized
 // to the original and must not appear in the sitemap.
 const excluded = fallbackUrls(SITE, projectFiles());
+// Coming-soon mode (PUBLIC_COMING_SOON='true', set in deploy.yml) publishes only the home pages.
+const soon = isComingSoon(process.env);
 
 export default defineConfig({
   site: SITE,
@@ -45,7 +48,8 @@ export default defineConfig({
     react(),
     mdx(),
     sitemap({
-      filter: (page) => !excluded.has(page) && !page.includes('/404'),
+      filter: (page) =>
+        soon ? comingSoonSitemapAllows(page, SITE) : !excluded.has(page) && !page.includes('/404'),
       i18n: { defaultLocale: 'en', locales: { en: 'en', es: 'es' } },
     }),
   ],

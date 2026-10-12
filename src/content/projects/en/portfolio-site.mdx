@@ -1,0 +1,48 @@
+---
+title: This portfolio — built for people and AI agents
+summary: Bilingual static site with Astro, React and Tailwind, fully Dockerized, tested and auto-deployed — readable by search engines, LLMs and browser agents (WebMCP).
+year: 2026
+role: Designer & developer
+stack: [Astro, React, TypeScript, Tailwind CSS, Docker, Playwright, Vitest, GitHub Actions]
+tags: [web, open-source, ai]
+cover: ../../../assets/projects/portfolio-site/cover.png
+coverAlt: Home page of this portfolio — green bento grid with name, headline, stack, years of experience, terminal tile, contact and featured project
+gallery:
+  - src: ../../../assets/projects/portfolio-site/home-dark.png
+    alt: The home page in dark mode
+  - src: ../../../assets/projects/portfolio-site/project-page.png
+    alt: A project case study page with year, role and stack tiles and an architecture diagram
+  - src: ../../../assets/projects/portfolio-site/not-found.png
+    alt: The custom 404 page with a terminal tile showing the missing path
+links:
+  repo: https://github.com/mariovzc/mariovzc.github.io
+featured: true
+order: 5
+---
+
+## Why
+
+Most of my work is private or belongs to clients, so this site is the one project where you can see **how I
+build** end to end — the code is public.
+
+## What's inside
+
+- **Astro + React islands.** Static HTML by default; React only where there is interaction (theme toggle,
+  image gallery). Pages load almost no JavaScript.
+- **Content as data.** Projects and profile live in Markdown/YAML collections validated with Zod — adding a
+  project is adding a file, and a missing field fails the build instead of breaking the page.
+- **Bilingual by design.** English at `/` and Spanish at `/es/`, with per-page fallbacks, `hreflang`,
+  canonical URLs and a sitemap that only lists real pages.
+- **Readable by AI.** A generated `llms.txt`, JSON-LD for people and projects, and **WebMCP** tools so browser
+  agents can query projects and contact details directly.
+- **Docker-only workflow.** Nothing is installed on the host: a Makefile wraps dev server, build, tests,
+  Lighthouse and asset generation inside containers.
+- **Tested and audited.** 100+ unit tests (Vitest) and end-to-end browser tests (Playwright) running against
+  dedicated fixtures, plus a Lighthouse audit that fails below 95.
+- **Automated deploys.** GitHub Actions validates, tests and publishes to GitHub Pages on every push, with a
+  "coming soon" switch for staged launches.
+
+## Result
+
+Lighthouse **99–100** in performance, accessibility, best practices and SEO, a design system that works in
+light and dark mode, and a codebase where content changes never require touching code.

@@ -1,0 +1,48 @@
+---
+title: Este portafolio — hecho para personas y agentes de IA
+summary: Sitio estático bilingüe con Astro, React y Tailwind, todo en Docker, con tests y deploy automático — legible por buscadores, LLMs y agentes (WebMCP).
+year: 2026
+role: Diseño y desarrollo
+stack: [Astro, React, TypeScript, Tailwind CSS, Docker, Playwright, Vitest, GitHub Actions]
+tags: [web, open-source, ai]
+cover: ../../../assets/projects/portfolio-site/cover.png
+coverAlt: Página de inicio de este portafolio — grilla bento verde con nombre, titular, stack, años de experiencia, terminal, contacto y proyecto destacado
+gallery:
+  - src: ../../../assets/projects/portfolio-site/home-dark.png
+    alt: La página de inicio en modo oscuro
+  - src: ../../../assets/projects/portfolio-site/project-page.png
+    alt: Una página de case study con tarjetas de año, rol y stack y un diagrama de arquitectura
+  - src: ../../../assets/projects/portfolio-site/not-found.png
+    alt: La página 404 personalizada con una terminal que muestra la ruta inexistente
+links:
+  repo: https://github.com/mariovzc/mariovzc.github.io
+featured: true
+order: 5
+---
+
+## Por qué
+
+La mayor parte de mi trabajo es privada o de clientes, así que este sitio es el único proyecto donde se puede
+ver **cómo construyo** de punta a punta — el código es público.
+
+## Qué tiene por dentro
+
+- **Astro + islas de React.** HTML estático por defecto; React solo donde hay interacción (cambio de tema,
+  galería). Las páginas casi no cargan JavaScript.
+- **El contenido son datos.** Proyectos y perfil viven en colecciones Markdown/YAML validadas con Zod —
+  agregar un proyecto es agregar un archivo, y un campo faltante detiene el build en lugar de romper la página.
+- **Bilingüe desde el diseño.** Inglés en `/` y español en `/es/`, con respaldo por página, `hreflang`, URLs
+  canónicas y un sitemap que solo lista páginas reales.
+- **Legible por IA.** Un `llms.txt` generado, JSON-LD de persona y proyectos, y herramientas **WebMCP** para que
+  los agentes en el navegador consulten proyectos y contacto directamente.
+- **Todo en Docker.** No se instala nada en la máquina: un Makefile envuelve el servidor de desarrollo, el
+  build, los tests, Lighthouse y la generación de assets dentro de contenedores.
+- **Con tests y auditoría.** Más de 100 tests unitarios (Vitest) y tests end-to-end en navegador (Playwright)
+  sobre datos de prueba propios, más una auditoría de Lighthouse que falla por debajo de 95.
+- **Deploy automático.** GitHub Actions valida, prueba y publica en GitHub Pages en cada push, con un
+  interruptor de "coming soon" para lanzamientos por etapas.
+
+## Resultado
+
+Lighthouse **99–100** en rendimiento, accesibilidad, buenas prácticas y SEO, un sistema de diseño que funciona
+en modo claro y oscuro, y un código donde cambiar el contenido nunca requiere tocar código.

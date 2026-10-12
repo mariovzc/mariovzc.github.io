@@ -43,11 +43,9 @@ Requirement: _Settings → Pages → Source_ must be set to "GitHub Actions" (al
 
 Optional: set repository variable `PUBLIC_WEBMCP_OT_TOKEN` (Chrome origin trial for WebMCP).
 
-## Launch (coming-soon mode)
+## Coming-soon mode
 
-Production currently shows only a "coming soon" page: `.github/workflows/deploy.yml` builds with `PUBLIC_COMING_SOON: 'true'`, which renders `/` and `/es/` as a placeholder (avatar, name, role, contact links; `noindex`), publishes no project pages, trims `/llms.txt` and limits the sitemap to the two home pages. Local `make dev`, `make build` and `make test` always build the full site.
-
-To launch the full site, set `PUBLIC_COMING_SOON: 'false'` (or remove it) in the build step of `deploy.yml` and push to `master`.
+The full site is live. To temporarily switch production back to a "coming soon" page, set `PUBLIC_COMING_SOON: 'true'` in the build step of `.github/workflows/deploy.yml` and push to `master`; `make build-soon` / `make preview-soon` show that mode locally.
 
 ## Custom domain (later)
 

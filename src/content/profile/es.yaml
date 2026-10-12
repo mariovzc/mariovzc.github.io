@@ -58,7 +58,17 @@ education:
     degree: Ingeniería de Sistemas
     start: '2010'
     end: '2015'
-certifications: []
+certifications:
+  - name: Arquitectura de Software
+    issuer: Universidad El Bosque
+    year: '2024'
+  - name: Advanced React
+    issuer: Meta
+    year: '2024'
+    url: https://www.coursera.org/account/accomplishments/verify/YLCJT62NGYQ3
+  - name: Python Project for AI and Application Development
+    issuer: Coursera
+    year: '2024'
 highlights: [Python, JavaScript, Flutter]
 stack:
   frontend: [React, JavaScript, Flutter, Dart]

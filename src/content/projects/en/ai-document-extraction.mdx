@@ -1,0 +1,55 @@
+---
+title: AI data extraction from legal documents
+summary: An LLM pipeline on Vertex AI (Gemini Flash) that reads scanned legal forms and fills the platform for lawyers, considerably cutting data entry time.
+year: 2026
+role: Tech lead & developer
+stack:
+  [
+    Python,
+    FastAPI,
+    React,
+    JavaScript,
+    Vertex AI,
+    Gemini Flash,
+    Docker,
+    Kubernetes,
+    Airflow,
+    MongoDB,
+  ]
+tags: [ai, llm, automation]
+cover: ../../../assets/projects/ai-document-extraction/cover.png
+coverAlt: Pipeline diagram — upload PDFs and photos, merge into one document, Gemini Flash on Vertex AI extracts structured fields, the lawyer reviews them and the data is saved to the platform
+featured: true
+confidential: true
+order: 0
+---
+
+## The challenge
+
+Lawyers worked from **paper forms** and had to type their contents into an internal platform by hand —
+a slow, repetitive task that was easy to get wrong.
+
+## How it works
+
+1. **Upload.** The lawyer uploads the form as PDFs and/or photos taken with a phone.
+2. **Merge.** All pages are combined into a single document, so the model sees the full form at once.
+3. **Extract with Gemini Flash on Vertex AI.** An extraction prompt defines the fields the platform needs;
+   the model reads the document and returns them as structured data, which is validated against that
+   expected structure.
+4. **Human review.** A review screen shows the extracted data so the lawyer can confirm it and fix anything
+   before saving — the person stays in control of what gets stored.
+5. **Save.** The approved data goes straight into the platform, no manual typing.
+
+The extraction API is built with **Python** and **FastAPI**, document processing is orchestrated with
+**Airflow**, results are stored in **MongoDB**, the review screen is built with **React**, and everything runs
+in **Docker** containers on **Kubernetes** in Google Cloud.
+
+## My role
+
+I **led and developed** the project: defined the approach and architecture, coordinated the team, and
+wrote code hands-on across the extraction service, the processing pipeline and the review screen.
+
+## Result
+
+A **considerable reduction in the time lawyers spend filling in forms**: instead of typing every field,
+they review and correct what the model extracted, and spend that time on legal work instead.

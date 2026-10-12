@@ -73,8 +73,9 @@ certifications:
 highlights: [Python, JavaScript, Flutter]
 stack:
   frontend: [React, JavaScript, Flutter, Dart, Swift]
-  backend: [Python, Node.js, Express, PHP, Ruby on Rails, APIs REST, Microservicios]
-  tools: [Google Cloud, Docker, Kubernetes, CI/CD, Codemagic, ISO 27001, OWASP]
+  backend:
+    [Python, FastAPI, Node.js, Express, PHP, Ruby on Rails, APIs REST, Microservicios, MongoDB]
+  tools: [Google Cloud, Vertex AI, Docker, Kubernetes, Airflow, CI/CD, Codemagic, ISO 27001, OWASP]
 contact:
   email: vzcdeveloper@gmail.com
   github: https://github.com/mariovzc

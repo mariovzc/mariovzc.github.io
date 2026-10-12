@@ -1,0 +1,56 @@
+---
+title: Extracción de datos de documentos legales con IA
+summary: Pipeline con LLM en Vertex AI (Gemini Flash) que lee formularios legales escaneados y llena la plataforma, reduciendo considerablemente el tiempo de carga.
+year: 2026
+role: Tech lead y desarrollador
+stack:
+  [
+    Python,
+    FastAPI,
+    React,
+    JavaScript,
+    Vertex AI,
+    Gemini Flash,
+    Docker,
+    Kubernetes,
+    Airflow,
+    MongoDB,
+  ]
+tags: [ai, llm, automation]
+cover: ../../../assets/projects/ai-document-extraction/cover-es.png
+coverAlt: Diagrama del pipeline — carga de PDFs y fotos, unión en un solo documento, Gemini Flash en Vertex AI extrae los campos, el abogado los revisa y los datos se guardan en la plataforma
+featured: true
+confidential: true
+order: 0
+---
+
+## El reto
+
+Los abogados trabajaban con **formularios físicos** y tenían que digitar su contenido a mano en una
+plataforma interna: un trabajo lento, repetitivo y propenso a errores.
+
+## Cómo funciona
+
+1. **Carga.** El abogado sube el formulario como PDFs y/o fotos tomadas con el celular.
+2. **Unión.** Todas las páginas se combinan en un solo documento, para que el modelo vea el formulario
+   completo.
+3. **Extracción con Gemini Flash en Vertex AI.** Un prompt de extracción define los campos que necesita la
+   plataforma; el modelo lee el documento y los devuelve como datos estructurados, que se validan contra esa
+   estructura esperada.
+4. **Revisión humana.** Una pantalla de revisión muestra los datos extraídos para que el abogado los confirme
+   y corrija lo necesario antes de guardar — la persona mantiene el control de lo que se almacena.
+5. **Guardado.** Los datos aprobados pasan directo a la plataforma, sin digitar nada.
+
+La API de extracción está construida con **Python** y **FastAPI**, el procesamiento de documentos se orquesta
+con **Airflow**, los resultados se guardan en **MongoDB**, la pantalla de revisión está hecha en **React**, y
+todo corre en contenedores **Docker** sobre **Kubernetes** en Google Cloud.
+
+## Mi rol
+
+**Lideré y desarrollé** el proyecto: definí el enfoque y la arquitectura, coordiné al equipo y programé de
+primera mano el servicio de extracción, el pipeline de procesamiento y la pantalla de revisión.
+
+## Resultado
+
+Una **reducción considerable del tiempo que los abogados dedican a llenar formularios**: en lugar de digitar
+cada campo, revisan y corrigen lo que extrajo el modelo, y dedican ese tiempo al trabajo legal.

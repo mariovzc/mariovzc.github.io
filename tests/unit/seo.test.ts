@@ -22,6 +22,7 @@ const profile: ProfileData = {
   experience: [],
   education: [],
   certifications: [],
+  highlights: [],
   stack: { frontend: [], backend: [], tools: [] },
   contact: { email: 'a@b.co', github: 'https://github.com/mariovzc' },
 };

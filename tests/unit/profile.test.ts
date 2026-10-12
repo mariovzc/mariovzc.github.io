@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { yearsOfExperience } from '../../src/lib/profile';
+import { stackHighlights, yearsOfExperience } from '../../src/lib/profile';
 
 const now = new Date('2026-06-01T00:00:00Z');
 
@@ -26,5 +26,34 @@ describe('yearsOfExperience', () => {
 
   it('never returns a negative number', () => {
     expect(yearsOfExperience([{ start: '2030' }], now)).toBe(0);
+  });
+});
+
+describe('stackHighlights', () => {
+  const stack = {
+    frontend: ['React', 'JavaScript'],
+    backend: ['Python', 'Node.js'],
+    tools: ['Docker'],
+  };
+
+  it('returns highlights when present', () => {
+    expect(stackHighlights({ highlights: ['Python', 'Flutter'], stack })).toEqual([
+      'Python',
+      'Flutter',
+    ]);
+  });
+
+  it('falls back to the first 3 of frontend + backend when highlights is empty', () => {
+    expect(stackHighlights({ highlights: [], stack })).toEqual(['React', 'JavaScript', 'Python']);
+  });
+
+  it('falls back when highlights is missing', () => {
+    expect(stackHighlights({ stack })).toEqual(['React', 'JavaScript', 'Python']);
+  });
+
+  it('returns an empty list when nothing is available', () => {
+    expect(
+      stackHighlights({ highlights: [], stack: { frontend: [], backend: [], tools: ['Docker'] } }),
+    ).toEqual([]);
   });
 });

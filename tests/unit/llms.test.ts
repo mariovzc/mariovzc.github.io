@@ -11,6 +11,7 @@ const profile: ProfileData = {
   experience: [],
   education: [],
   certifications: [],
+  highlights: [],
   stack: { frontend: ['React'], backend: ['Node.js'], tools: [] },
   contact: { email: 'a@b.co', github: 'https://github.com/mariovzc' },
 };

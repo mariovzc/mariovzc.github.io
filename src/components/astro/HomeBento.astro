@@ -6,6 +6,7 @@ import type { LocalizedProject } from '../../lib/projects';
 import type { ProjectEntry } from '../../lib/site-data';
 import type { ProfileData } from '../../lib/types';
 import { bentoSpans } from '../../lib/bento';
+import { stackHighlights } from '../../lib/profile';
 
 interface Props {
   lang: Locale;
@@ -15,7 +16,7 @@ interface Props {
 }
 const { lang, profile, featured, years } = Astro.props;
 const home = localizePath('/', lang);
-const stack = [...profile.stack.frontend, ...profile.stack.backend].slice(0, 3);
+const stack = stackHighlights(profile);
 // 1x1 tiles present (stack?, years?, terminal, contact); spans keep rows full.
 const singles = (stack.length > 0 ? 1 : 0) + (years !== null ? 1 : 0) + 2;
 const spans = bentoSpans(singles, Boolean(featured));

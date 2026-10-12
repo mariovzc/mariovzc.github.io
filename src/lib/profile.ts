@@ -1,3 +1,5 @@
+import type { ProfileData } from './types';
+
 /**
  * Years since the earliest experience start. Each `start` must begin with a 4-digit
  * year (e.g. "2019" or "2019-03"); entries that don't are ignored.
@@ -13,4 +15,15 @@ export function yearsOfExperience(
     .map(Number);
   if (years.length === 0) return null;
   return Math.max(0, now.getFullYear() - Math.min(...years));
+}
+
+/**
+ * Technologies shown on the home bento Stack tile: the curated `highlights` when
+ * non-empty, otherwise the first 3 of frontend + backend.
+ */
+export function stackHighlights(
+  profile: Pick<ProfileData, 'stack'> & { highlights?: string[] },
+): string[] {
+  if (profile.highlights && profile.highlights.length > 0) return profile.highlights;
+  return [...profile.stack.frontend, ...profile.stack.backend].slice(0, 3);
 }

@@ -65,6 +65,7 @@ const profile = defineCollection({
         }),
       )
       .default([]),
+    highlights: z.array(z.string().min(1)).default([]),
     stack: z.object({
       frontend: z.array(z.string()).default([]),
       backend: z.array(z.string()).default([]),

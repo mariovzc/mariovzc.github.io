@@ -11,6 +11,8 @@ export interface ProfileData {
   experience: { company: string; role: string; start: string; end?: string; summary: string }[];
   education: { institution: string; degree: string; start: string; end?: string }[];
   certifications: { name: string; issuer: string; year: string; url?: string }[];
+  /** Curated technologies for the home bento Stack tile; empty → fallback. */
+  highlights: string[];
   stack: { frontend: string[]; backend: string[]; tools: string[] };
   contact: { email: string; github?: string; linkedin?: string; x?: string };
 }

@@ -79,7 +79,7 @@ certifications:
     url: https://www.credly.com/badges/02db8e22-c0c2-416a-89f8-6dee2f9e7860
 highlights: [Python, JavaScript, Flutter, Gemini]
 stack:
-  frontend: [React, JavaScript, Flutter, Dart, Swift]
+  frontend: [React, JavaScript, jQuery, Tailwind CSS, Flutter, Dart, Swift]
   backend:
     [Python, FastAPI, Node.js, Express, PHP, Ruby on Rails, APIs REST, Microservicios, MongoDB]
   tools:

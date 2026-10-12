@@ -3,36 +3,38 @@ import react from '@astrojs/react';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
-import { existsSync, readdirSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
+import { fallbackUrls } from './src/lib/sitemap.ts';
 
 const SITE = 'https://mariovzc.github.io';
 
-// Pages that only exist as a fallback (other locale's content) are canonicalized
-// to the original and must not appear in the sitemap.
-function fallbackUrls() {
-  const slugs = (lang) => {
+// Project file names must be lowercase kebab-case (enforced by a unit test), so the
+// file name equals the glob-loader slug.
+function projectFiles() {
+  return ['en', 'es'].flatMap((lang) => {
     const dir = `./src/content/projects/${lang}`;
-    if (!existsSync(dir)) return new Set();
-    return new Set(
-      readdirSync(dir)
-        .filter((f) => f.endsWith('.mdx'))
-        .map((f) => f.replace(/\.mdx$/, '')),
-    );
-  };
-  const en = slugs('en');
-  const es = slugs('es');
-  return new Set([
-    ...[...en].filter((s) => !es.has(s)).map((s) => `${SITE}/es/projects/${s}/`),
-    ...[...es].filter((s) => !en.has(s)).map((s) => `${SITE}/projects/${s}/`),
-  ]);
+    if (!existsSync(dir)) return [];
+    return readdirSync(dir)
+      .filter((f) => f.endsWith('.mdx'))
+      .map((f) => {
+        const head = readFileSync(`${dir}/${f}`, 'utf8').split(/^---\s*$/m)[1] ?? '';
+        return {
+          lang,
+          slug: f.replace(/\.mdx$/, ''),
+          draft: /^draft:\s*true\s*$/m.test(head),
+        };
+      });
+  });
 }
 
-const excluded = fallbackUrls();
+// Pages that only exist as a fallback (other locale's content) are canonicalized
+// to the original and must not appear in the sitemap.
+const excluded = fallbackUrls(SITE, projectFiles());
 
 export default defineConfig({
   site: SITE,
   trailingSlash: 'always',
-  // Sample/placeholder covers are repo-owned SVGs that sharp must rasterize; drop once all project images are raster.
+  // Sample/placeholder covers are repo-owned SVGs; sharp rasterizes them to WebP/PNG, which needs this flag. Drop once all project images are raster.
   image: { dangerouslyProcessSVG: true },
   i18n: {
     locales: ['en', 'es'],

@@ -116,7 +116,14 @@ test.describe('theme', () => {
 test.describe('site files', () => {
   test('every internal link resolves', async ({ page, request }) => {
     const seen = new Set<string>();
-    for (const start of ['/', '/es/', '/projects/sample-full/', '/es/projects/sample-en-only/']) {
+    for (const start of [
+      '/',
+      '/es/',
+      '/projects/sample-full/',
+      '/es/projects/sample-en-only/',
+      '/does-not-exist/',
+    ]) {
+      // The 404 start page itself returns 404; only its links are checked.
       await page.goto(start);
       const hrefs = await page
         .locator('a[href^="/"]')

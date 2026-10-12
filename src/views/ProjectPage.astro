@@ -18,7 +18,8 @@ const { lang, project, all } = Astro.props;
 const d = project.entry.data;
 const { Content } = await render(project.entry);
 const profile = await getProfile(lang);
-const summary = toSummary(project, Astro.site!);
+// On fallback pages the JSON-LD url is the canonical (content-language) URL.
+const summary = toSummary({ ...project, lang: project.contentLang }, Astro.site!);
 const { prev, next } = adjacentProjects(all, project.slug);
 const og = await getImage({ src: d.cover, width: 1200, height: 630, fit: 'cover', format: 'png' });
 const gallery = await Promise.all(
@@ -45,6 +46,7 @@ const projectHref = (slug: string) => localizePath(`/projects/${slug}/`, lang);
   translations={project.translations}
   image={og.src}
   type="article"
+  contentLang={project.contentLang}
   jsonLd={[projectJsonLd(summary, profile)]}
 >
   <article class="py-16">
@@ -120,6 +122,7 @@ const projectHref = (slug: string) => localizePath(`/projects/${slug}/`, lang);
           widths={[800, 1600]}
           sizes="(min-width: 1024px) 1024px, 100vw"
           class="w-full"
+          format="webp"
           loading="eager"
         />
       </div>
@@ -142,12 +145,14 @@ const projectHref = (slug: string) => localizePath(`/projects/${slug}/`, lang);
 
     <nav
       class="mt-20 flex justify-between gap-6 border-t border-line pt-8 text-sm"
-      aria-label="Projects"
+      aria-label={t(lang, 'project.navLabel')}
     >
       {prev ? (
         <a href={projectHref(prev.slug)} data-testid="project-prev" class="hover:text-accent">
           ← {t(lang, 'project.prev')}
-          <span class="block font-serif text-lg">{prev.entry.data.title}</span>
+          <span lang={prev.contentLang} class="block font-serif text-lg">
+            {prev.entry.data.title}
+          </span>
         </a>
       ) : (
         <span />
@@ -159,7 +164,9 @@ const projectHref = (slug: string) => localizePath(`/projects/${slug}/`, lang);
           class="text-right hover:text-accent"
         >
           {t(lang, 'project.next')} →
-          <span class="block font-serif text-lg">{next.entry.data.title}</span>
+          <span lang={next.contentLang} class="block font-serif text-lg">
+            {next.entry.data.title}
+          </span>
         </a>
       )}
     </nav>

@@ -6,6 +6,7 @@ import {
   personJsonLd,
   projectJsonLd,
   safeJson,
+  truncateText,
   websiteJsonLd,
 } from '../../src/lib/seo';
 import type { ProfileData, ProjectSummary } from '../../src/lib/types';
@@ -96,5 +97,19 @@ describe('safeJson', () => {
     expect(out).not.toContain('</script');
     expect(out).not.toContain('<');
     expect(JSON.parse(out)).toEqual({ title: '</script><script>alert(1)</script>' });
+  });
+});
+
+describe('truncateText', () => {
+  it('returns short text unchanged', () => {
+    expect(truncateText('hello world', 20)).toBe('hello world');
+  });
+  it('cuts at a word boundary and appends an ellipsis within the limit', () => {
+    const out = truncateText('alpha beta gamma delta', 14);
+    expect(out).toBe('alpha beta…');
+    expect(out.length).toBeLessThanOrEqual(14);
+  });
+  it('hard-cuts a single long word', () => {
+    expect(truncateText('abcdefghij', 5)).toBe('abcd…');
   });
 });

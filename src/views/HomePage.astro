@@ -9,7 +9,7 @@ import Contact from '../components/astro/Contact.astro';
 import type { Locale } from '../i18n/utils';
 import { featuredProjects } from '../lib/projects';
 import { getProfile, getProjects } from '../lib/site-data';
-import { personJsonLd, websiteJsonLd } from '../lib/seo';
+import { personJsonLd, truncateText, websiteJsonLd } from '../lib/seo';
 
 interface Props {
   lang: Locale;
@@ -23,7 +23,7 @@ const site = Astro.site!.href;
 <BaseLayout
   lang={lang}
   title={`${profile.name} — ${profile.role}`}
-  description={`${profile.headline} ${profile.bio}`.slice(0, 160)}
+  description={truncateText(`${profile.headline} ${profile.bio}`, 160)}
   path="/"
   jsonLd={[personJsonLd(profile, site), websiteJsonLd(profile, site)]}
 >

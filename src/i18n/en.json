@@ -26,6 +26,7 @@
   "project.repo": "Source code",
   "project.prev": "Previous project",
   "project.next": "Next project",
+  "project.navLabel": "More projects",
   "project.back": "All projects",
   "project.gallery": "Gallery",
   "project.fallbackNotice": "This project is only available in Spanish.",

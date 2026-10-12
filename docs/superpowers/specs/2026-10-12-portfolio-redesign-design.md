@@ -28,7 +28,7 @@ Reemplazar el sitio estático de 2018 por un portafolio moderno, rápido y fáci
 | Pieza | Elección |
 |---|---|
 | Generador | Astro (última estable), salida 100 % estática |
-| Interactividad | Islas React solo donde hace falta (`ThemeToggle`, `LangSwitcher`, `ImageGallery`) |
+| Interactividad | Islas React solo donde hace falta (`ThemeToggle`, `ImageGallery`) |
 | Estilos | Tailwind CSS v4 con tokens de diseño propios |
 | Contenido | Astro content collections (MDX + YAML) validadas con Zod |
 | Lenguaje | TypeScript estricto |
@@ -60,13 +60,13 @@ mariovzc.github.io/
 ├── docs/superpowers/specs/
 ├── public/
 │   ├── favicon.svg
-│   ├── robots.txt
+│   ├── (robots.txt: generado por un endpoint a partir de `site`)
 │   └── cv/                        # CV público (fase de contenido)
 ├── src/
 │   ├── components/
 │   │   ├── astro/                 # Hero, ProjectsSection, ProjectCard, About, Services,
 │   │   │                          # Experience, Contact, Nav, Footer, SEO
-│   │   └── react/                 # ThemeToggle, LangSwitcher, ImageGallery
+│   │   └── react/                 # ThemeToggle, ImageGallery
 │   ├── content/
 │   │   ├── projects/{en,es}/*.mdx
 │   │   └── profile/{en,es}.yaml
@@ -143,7 +143,7 @@ Etiquetas de botones, navegación y títulos de sección. El helper `t(lang, key
 ## 7. Idiomas
 
 - `en` por defecto en `/`, `es` en `/es/` (i18n routing nativo de Astro, `prefixDefaultLocale: false`).
-- `LangSwitcher` lleva a la misma página en el otro idioma.
+- El selector de idioma es un enlace Astro simple (sin isla React) que lleva a la misma página en el otro idioma.
 - Sin redirección automática por idioma del navegador.
 - `<html lang>` correcto por página.
 
@@ -156,7 +156,7 @@ Componente `SEO.astro` en el layout, por página:
 - Open Graph + Twitter card. Imagen: portada del proyecto, o una imagen estática diseñada para el home.
 - JSON-LD: `Person` (home), `CreativeWork` (proyecto), `WebSite`.
 - `@astrojs/sitemap` con alternativas por idioma.
-- `robots.txt` que permite todo, incluidos explícitamente `GPTBot`, `ClaudeBot`, `PerplexityBot` y `Google-Extended`, y declara el sitemap.
+- `robots.txt` generado por un endpoint a partir de `site`, que permite todo, incluidos explícitamente `GPTBot`, `ClaudeBot`, `PerplexityBot` y `Google-Extended`, y declara el sitemap.
 
 **Dominio:** inicialmente `https://mariovzc.github.io`. Migrar a dominio propio = cambiar `site` + añadir `public/CNAME` + DNS (documentado en el README).
 
@@ -193,7 +193,7 @@ Mejora progresiva; sin efecto en navegadores sin soporte.
 
 ## 12. Docker y flujo diario
 
-- `Dockerfile` basado en `node:22-alpine`. `docker-compose.yml` monta el código y guarda `node_modules` en un volumen con nombre.
+- `Dockerfile` basado en `node:22-bookworm-slim` (no alpine: `node_modules` se comparte con la imagen Playwright basada en glibc). `docker-compose.yml` monta el código y guarda `node_modules` en un volumen con nombre.
 - Hot reload con polling activado (fiabilidad de eventos de archivos macOS → contenedor).
 - Puerto de desarrollo `4321`.
 - Playwright y Lighthouse corren en contenedores propios (imagen oficial de Playwright; Chromium en contenedor para Lighthouse).
@@ -204,7 +204,7 @@ Mejora progresiva; sin efecto en navegadores sin soporte.
 | `make stop` | Detiene los contenedores |
 | `make build` | Build de producción en `dist/` |
 | `make preview` | Sirve `dist/` |
-| `make check` | `astro check` (tipos + contenido) + lint/format |
+| `make check` | `astro check` (tipos + contenido) + Prettier (sin ESLint, a propósito: sitio estático pequeño) |
 | `make test` | Vitest + Playwright |
 | `make lighthouse` | Lighthouse contra el build, reporte en `reports/` |
 | `make add pkg=<nombre>` | Instala una dependencia dentro del contenedor |
@@ -216,7 +216,7 @@ Mejora progresiva; sin efecto en navegadores sin soporte.
 |---|---|---|
 | Contenido | Zod + `astro check` | Campos obligatorios, tipos, URLs, imágenes existentes |
 | Unitario | Vitest | `t()` y paridad de claves EN/ES, resolución de traducciones de proyectos y fallback, generador de `llms.txt`, JSON-LD, handlers WebMCP |
-| Navegador | Playwright | Home y detalle cargan en ambos idiomas, `LangSwitcher` mantiene la página, `ThemeToggle` persiste, sin enlaces internos rotos, 404 funciona, meta tags SEO presentes |
+| Navegador | Playwright | Home y detalle cargan en ambos idiomas, el selector de idioma mantiene la página, `ThemeToggle` persiste, sin enlaces internos rotos, 404 funciona, meta tags SEO presentes |
 | Calidad | Lighthouse (local) | Objetivo ≥ 95 en las cuatro categorías |
 
 Mientras no haya contenido real, se usan 2 proyectos de ejemplo marcados como tales, uno solo en EN para probar el fallback. Se reemplazan en la fase de contenido.
@@ -244,3 +244,13 @@ Si cualquier paso falla, no se publica y el sitio anterior sigue en línea. Play
 - Contenido real: proyectos (pendiente de confirmar cuáles son públicos), perfil a partir del CV, CV público sin datos sensibles.
 - Dominio propio.
 - Blog.
+
+## 17. Cambios durante la implementación (2026-10-12)
+
+- Imagen Docker base `node:22-bookworm-slim` en lugar de alpine: `node_modules` se comparte con la imagen Playwright (glibc).
+- El selector de idioma es un enlace Astro plano, no una isla React; la página 404 lo apunta a `/es/`.
+- `robots.txt` lo genera un endpoint a partir de `site`.
+- `make check` = `astro check` + Prettier; no hay ESLint (decisión deliberada para un sitio estático pequeño).
+- `image.dangerouslyProcessSVG` está activo porque las portadas de ejemplo son SVG que sharp rasteriza a WebP.
+- Las páginas de proyecto con contenido de respaldo (fallback) se excluyen del sitemap con `src/lib/sitemap.ts`, que reutiliza `localizeProjects`; los nombres de archivo de proyectos deben ser kebab-case en minúsculas.
+- Las páginas `noindex` (404) no emiten canonical ni hreflang.

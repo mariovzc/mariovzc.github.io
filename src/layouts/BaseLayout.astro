@@ -18,6 +18,10 @@ interface Props {
   jsonLd?: Record<string, unknown>[];
   type?: 'website' | 'article';
   noindex?: boolean;
+  /** Language the content is written in (og:locale); defaults to `lang`. */
+  contentLang?: Locale;
+  /** Overrides the language-switch target (e.g. the 404 page). */
+  langSwitchHref?: string;
 }
 
 const {
@@ -30,6 +34,8 @@ const {
   jsonLd = [],
   type = 'website',
   noindex = false,
+  contentLang = lang,
+  langSwitchHref,
 } = Astro.props;
 
 const profile = await getProfile(lang);
@@ -67,6 +73,7 @@ const originTrialToken = import.meta.env.PUBLIC_WEBMCP_OT_TOKEN;
       type={type}
       jsonLd={jsonLd}
       noindex={noindex}
+      contentLang={contentLang}
     />
   </head>
   <body class="min-h-screen bg-bg text-fg">
@@ -76,7 +83,7 @@ const originTrialToken = import.meta.env.PUBLIC_WEBMCP_OT_TOKEN;
     >
       {t(lang, 'nav.skip')}
     </a>
-    <Nav lang={lang} path={path} name={profile.name} />
+    <Nav lang={lang} path={path} name={profile.name} langSwitchHref={langSwitchHref} />
     <main id="main" class="mx-auto max-w-5xl px-4 sm:px-6">
       <slot />
     </main>

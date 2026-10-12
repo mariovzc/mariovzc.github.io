@@ -6,9 +6,10 @@ interface Props {
   lang: Locale;
   path: string;
   name: string;
+  langSwitchHref?: string;
 }
 
-const { lang, path, name } = Astro.props;
+const { lang, path, name, langSwitchHref } = Astro.props;
 const home = localizePath('/', lang);
 const other = otherLocale(lang);
 ---
@@ -32,14 +33,14 @@ const other = otherLocale(lang);
         {t(lang, 'nav.contact')}
       </a>
       <a
-        href={localizePath(path, other)}
+        href={langSwitchHref ?? localizePath(path, other)}
         hreflang={other}
         lang={other}
-        aria-label={t(lang, 'lang.switchLabel')}
         data-testid="lang-switch"
         class="font-medium hover:text-fg"
       >
         {t(lang, 'lang.short')}
+        <span class="sr-only"> — {t(lang, 'lang.switchLabel')}</span>
       </a>
       <ThemeToggle
         client:load

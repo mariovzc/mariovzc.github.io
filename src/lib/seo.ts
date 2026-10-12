@@ -82,3 +82,13 @@ export function safeJson(value: unknown): string {
     .replace(/\u2028/g, '\\u2028')
     .replace(/\u2029/g, '\\u2029');
 }
+
+/** Truncates at a word boundary, appending "…"; the result never exceeds `max` characters. */
+export function truncateText(text: string, max: number): string {
+  if (text.length <= max) return text;
+  const room = max - 1;
+  const cut = text.slice(0, room + 1);
+  const lastSpace = cut.lastIndexOf(' ');
+  const head = lastSpace > 0 ? cut.slice(0, lastSpace) : text.slice(0, room);
+  return `${head.trimEnd()}…`;
+}

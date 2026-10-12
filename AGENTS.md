@@ -11,7 +11,7 @@ Personal portfolio of Mario Vizcaino. Astro 7 static site, bilingual (EN default
 - Astro 7 uses a Rust compiler: close every non-void tag; no block elements inside `<p>`.
 - Internal links always end with `/` (`trailingSlash: 'always'`). Build them with `localizePath()`.
 - Keep logic in pure functions under `src/lib/` or `src/i18n/` with Vitest tests; `.astro` files only render.
-- `astro.config.mjs` sets `image: { dangerouslyProcessSVG: true }` because the sample/placeholder project covers are SVG. Do not remove it until every project image is raster (PNG/JPG/WebP).
+- `astro.config.mjs` sets `image: { dangerouslyProcessSVG: true }` because the sample/placeholder project covers are SVG: sharp rasterizes them to WebP/PNG (covers use `format="webp"`), which requires the flag. Do not remove it until every project image is raster (PNG/JPG/WebP).
 - Playwright (`playwright.config.ts`) and `scripts/lighthouse.mjs` run `astro preview --ignore-lock` because a stale preview lock can persist in the shared Docker node_modules volume. Keep the flag.
 
 ## Layout
@@ -19,16 +19,17 @@ Personal portfolio of Mario Vizcaino. Astro 7 static site, bilingual (EN default
 - `src/content/projects/{en,es}/<slug>.mdx` — one file per project per language; same slug links translations. Schema in `src/content.config.ts`.
 - `src/content/profile/{en,es}.yaml` — bio, services, experience, stack, contact, optional `cv`.
 - `src/i18n/{en,es}.json` — UI strings; keys must match in both files (unit test enforces it).
-- `src/lib/` — `projects.ts` (localization/fallback), `seo.ts`, `llms.ts`, `robots.ts`, `theme.ts`, `webmcp-tools.ts`, `site-data.ts` (only file that reads collections).
+- `src/lib/` — `projects.ts` (localization/fallback), `sitemap.ts` (fallback-page sitemap exclusion), `seo.ts`, `llms.ts`, `robots.ts`, `theme.ts`, `webmcp-tools.ts`, `site-data.ts` (only file that reads collections).
 - `src/views/` — page bodies shared by EN/ES routes in `src/pages/`.
 - Design tokens in `src/styles/global.css` (B1 Editorial light: warm off-white, Fraunces + Inter, terracotta accent).
 
 ## Common tasks
 
 - **Add a project:** create `src/content/projects/en/<slug>.mdx` (and optionally `es/<slug>.mdx`), put images in `src/assets/projects/<slug>/`, run `make check && make test`. A missing ES file falls back to EN automatically.
+- **File names:** project files must be lowercase kebab-case (`my-app.mdx`); a unit test enforces it because `astro.config.mjs` derives slugs from file names for the sitemap.
 - **Hide a project:** `draft: true`. Drafts are still visible in the public GitHub repo.
 - **Add a UI string:** add the key to both `en.json` and `es.json`.
-- **Change domain:** update `SITE` in `astro.config.mjs`, add `public/CNAME`, configure DNS (see README).
+- **Change domain:** update `SITE` in `astro.config.mjs` and the `SITE` constant in `tests/e2e/site.spec.ts`, add `public/CNAME`, configure DNS (see README), then regenerate the OG image with `make og` (it reads the domain from `astro.config.mjs` and name/role/headline from `src/content/profile/en.yaml`).
 
 ## AI surfaces
 

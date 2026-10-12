@@ -12,18 +12,21 @@ interface Props {
   type: 'website' | 'article';
   jsonLd: Record<string, unknown>[];
   noindex: boolean;
+  contentLang: Locale;
 }
 
-const { lang, title, description, path, translations, image, type, jsonLd, noindex } = Astro.props;
+const { lang, title, description, path, translations, image, type, jsonLd, noindex, contentLang } =
+  Astro.props;
 const site = Astro.site!.href;
-const canonical = canonicalFor({ site, path, lang, translations });
-const alternates = buildAlternates({ site, path, translations });
+// noindex pages (404) have no stable URL of their own: no canonical or alternates.
+const canonical = noindex ? undefined : canonicalFor({ site, path, lang, translations });
+const alternates = noindex ? [] : buildAlternates({ site, path, translations });
 const imageUrl = new URL(image, site).href;
 ---
 
 <title>{title}</title>
 <meta name="description" content={description} />
-<link rel="canonical" href={canonical} />
+{canonical && <link rel="canonical" href={canonical} />}
 {noindex && <meta name="robots" content="noindex" />}
 {alternates.map((a) => (
   <link rel="alternate" hreflang={a.hreflang} href={a.href} />
@@ -32,9 +35,9 @@ const imageUrl = new URL(image, site).href;
 <meta property="og:type" content={type} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:url" content={canonical} />
+{canonical && <meta property="og:url" content={canonical} />}
 <meta property="og:image" content={imageUrl} />
-<meta property="og:locale" content={lang === 'es' ? 'es_ES' : 'en_US'} />
+<meta property="og:locale" content={contentLang === 'es' ? 'es_ES' : 'en_US'} />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />

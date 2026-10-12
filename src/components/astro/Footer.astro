@@ -1,20 +1,16 @@
 ---
-import { t, type Locale } from '../../i18n/utils';
-
 interface Props {
-  lang: Locale;
   name: string;
 }
 
-const { lang, name } = Astro.props;
+const { name } = Astro.props;
 const year = new Date().getFullYear();
 ---
 
 <footer class="mt-16 bg-[var(--footer-bg)] text-[#a1a1a6]">
-  <div class="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-10 text-sm sm:flex-row sm:justify-between sm:px-6">
+  <div class="mx-auto max-w-6xl px-4 py-10 text-center text-sm sm:px-6">
     <p>
       © {year} <span class="heavy text-[#f5f5f7]">{name}</span>
     </p>
-    <p>{t(lang, 'footer.built')}</p>
   </div>
 </footer>

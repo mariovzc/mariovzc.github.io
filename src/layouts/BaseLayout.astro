@@ -87,7 +87,7 @@ const originTrialToken = import.meta.env.PUBLIC_WEBMCP_OT_TOKEN;
     <main id="main" class="mx-auto max-w-6xl px-4 sm:px-6">
       <slot />
     </main>
-    <Footer lang={lang} name={profile.name} />
+    <Footer name={profile.name} />
     <script type="application/json" id="webmcp-data" set:html={safeJson(siteData)} />
     <script>
       import '../scripts/webmcp.ts';

@@ -38,7 +38,6 @@
   "notFound.title": "Página no encontrada",
   "notFound.text": "La página que buscas no existe o fue movida.",
   "notFound.home": "Volver al inicio",
-  "footer.built": "Hecho con Astro.",
   "section.work": "Portafolio",
   "section.about": "Perfil",
   "section.services": "Servicios",

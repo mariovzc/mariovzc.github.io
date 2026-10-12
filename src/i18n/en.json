@@ -38,7 +38,6 @@
   "notFound.title": "Page not found",
   "notFound.text": "The page you are looking for does not exist or was moved.",
   "notFound.home": "Back to home",
-  "footer.built": "Built with Astro.",
   "section.work": "Portfolio",
   "section.about": "Profile",
   "section.services": "Services",

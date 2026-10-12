@@ -49,54 +49,54 @@ const projectHref = (slug: string) => localizePath(`/projects/${slug}/`, lang);
   contentLang={project.contentLang}
   jsonLd={[projectJsonLd(summary, profile)]}
 >
-  <article class="py-16">
-    <a href={`${localizePath('/', lang)}#work`} class="text-sm text-muted hover:text-fg">
+  <article class="py-8 sm:py-12">
+    <a href={`${localizePath('/', lang)}#work`} class="pill pill-neutral">
       ← {t(lang, 'project.back')}
     </a>
 
     {project.isFallback && (
       <p
         data-testid="fallback-notice"
-        class="mt-6 rounded-lg border border-line bg-surface px-4 py-3 text-sm"
+        class="mt-6 rounded-tile bg-chip-orange-bg px-5 py-3 text-sm font-semibold text-chip-orange"
       >
         {t(lang, 'project.fallbackNotice')}
       </p>
     )}
 
     <div>
-      <h1 lang={project.contentLang} class="mt-6 font-serif text-4xl leading-tight sm:text-6xl">
+      <h1 lang={project.contentLang} class="heavy mt-8 text-4xl leading-tight sm:text-6xl">
         {d.title}
       </h1>
       <p lang={project.contentLang} class="mt-4 max-w-2xl text-xl text-muted">
         {d.summary}
       </p>
 
-      <dl class="mt-10 grid gap-6 border-y border-line py-6 text-sm sm:grid-cols-3">
-        <div>
-          <dt class="text-muted">{t(lang, 'project.year')}</dt>
-          <dd class="mt-1">{d.year}</dd>
+      <dl class="mt-8 grid gap-4 text-sm sm:grid-cols-3">
+        <div class="tile p-5">
+          <dt class="eyebrow">{t(lang, 'project.year')}</dt>
+          <dd class="heavy mt-2 text-lg">{d.year}</dd>
         </div>
-        <div>
-          <dt class="text-muted">{t(lang, 'project.role')}</dt>
-          <dd lang={project.contentLang} class="mt-1">
+        <div class="tile p-5">
+          <dt class="eyebrow">{t(lang, 'project.role')}</dt>
+          <dd lang={project.contentLang} class="heavy mt-2 text-lg">
             {d.role}
           </dd>
         </div>
-        <div>
-          <dt class="text-muted">{t(lang, 'project.stack')}</dt>
-          <dd class="mt-1">{d.stack.join(' · ')}</dd>
+        <div class="tile p-5">
+          <dt class="eyebrow">{t(lang, 'project.stack')}</dt>
+          <dd class="mt-2 font-semibold">{d.stack.join(' · ')}</dd>
         </div>
       </dl>
 
       {(d.links.live || d.links.repo) && (
-        <p class="mt-6 flex gap-6 text-sm">
+        <p class="mt-6 flex flex-wrap gap-3">
           {d.links.live && (
             <a
               href={d.links.live}
               data-testid="project-live"
               target="_blank"
               rel="noopener"
-              class="text-accent underline underline-offset-4"
+              class="pill pill-accent px-5 py-2.5"
             >
               {t(lang, 'project.live')} ↗
             </a>
@@ -107,7 +107,7 @@ const projectHref = (slug: string) => localizePath(`/projects/${slug}/`, lang);
               data-testid="project-repo"
               target="_blank"
               rel="noopener"
-              class="text-accent underline underline-offset-4"
+              class="pill pill-outline px-5 py-2.5"
             >
               {t(lang, 'project.repo')} ↗
             </a>
@@ -115,25 +115,27 @@ const projectHref = (slug: string) => localizePath(`/projects/${slug}/`, lang);
         </p>
       )}
 
-      <div class="mt-10 overflow-hidden rounded-lg bg-surface">
+      <div class="tile mt-8 overflow-hidden rounded-block">
         <Image
           src={d.cover}
           alt={d.coverAlt}
           widths={[800, 1600]}
-          sizes="(min-width: 1024px) 1024px, 100vw"
+          sizes="(min-width: 1152px) 1152px, 100vw"
           class="w-full"
           format="webp"
           loading="eager"
         />
       </div>
 
-      <div lang={project.contentLang} class="prose-content mt-12 max-w-2xl">
-        <Content />
+      <div class="tile mt-8 p-7 sm:p-10">
+        <div lang={project.contentLang} class="prose-content max-w-2xl">
+          <Content />
+        </div>
       </div>
 
       {gallery.length > 0 && (
-        <section data-testid="project-gallery" class="mt-16">
-          <h2 class="mb-6 font-serif text-2xl">{t(lang, 'project.gallery')}</h2>
+        <section data-testid="project-gallery" class="mt-12">
+          <h2 class="heavy mb-5 text-2xl">{t(lang, 'project.gallery')}</h2>
           <ImageGallery
             client:visible
             images={gallery}
@@ -143,28 +145,29 @@ const projectHref = (slug: string) => localizePath(`/projects/${slug}/`, lang);
       )}
     </div>
 
-    <nav
-      class="mt-20 flex justify-between gap-6 border-t border-line pt-8 text-sm"
-      aria-label={t(lang, 'project.navLabel')}
-    >
+    <nav class="mt-12 grid gap-4 text-sm sm:grid-cols-2" aria-label={t(lang, 'project.navLabel')}>
       {prev ? (
-        <a href={projectHref(prev.slug)} data-testid="project-prev" class="hover:text-accent">
+        <a
+          href={projectHref(prev.slug)}
+          data-testid="project-prev"
+          class="tile tile-hover block p-6 text-muted"
+        >
           ← {t(lang, 'project.prev')}
-          <span lang={prev.contentLang} class="block font-serif text-lg">
+          <span lang={prev.contentLang} class="heavy mt-1 block text-lg text-fg">
             {prev.entry.data.title}
           </span>
         </a>
       ) : (
-        <span />
+        <span class="hidden sm:block"></span>
       )}
       {next && (
         <a
           href={projectHref(next.slug)}
           data-testid="project-next"
-          class="text-right hover:text-accent"
+          class="tile tile-hover block p-6 text-right text-muted"
         >
           {t(lang, 'project.next')} →
-          <span lang={next.contentLang} class="block font-serif text-lg">
+          <span lang={next.contentLang} class="heavy mt-1 block text-lg text-fg">
             {next.entry.data.title}
           </span>
         </a>

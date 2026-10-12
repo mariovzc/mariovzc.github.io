@@ -12,20 +12,22 @@ import { t } from '../i18n/utils';
   noindex
   langSwitchHref="/es/"
 >
-  <section class="py-28">
-    <p class="text-sm uppercase tracking-widest text-muted">404</p>
-    <h1 class="mt-4 font-serif text-5xl">{t('en', 'notFound.title')}</h1>
-    <p class="mt-4 text-lg text-muted">{t('en', 'notFound.text')}</p>
-    <p class="mt-2 text-lg text-muted" lang="es">
-      {t('es', 'notFound.text')}
-    </p>
-    <p class="mt-10 flex gap-6">
-      <a href="/" class="text-accent underline underline-offset-4">
-        {t('en', 'notFound.home')}
-      </a>
-      <a href="/es/" lang="es" class="text-accent underline underline-offset-4">
-        {t('es', 'notFound.home')}
-      </a>
-    </p>
+  <section class="flex justify-center py-16 sm:py-24">
+    <div class="tile w-full max-w-xl p-8 text-center sm:p-12">
+      <p class="eyebrow">404</p>
+      <h1 class="heavy mt-3 text-4xl sm:text-5xl">{t('en', 'notFound.title')}</h1>
+      <p class="mt-4 text-lg text-muted">{t('en', 'notFound.text')}</p>
+      <p class="mt-2 text-lg text-muted" lang="es">
+        {t('es', 'notFound.text')}
+      </p>
+      <p class="mt-8 flex flex-wrap justify-center gap-3">
+        <a href="/" class="pill pill-accent px-5 py-2.5">
+          {t('en', 'notFound.home')}
+        </a>
+        <a href="/es/" lang="es" class="pill pill-soft px-5 py-2.5">
+          {t('es', 'notFound.home')}
+        </a>
+      </p>
+    </div>
   </section>
 </BaseLayout>

@@ -15,7 +15,7 @@ services:
   - title: IA aplicada
     description: Integración de LLMs con Gemini y Vertex AI, extracción de datos de documentos, automatización de procesos y agentes de IA — con revisión humana donde importa.
   - title: Desarrollo full-stack
-    description: Plataformas web de punta a punta — APIs REST, backends escalables en Python y Node.js, y frontends en React.
+    description: Plataformas web de punta a punta — APIs REST, backends escalables en Python, Node.js y Ruby on Rails, y frontends en React.
   - title: Apps móviles
     description: Apps multiplataforma para iOS y Android con Flutter y apps nativas de iOS con Swift — desde el primer build hasta la publicación en App Store y Google Play.
   - title: Cloud y DevOps

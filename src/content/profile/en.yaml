@@ -14,7 +14,7 @@ services:
   - title: Applied AI
     description: LLM integrations with Gemini and Vertex AI, data extraction from documents, process automation and AI agents — with human review where it matters.
   - title: Full-stack development
-    description: Web platforms end to end — REST APIs, scalable backends in Python and Node.js, and React frontends.
+    description: Web platforms end to end — REST APIs, scalable backends in Python, Node.js and Ruby on Rails, and React frontends.
   - title: Mobile apps
     description: Cross-platform iOS and Android apps with Flutter and native iOS apps with Swift — from first build to App Store and Google Play releases.
   - title: Cloud & DevOps

@@ -32,7 +32,7 @@ jobs:
       - run: npm run build
         env:
           # Production shows only the coming-soon page; set to 'false' to launch the full site.
-          PUBLIC_COMING_SOON: 'true'
+          PUBLIC_COMING_SOON: 'false'
       - uses: actions/upload-pages-artifact@v5
         if: github.event_name != 'pull_request'
         with:

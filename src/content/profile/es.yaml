@@ -18,8 +18,8 @@ services:
     description: Plataformas web de punta a punta — APIs REST, backends escalables en Python y Node.js, y frontends en React.
   - title: Cloud y DevOps
     description: Microservicios en contenedores sobre Google Cloud con Docker y Kubernetes, y CI/CD para web y móvil — builds, firmado y publicación automática en App Store y Google Play con Codemagic.
-  - title: Seguridad e ISO 27001
-    description: Código seguro (OWASP), control de accesos y procesos de desarrollo alineados con auditorías ISO 27001.
+  - title: Seguridad y calidad (ISO 27001 · ISO 25010)
+    description: Código seguro (OWASP), control de accesos y procesos de desarrollo alineados con auditorías ISO 27001, y calidad del software evaluada según ISO 25010.
   - title: Integraciones y datos
     description: Integraciones de APIs con sistemas de terceros y pipelines automatizados de web scraping para inteligencia de negocio.
 experience:
@@ -27,7 +27,8 @@ experience:
     role: Tech Leader
     start: '2021'
     summary: >-
-      Lideré al equipo que alineó el desarrollo con ISO 27001 y aprobó la auditoría; diseñé
+      Lideré al equipo que alineó el desarrollo con ISO 27001 y aprobó la auditoría, y apliqué
+      ISO 25010 para evaluar y mejorar la calidad del software; diseñé
       microservicios en contenedores sobre GCP; diseñé integraciones de APIs con
       proveedores logísticos y pipelines de datos automatizados; facilito ceremonias Agile y
       code reviews.

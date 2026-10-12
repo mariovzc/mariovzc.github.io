@@ -17,8 +17,8 @@ services:
     description: Web platforms end to end — REST APIs, scalable backends in Python and Node.js, and React frontends.
   - title: Cloud & DevOps
     description: Containerized microservices on Google Cloud with Docker and Kubernetes, plus CI/CD for web and mobile — automated builds, signing and App Store / Google Play releases with Codemagic.
-  - title: Security & ISO 27001
-    description: Secure coding (OWASP), access control and development processes aligned with ISO 27001 audits.
+  - title: Security & quality (ISO 27001 · ISO 25010)
+    description: Secure coding (OWASP), access control and development processes aligned with ISO 27001 audits, plus software quality evaluated against ISO 25010.
   - title: Integrations & data
     description: API integrations with third-party systems and automated web scraping pipelines for business intelligence.
 experience:
@@ -26,7 +26,8 @@ experience:
     role: Tech Leader
     start: '2021'
     summary: >-
-      Led the team that aligned development with ISO 27001 and passed the audit; architected
+      Led the team that aligned development with ISO 27001 and passed the audit, and applied
+      ISO 25010 to assess and improve software quality; architected
       containerized microservices on GCP; designed API integrations with third-party
       logistics providers and automated data pipelines; run Agile ceremonies and code reviews.
   - company: Alto

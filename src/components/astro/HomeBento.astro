@@ -5,6 +5,7 @@ import { localizePath, t, type Locale } from '../../i18n/utils';
 import type { LocalizedProject } from '../../lib/projects';
 import type { ProjectEntry } from '../../lib/site-data';
 import type { ProfileData } from '../../lib/types';
+import { bentoSpans } from '../../lib/bento';
 
 interface Props {
   lang: Locale;
@@ -15,16 +16,16 @@ interface Props {
 const { lang, profile, featured, years } = Astro.props;
 const home = localizePath('/', lang);
 const stack = [...profile.stack.frontend, ...profile.stack.backend].slice(0, 3);
-// 1x1 tiles present; with an odd count the contact tile widens so rows stay full.
+// 1x1 tiles present (stack?, years?, terminal, contact); spans keep rows full.
 const singles = (stack.length > 0 ? 1 : 0) + (years !== null ? 1 : 0) + 2;
-const contactWide = singles % 2 === 1;
+const spans = bentoSpans(singles, Boolean(featured));
+// Literal class names so Tailwind generates them.
+const smSpan = { 1: 'sm:col-span-1', 2: 'sm:col-span-2' } as const;
+const lgSpan = { 1: 'lg:col-span-1', 2: 'lg:col-span-2', 4: 'lg:col-span-4' } as const;
 const f = featured?.entry.data;
 ---
 
-<section
-  aria-label={profile.name}
-  class="grid gap-4 py-6 sm:grid-cols-2 sm:py-8 lg:grid-cols-4 lg:gap-5"
->
+<section class="grid gap-4 py-6 sm:grid-cols-2 sm:py-8 lg:grid-cols-4 lg:gap-5">
   <div class="hero-surface fade-up relative flex min-h-80 flex-col justify-between overflow-hidden rounded-block p-7 sm:col-span-2 sm:p-9 lg:row-span-2">
     <p class="text-xs font-bold uppercase tracking-[0.14em]">{profile.role}</p>
     <div class="mt-16">
@@ -74,7 +75,13 @@ const f = featured?.entry.data;
     </div>
   )}
 
-  <div class="tile-dark fade-up p-6 font-mono text-sm leading-relaxed" style="--delay:200ms">
+  <div
+    class:list={[
+      'tile-dark fade-up p-6 font-mono text-sm leading-relaxed',
+      lgSpan[spans.terminalLg],
+    ]}
+    style="--delay:200ms"
+  >
     <div class="mb-4 flex gap-1.5" aria-hidden="true">
       <span class="size-2.5 rounded-full bg-[#ff5f57]"></span>
       <span class="size-2.5 rounded-full bg-[#febc2e]"></span>
@@ -95,7 +102,11 @@ const f = featured?.entry.data;
   </div>
 
   <div
-    class:list={['tile fade-up flex flex-col p-6', contactWide && 'sm:col-span-2']}
+    class:list={[
+      'tile fade-up flex flex-col p-6',
+      smSpan[spans.contactSm],
+      lgSpan[spans.contactLg],
+    ]}
     style="--delay:240ms"
   >
     <span class="chip bg-chip-blue-bg text-chip-blue">
@@ -113,14 +124,17 @@ const f = featured?.entry.data;
   {featured && f && (
     <a
       href={localizePath(`/projects/${featured.slug}/`, lang)}
-      class="tile tile-hover fade-up group flex flex-col overflow-hidden sm:col-span-2 sm:flex-row"
+      class:list={[
+        'tile tile-hover fade-up group flex flex-col overflow-hidden sm:col-span-2 sm:flex-row',
+        lgSpan[spans.featuredLg],
+      ]}
       style="--delay:280ms"
     >
       <Image
         src={f.cover}
         alt={f.coverAlt}
         widths={[480, 800]}
-        sizes="(min-width: 1024px) 280px, (min-width: 640px) 50vw, 100vw"
+        sizes="(min-width: 1024px) 560px, (min-width: 640px) 50vw, 100vw"
         format="webp"
         class="aspect-[16/10] w-full object-cover sm:aspect-auto sm:w-1/2"
       />

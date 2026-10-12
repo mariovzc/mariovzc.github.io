@@ -19,6 +19,7 @@
   --accent-soft: rgba(52, 199, 89, 0.12);
   --on-accent: #ffffff;
   --pill-bg: rgba(0, 0, 0, 0.06);
+  --pill-bg-hover: rgba(0, 0, 0, 0.11);
   --hero-from: #187a35;
   --hero-to: #0f5a26;
   --chip-purple: #8e3fc4;
@@ -46,6 +47,7 @@
   --accent-soft: rgba(48, 209, 88, 0.16);
   --on-accent: #000000;
   --pill-bg: rgba(255, 255, 255, 0.08);
+  --pill-bg-hover: rgba(255, 255, 255, 0.15);
   --chip-purple: #c973f4;
   --chip-purple-bg: rgba(191, 90, 242, 0.2);
   --chip-orange: #ff9f0a;
@@ -91,13 +93,23 @@ html {
   background: var(--bg);
   color: var(--fg);
   font-family: var(--font-sans);
-  scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
 }
 
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
+}
+
+/* Unlayered and more specific than :focus-visible, so it wins on green surfaces. */
+.hero-surface :focus-visible {
+  outline-color: #fff;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 @layer components {
@@ -120,9 +132,6 @@ html {
     background:
       radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px) 0 0 / 20px 20px,
       linear-gradient(135deg, var(--hero-from), var(--hero-to));
-  }
-  .hero-surface :focus-visible {
-    outline-color: #fff;
   }
 
   .eyebrow {
@@ -168,6 +177,25 @@ html {
     border-color: rgba(255, 255, 255, 0.7);
     color: #fff;
   }
+  /* Hover states only for interactive pills (static list pills stay put). */
+  a.pill-neutral:hover,
+  button.pill-neutral:hover,
+  a.pill-outline:hover {
+    background: var(--pill-bg-hover);
+  }
+  a.pill-soft:hover {
+    border-color: var(--accent);
+  }
+  a.pill-accent:hover {
+    filter: brightness(1.1);
+  }
+  a.pill-white:hover {
+    background: #e8f5ec;
+  }
+  a.pill-outline-white:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: #fff;
+  }
 
   .chip {
     display: inline-flex;
@@ -180,6 +208,13 @@ html {
   }
 
   @media (prefers-reduced-motion: no-preference) {
+    a.pill,
+    button.pill {
+      transition:
+        background-color 0.15s ease,
+        border-color 0.15s ease,
+        filter 0.15s ease;
+    }
     .tile-hover {
       transition:
         transform 0.2s ease,
@@ -192,7 +227,8 @@ html {
       border-color: var(--line-strong);
     }
     .fade-up {
-      animation: fade-up 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+      /* backwards (not both): no transform is held after the animation, so hover lift works. */
+      animation: fade-up 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
       animation-delay: var(--delay, 0ms);
     }
   }
@@ -205,7 +241,6 @@ html {
   }
   to {
     opacity: 1;
-    transform: none;
   }
 }
 

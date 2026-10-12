@@ -1,9 +1,10 @@
-// Renders public/og-default.png (1200x630) with Playwright's Chromium. Run via `make og`.
+// Renders src/assets/brand/og-{en,es}.png (1200x630) with Playwright's Chromium. Run via `make og`.
+// They live in src/assets so Astro emits them with a content hash: every change gets a new URL,
+// which forces WhatsApp/LinkedIn/X to refresh their cached link previews.
 import { readFileSync } from 'node:fs';
 import { chromium } from '@playwright/test';
 import { parse } from 'yaml';
 
-const profile = parse(readFileSync('src/content/profile/en.yaml', 'utf8'));
 const site = readFileSync('astro.config.mjs', 'utf8').match(/const SITE = '([^']+)'/)?.[1];
 if (!site) throw new Error('SITE constant not found in astro.config.mjs');
 const domain = new URL(site).host;
@@ -13,7 +14,7 @@ const font = readFileSync(
   'node_modules/@fontsource-variable/plus-jakarta-sans/files/plus-jakarta-sans-latin-wght-normal.woff2',
 ).toString('base64');
 
-const html = `<!doctype html><html><head><style>
+const render = (profile) => `<!doctype html><html><head><style>
 @font-face{font-family:'Plus Jakarta Sans';src:url(data:font/woff2;base64,${font}) format('woff2');font-weight:200 800}
 </style></head><body style="margin:0">
 <div style="width:1200px;height:630px;box-sizing:border-box;padding:80px;color:#fff;
@@ -29,8 +30,12 @@ const html = `<!doctype html><html><head><style>
 
 const browser = await chromium.launch();
 const page = await browser.newPage({ viewport: { width: 1200, height: 630 } });
-await page.setContent(html);
-await page.evaluate(() => document.fonts.ready);
-await page.screenshot({ path: 'public/og-default.png' });
+for (const lang of ['en', 'es']) {
+  const profile = parse(readFileSync(`src/content/profile/${lang}.yaml`, 'utf8'));
+  await page.setContent(render(profile));
+  await page.evaluate(() => document.fonts.ready);
+  const out = `src/assets/brand/og-${lang}.png`;
+  await page.screenshot({ path: out });
+  console.log(`Wrote ${out}`);
+}
 await browser.close();
-console.log('Wrote public/og-default.png');

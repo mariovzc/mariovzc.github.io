@@ -6,6 +6,9 @@ import Footer from '../components/astro/Footer.astro';
 import { LOCALES, t, type Locale } from '../i18n/utils';
 import { getProfile, getSiteData } from '../lib/site-data';
 import { safeJson } from '../lib/seo';
+import { getImage } from 'astro:assets';
+import ogEn from '../assets/brand/og-en.png';
+import ogEs from '../assets/brand/og-es.png';
 
 interface Props {
   lang: Locale;
@@ -34,7 +37,7 @@ const {
   description,
   path,
   translations = [...LOCALES],
-  image = '/og-default.png',
+  image,
   jsonLd = [],
   type = 'website',
   noindex = false,
@@ -45,6 +48,8 @@ const {
 } = Astro.props;
 
 const profile = await getProfile(lang);
+// Hashed URL per content change so social networks refresh cached previews.
+const ogImage = image ?? (await getImage({ src: lang === 'es' ? ogEs : ogEn, format: 'png' })).src;
 const siteData = minimal ? null : await getSiteData(Astro.site!);
 const originTrialToken = import.meta.env.PUBLIC_WEBMCP_OT_TOKEN;
 ---
@@ -78,7 +83,7 @@ const originTrialToken = import.meta.env.PUBLIC_WEBMCP_OT_TOKEN;
       description={description}
       path={path}
       translations={translations}
-      image={image}
+      image={ogImage}
       type={type}
       jsonLd={jsonLd}
       noindex={noindex}

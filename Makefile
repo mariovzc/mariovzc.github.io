@@ -41,7 +41,7 @@ test-e2e: ## E2E against tests/fixtures/content (never the real content)
 lighthouse: build ## Lighthouse audit, reports in reports/
 	$(E2E) npm run lighthouse
 
-og: ## Regenerate public/og-default.png
+og: ## Regenerate src/assets/brand/og-{en,es}.png
 	$(E2E) npm run og
 
 favicons: ## Regenerate favicons/app icons in public/ from src/assets/brand/avatar.png

@@ -22,5 +22,6 @@ stack:
   backend: [Node.js, Ruby on Rails, PostgreSQL]
   tools: [Docker, Git, GitHub Actions]
 contact:
-  email: hello@example.com
+  email: vzcdeveloper@gmail.com
   github: https://github.com/mariovzc
+  linkedin: https://www.linkedin.com/in/mariovzc/

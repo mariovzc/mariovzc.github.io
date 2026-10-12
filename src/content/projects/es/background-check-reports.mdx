@@ -1,8 +1,8 @@
 ---
-title: Reportes de antecedentes de personas y vehículos
-summary: Integración con la API de TusDatos.co que genera reportes de antecedentes de personas y vehículos, con procesos batch y en segundo plano.
+title: De scrapers a reportes de antecedentes confiables
+summary: Reemplacé scrapers frágiles (3 fuentes) por la API de TusDatos.co (10+ fuentes) con datos internos, y reportes asíncronos y por lotes.
 year: 2025
-role: Líder de proyecto y desarrollador
+role: Líder, gestor de proyecto y desarrollador
 stack: [Python, Flask, React, MongoDB, Airflow]
 tags: [integration, data, automation]
 cover: ../../../assets/projects/background-check-reports/cover-es.png
@@ -14,9 +14,20 @@ order: 1
 
 ## El reto
 
-Antes de trabajar con una persona o un vehículo, la operación necesitaba conocer sus **antecedentes** —
-registros en fuentes oficiales y listas restrictivas, y el estado de los vehículos — y hacerlo para muchas
-personas y vehículos a la vez, sin que alguien revisara cada fuente a mano.
+Antes de trabajar con una persona o un vehículo, la operación necesita conocer sus **antecedentes** —
+registros en fuentes oficiales y listas restrictivas, y el estado de los vehículos.
+
+Hasta entonces esto dependía de **scrapers** que leían **3 sitios públicos** directamente. Cuando un sitio
+estaba caído o cambiaba su estructura, el scraper fallaba y la verificación quedaba incompleta — y solo se
+cubrían esas 3 fuentes.
+
+## Qué cambió
+
+- **De scraping a una API.** Migramos a la API de **TusDatos.co**, que agrega fuentes oficiales detrás de una
+  interfaz estable — se acabaron los scrapers rotos cada vez que un sitio cambiaba.
+- **De 3 a más de 10 fuentes.** La cobertura se multiplicó usando las fuentes que ya ofrece el proveedor.
+- **Datos internos, por primera vez.** Combinamos los resultados externos con **datos internos de la
+  compañía** para mejorar las búsquedas y dar una visión más completa — algo que el proceso anterior no hacía.
 
 ## Cómo funciona
 
@@ -37,11 +48,12 @@ personas y vehículos a la vez, sin que alguien revisara cada fuente a mano.
 
 ## Mi rol
 
-**Lideré el proyecto y lo desarrollé**: diseñé la integración y el flujo de procesamiento, definí cómo corren
-los trabajos en batch y en segundo plano, y construí el servicio, los pipelines y la vista del reporte.
+**Lideré, gestioné y desarrollé** el proyecto: planifiqué la migración de los scrapers a la API y coordiné al
+equipo y los tiempos, diseñé la integración y el flujo de procesamiento, y construí el servicio, los
+pipelines y la vista del reporte.
 
 ## Resultado
 
-**Reportes de antecedentes confiables y enriquecidos** bajo demanda — para una persona o vehículo o para
-lotes completos — que combinan fuentes oficiales con datos internos y se generan en segundo plano sin afectar
-el rendimiento de la plataforma.
+- **Más de 10 fuentes en lugar de 3**, con una API estable en vez de scrapers que se rompían.
+- **Reportes confiables y enriquecidos** que combinan fuentes oficiales con datos internos.
+- **Bajo demanda y por lotes**, generados en segundo plano sin afectar el rendimiento de la plataforma.

@@ -1,8 +1,8 @@
 ---
-title: Background check reports for people and vehicles
-summary: Integration with the TusDatos.co API that generates background reports for people (by ID document) and vehicles, with batch and background processing.
+title: From scrapers to reliable background-check reports
+summary: Replaced fragile scrapers (3 sources) with the TusDatos.co API (10+ sources) plus internal data, and built async batch reports for people and vehicles.
 year: 2025
-role: Project lead & developer
+role: Lead, project manager & developer
 stack: [Python, Flask, React, MongoDB, Airflow]
 tags: [integration, data, automation]
 cover: ../../../assets/projects/background-check-reports/cover.png
@@ -14,9 +14,19 @@ order: 1
 
 ## The challenge
 
-Before working with a person or a vehicle, the operation needed to know their **background** — records in
-official and restrictive lists, and the status of vehicles — and to do it for many people and vehicles at
-once, without someone checking each source by hand.
+Before working with a person or a vehicle, the operation needs to know their **background** — records in
+official and restrictive lists, and the status of vehicles.
+
+Until then this relied on **scrapers** that read **3 public websites** directly. Whenever a site was down or
+changed its layout, the scraper failed and the check was incomplete — and only those 3 sources were covered.
+
+## What changed
+
+- **From scraping to an API.** Moved to the **TusDatos.co** API, which aggregates official sources behind a
+  stable interface — no more broken scrapers when a website changes.
+- **From 3 to 10+ sources.** Coverage more than tripled by using the sources the provider already offers.
+- **Internal data, for the first time.** Combined the external results with the **company's own internal
+  data** to improve searches and give a more complete picture — something the old process didn't do.
 
 ## How it works
 
@@ -35,11 +45,12 @@ once, without someone checking each source by hand.
 
 ## My role
 
-I **led the project and developed it**: designed the integration and the processing flow, defined how jobs
-run in batch and in the background, and built the service, the pipelines and the report view.
+I **led, managed and developed** the project: planned the migration from scrapers to the API and coordinated
+the team and timelines, designed the integration and the processing flow, and built the service, the
+pipelines and the report view.
 
 ## Result
 
-**Reliable, enriched background reports** on demand — for a single person or vehicle or for whole batches —
-combining official sources with internal data, and generated in the background without slowing down the
-platform.
+- **10+ sources instead of 3**, with a stable API instead of scrapers that broke.
+- **Reliable, enriched reports** that combine official sources with internal data.
+- **On demand and in batches**, generated in the background without slowing down the platform.

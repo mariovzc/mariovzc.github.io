@@ -4,7 +4,8 @@ import SEO from '../components/astro/SEO.astro';
 import Nav from '../components/astro/Nav.astro';
 import Footer from '../components/astro/Footer.astro';
 import { LOCALES, t, type Locale } from '../i18n/utils';
-import { getProfile } from '../lib/site-data';
+import { getProfile, getSiteData } from '../lib/site-data';
+import { safeJson } from '../lib/seo';
 
 interface Props {
   lang: Locale;
@@ -32,6 +33,8 @@ const {
 } = Astro.props;
 
 const profile = await getProfile(lang);
+const siteData = await getSiteData(Astro.site!);
+const originTrialToken = import.meta.env.PUBLIC_WEBMCP_OT_TOKEN;
 ---
 
 <!doctype html>
@@ -40,6 +43,7 @@ const profile = await getProfile(lang);
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    {originTrialToken && <meta http-equiv="origin-trial" content={originTrialToken} />}
     <script is:inline>
       // Mirrors resolveTheme() in src/lib/theme.ts. Runs before first paint.
       (function () {
@@ -77,5 +81,9 @@ const profile = await getProfile(lang);
       <slot />
     </main>
     <Footer lang={lang} name={profile.name} />
+    <script type="application/json" id="webmcp-data" set:html={safeJson(siteData)} />
+    <script>
+      import '../scripts/webmcp.ts';
+    </script>
   </body>
 </html>

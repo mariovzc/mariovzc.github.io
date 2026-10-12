@@ -49,8 +49,6 @@ Priority: **P1** = soon / high impact · **P2** = valuable, not urgent · **P3**
 
 ## Design & UX
 
-- [ ] **P2 · Featured bento tile cover** — wide architecture diagrams (AI project) get cropped in the narrow
-      featured tile; add a tile-friendly cover variant (e.g. `coverCard`) or a compact diagram.
 - [ ] **P3 · Service icons** — services reuse a cycling set of generic icons; give each service a specific icon
       (AI, web, mobile, cloud, security, data).
 - [ ] **P3 · Visual QA pass** — manual review on real devices (iOS Safari, Android Chrome) in light and dark mode.
@@ -74,6 +72,8 @@ Priority: **P1** = soon / high impact · **P2** = valuable, not urgent · **P3**
 
 ## Done
 
+- [x] 2026-10-12 — Featured bento tile: optional `cardCover` (square diagram) for the AI project so the
+      narrow tile isn't cropped.
 - [x] 2026-10-12 — Google Search Console: URL-prefix property verified (meta tag in `BaseLayout.astro`),
       sitemap submitted, indexing requested for `/` and `/es/`.
 - [x] 2026-10-12 — Astro 7 rebuild, Bento verde design, EN/ES, SEO, `llms.txt`, WebMCP, Docker + Makefile,

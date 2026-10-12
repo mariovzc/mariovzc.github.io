@@ -16,6 +16,8 @@ const projects = defineCollection({
       stack: z.array(z.string().min(1)).min(1),
       tags: z.array(z.string().min(1)).default([]),
       cover: image(),
+      // Optional square-ish variant for the narrow featured tile on the home bento.
+      cardCover: image().optional(),
       coverAlt: z.string().min(1),
       gallery: z.array(z.object({ src: image(), alt: z.string().min(1) })).default([]),
       links: z.object({ live: z.url().optional(), repo: z.url().optional() }).default({}),

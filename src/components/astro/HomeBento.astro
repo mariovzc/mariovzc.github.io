@@ -144,7 +144,7 @@ const f = featured?.entry.data;
       style="--delay:280ms"
     >
       <Image
-        src={f.cover}
+        src={f.cardCover ?? f.cover}
         alt={f.coverAlt}
         widths={[480, 800]}
         sizes="(min-width: 1024px) 560px, (min-width: 640px) 50vw, 100vw"

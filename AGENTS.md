@@ -49,7 +49,7 @@ Personal portfolio of Mario Vizcaino. Astro 7 static site, bilingual (EN default
 
 ## Common tasks
 
-- **Add a project:** create `src/content/projects/en/<slug>.mdx` (and optionally `es/<slug>.mdx`), put images in `src/assets/projects/<slug>/`, set `featured: true` to list it on the home page and an `order` after 0, run `make check && make test`. A missing ES file falls back to EN automatically. Covers are 1600×1000; App Store screenshots can be pulled from the iTunes lookup API and composed on the green gradient; architecture diagrams are rendered to PNG with Playwright (never SVG `<text>`, which sharp can't rasterize without fonts).
+- **Add a project:** create `src/content/projects/en/<slug>.mdx` (and optionally `es/<slug>.mdx`), put images in `src/assets/projects/<slug>/`, set `featured: true` to list it on the home page and an `order` after 0, run `make check && make test`. A missing ES file falls back to EN automatically. Covers are 1600×1000 (optional `cardCover`, ~1:1, is used by the narrow featured tile on the home bento — add one when the cover is a wide diagram); App Store screenshots can be pulled from the iTunes lookup API and composed on the green gradient; architecture diagrams are rendered to PNG with Playwright (never SVG `<text>`, which sharp can't rasterize without fonts).
 - **File names:** project files must be lowercase kebab-case (`my-app.mdx`); a unit test enforces it because `astro.config.mjs` derives slugs from file names for the sitemap.
 - **Hide a project:** `draft: true`. Drafts are still visible in the public GitHub repo.
 - **Add a UI string:** add the key to both `en.json` and `es.json`.

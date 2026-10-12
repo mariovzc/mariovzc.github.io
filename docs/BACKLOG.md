@@ -7,8 +7,9 @@ Priority: **P1** = soon / high impact · **P2** = valuable, not urgent · **P3**
 
 ## Launch follow-up
 
-- [ ] **P1 · Google Search Console** — verify `https://mariovzc.github.io` and submit
-      `https://mariovzc.github.io/sitemap-index.xml` so Google indexes the site faster. (Owner action.)
+- [ ] **P2 · Check indexing** — in a week or two, search `site:mariovzc.github.io` and review Search Console
+      (Pages / Sitemaps) for errors. When the custom domain is live, add a **Domain** property verified with a
+      DNS TXT record in Cloudflare and resubmit the sitemap.
 - [ ] **P1 · LinkedIn update** — new headline ("Senior Full Stack & AI Engineer · Tech Leader | …"), new
       "About" text (EN/ES drafts agreed in the session of 2026-10-12), add the portfolio link to *Featured*,
       add ISO 25010 and the AI project to the Alto experience, add skills (Gemini/Vertex AI, LLMs, Flutter,
@@ -73,6 +74,8 @@ Priority: **P1** = soon / high impact · **P2** = valuable, not urgent · **P3**
 
 ## Done
 
+- [x] 2026-10-12 — Google Search Console: URL-prefix property verified (meta tag in `BaseLayout.astro`),
+      sitemap submitted, indexing requested for `/` and `/es/`.
 - [x] 2026-10-12 — Astro 7 rebuild, Bento verde design, EN/ES, SEO, `llms.txt`, WebMCP, Docker + Makefile,
       CI deploy, tests, Lighthouse 99–100.
 - [x] 2026-10-12 — Real profile, education, certifications, 5 projects (2 confidential case studies), favicon

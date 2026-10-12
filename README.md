@@ -34,6 +34,10 @@ make dev       # http://localhost:4321 with hot reload
 
 Push to `master` → GitHub Actions validates, tests, builds and publishes to GitHub Pages. If any step fails nothing is published.
 
+Pull requests to `master` run validation and build only; nothing is published.
+
+Requirement: _Settings → Pages → Source_ must be set to "GitHub Actions" (already set for this repo).
+
 Optional: set repository variable `PUBLIC_WEBMCP_OT_TOKEN` (Chrome origin trial for WebMCP).
 
 ## Custom domain (later)

@@ -11,6 +11,8 @@ Personal portfolio of Mario Vizcaino. Astro 7 static site, bilingual (EN default
 - Astro 7 uses a Rust compiler: close every non-void tag; no block elements inside `<p>`.
 - Internal links always end with `/` (`trailingSlash: 'always'`). Build them with `localizePath()`.
 - Keep logic in pure functions under `src/lib/` or `src/i18n/` with Vitest tests; `.astro` files only render.
+- `astro.config.mjs` sets `image: { dangerouslyProcessSVG: true }` because the sample/placeholder project covers are SVG. Do not remove it until every project image is raster (PNG/JPG/WebP).
+- Playwright (`playwright.config.ts`) and `scripts/lighthouse.mjs` run `astro preview --ignore-lock` because a stale preview lock can persist in the shared Docker node_modules volume. Keep the flag.
 
 ## Layout
 

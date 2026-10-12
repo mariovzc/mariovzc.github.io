@@ -28,7 +28,7 @@ services:
     description: Código seguro (OWASP), control de accesos y procesos de desarrollo alineados con auditorías ISO 27001, y calidad del software evaluada según ISO 25010.
     icon: shield
   - title: Integraciones y datos
-    description: Integraciones de APIs con sistemas de terceros y pipelines automatizados de web scraping para inteligencia de negocio.
+    description: Integraciones de APIs con sistemas de terceros y proveedores de datos, y web scrapers cuando no hay API — pipelines automatizados, por lotes y en segundo plano, para inteligencia de negocio.
     icon: database
 experience:
   - company: Alto

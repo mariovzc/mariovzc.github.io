@@ -137,6 +137,20 @@ test.describe('site files', () => {
     expect(await res.text()).toContain('Page not found');
   });
 
+  test('404 shows English for unknown paths', async ({ page }) => {
+    await page.goto('/nope/');
+    await expect(page.getByRole('heading', { name: 'Page not found' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Página no encontrada' })).toBeHidden();
+    await expect(page.getByTestId('not-found-terminal')).toContainText('/nope/');
+    await expect(page.locator('a[href*="#work"]')).toHaveCount(0);
+  });
+
+  test('404 shows Spanish under /es/', async ({ page }) => {
+    await page.goto('/es/no-existe/');
+    await expect(page.getByRole('heading', { name: 'Página no encontrada' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Page not found' })).toBeHidden();
+  });
+
   test('llms.txt, robots.txt and sitemap', async ({ request }) => {
     const llms = await request.get('/llms.txt');
     expect(llms.status()).toBe(200);

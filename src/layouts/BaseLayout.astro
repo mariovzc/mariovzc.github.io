@@ -24,6 +24,8 @@ interface Props {
   langSwitchHref?: string;
   /** Coming-soon mode: no nav, footer or WebMCP data; the page renders its own controls. */
   minimal?: boolean;
+  /** Nav with only the brand link and theme toggle (404 page). */
+  brandOnlyNav?: boolean;
 }
 
 const {
@@ -39,6 +41,7 @@ const {
   contentLang = lang,
   langSwitchHref,
   minimal = false,
+  brandOnlyNav = false,
 } = Astro.props;
 
 const profile = await getProfile(lang);
@@ -82,7 +85,7 @@ const originTrialToken = import.meta.env.PUBLIC_WEBMCP_OT_TOKEN;
       contentLang={contentLang}
     />
   </head>
-  <body class="min-h-screen bg-bg text-fg">
+  <body class="flex min-h-screen flex-col bg-bg text-fg">
     <a
       href="#main"
       class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-surface focus:px-4 focus:py-2 focus:font-semibold focus:shadow-lg"
@@ -95,8 +98,14 @@ const originTrialToken = import.meta.env.PUBLIC_WEBMCP_OT_TOKEN;
       </main>
     ) : (
       <>
-        <Nav lang={lang} path={path} name={profile.name} langSwitchHref={langSwitchHref} />
-        <main id="main" class="mx-auto max-w-6xl px-4 sm:px-6">
+        <Nav
+          lang={lang}
+          path={path}
+          name={profile.name}
+          langSwitchHref={langSwitchHref}
+          brandOnly={brandOnlyNav}
+        />
+        <main id="main" class="mx-auto w-full max-w-6xl flex-1 px-4 sm:px-6">
           <slot />
         </main>
         <Footer name={profile.name} />

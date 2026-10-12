@@ -7,9 +7,11 @@ interface Props {
   path: string;
   name: string;
   langSwitchHref?: string;
+  /** Brand link and theme toggle only (404 page). */
+  brandOnly?: boolean;
 }
 
-const { lang, path, name, langSwitchHref } = Astro.props;
+const { lang, path, name, langSwitchHref, brandOnly = false } = Astro.props;
 const home = localizePath('/', lang);
 const other = otherLocale(lang);
 ---
@@ -23,25 +25,31 @@ const other = otherLocale(lang);
       {name}
     </a>
     <div class="flex shrink-0 items-center gap-1.5 sm:gap-2">
-      <a href={`${home}#work`} class="pill pill-neutral hidden sm:inline-flex">
-        {t(lang, 'nav.work')}
-      </a>
-      <a href={`${home}#about`} class="pill pill-neutral hidden sm:inline-flex">
-        {t(lang, 'nav.about')}
-      </a>
-      <a href={`${home}#contact`} class="pill pill-neutral">
-        {t(lang, 'nav.contact')}
-      </a>
-      <a
-        href={langSwitchHref ?? localizePath(path, other)}
-        hreflang={other}
-        lang={other}
-        data-testid="lang-switch"
-        class="pill pill-soft"
-      >
-        {t(lang, 'lang.short')}
-        <span class="sr-only"> — {t(lang, 'lang.switchLabel')}</span>
-      </a>
+      {!brandOnly && (
+        <>
+          <a href={`${home}#work`} class="pill pill-neutral hidden sm:inline-flex">
+            {t(lang, 'nav.work')}
+          </a>
+          <a href={`${home}#about`} class="pill pill-neutral hidden sm:inline-flex">
+            {t(lang, 'nav.about')}
+          </a>
+          <a href={`${home}#contact`} class="pill pill-neutral">
+            {t(lang, 'nav.contact')}
+          </a>
+        </>
+      )}
+      {!brandOnly && (
+        <a
+          href={langSwitchHref ?? localizePath(path, other)}
+          hreflang={other}
+          lang={other}
+          data-testid="lang-switch"
+          class="pill pill-soft"
+        >
+          {t(lang, 'lang.short')}
+          <span class="sr-only"> — {t(lang, 'lang.switchLabel')}</span>
+        </a>
+      )}
       <ThemeToggle
         client:load
         labels={{ toLight: t(lang, 'theme.toLight'), toDark: t(lang, 'theme.toDark') }}

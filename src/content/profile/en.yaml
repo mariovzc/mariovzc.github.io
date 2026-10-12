@@ -1,0 +1,26 @@
+# SAMPLE CONTENT — replaced in the content phase (see spec §16).
+name: Mario Vizcaino
+headline: Software that feels simple.
+role: Full-stack developer
+location: Colombia
+bio: >-
+  I design and build web products end to end, from the interface people touch to the
+  services behind it. Sample bio — to be replaced.
+availability: Open for freelance projects
+services:
+  - title: Web applications
+    description: Product-grade web apps with React and a solid backend.
+  - title: Technical consulting
+    description: Architecture reviews, performance and code quality.
+experience:
+  - company: Sample Company
+    role: Senior developer
+    start: '2022'
+    summary: Sample entry — to be replaced.
+stack:
+  frontend: [React, TypeScript, Astro]
+  backend: [Node.js, Ruby on Rails, PostgreSQL]
+  tools: [Docker, Git, GitHub Actions]
+contact:
+  email: hello@example.com
+  github: https://github.com/mariovzc

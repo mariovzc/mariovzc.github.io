@@ -1,0 +1,26 @@
+# CONTENIDO DE EJEMPLO — se reemplaza en la fase de contenido (spec §16).
+name: Mario Vizcaino
+headline: Software que se siente simple.
+role: Desarrollador full-stack
+location: Colombia
+bio: >-
+  Diseño y construyo productos web de punta a punta, desde la interfaz hasta los
+  servicios que la sostienen. Bio de ejemplo — se reemplaza.
+availability: Disponible para proyectos freelance
+services:
+  - title: Aplicaciones web
+    description: Apps web de nivel producto con React y un backend sólido.
+  - title: Consultoría técnica
+    description: Revisión de arquitectura, rendimiento y calidad de código.
+experience:
+  - company: Empresa de ejemplo
+    role: Desarrollador senior
+    start: '2022'
+    summary: Entrada de ejemplo — se reemplaza.
+stack:
+  frontend: [React, TypeScript, Astro]
+  backend: [Node.js, Ruby on Rails, PostgreSQL]
+  tools: [Docker, Git, GitHub Actions]
+contact:
+  email: hello@example.com
+  github: https://github.com/mariovzc

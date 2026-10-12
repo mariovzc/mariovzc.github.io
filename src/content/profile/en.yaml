@@ -68,6 +68,7 @@ certifications:
   - name: Python Project for AI and Application Development
     issuer: Coursera
     year: '2024'
+    url: https://www.credly.com/badges/02db8e22-c0c2-416a-89f8-6dee2f9e7860
 highlights: [Python, JavaScript, Flutter]
 stack:
   frontend: [React, JavaScript, Flutter, Dart]

@@ -1,0 +1,22 @@
+---
+import Section from './Section.astro';
+import { t, type Locale } from '../../i18n/utils';
+import type { ProfileData } from '../../lib/types';
+
+interface Props {
+  lang: Locale;
+  profile: ProfileData;
+}
+const { lang, profile } = Astro.props;
+---
+
+<Section id="services" title={t(lang, 'services.title')}>
+  <ul class="grid gap-8 md:grid-cols-2">
+    {profile.services.map((s) => (
+      <li class="rounded-lg border border-line p-6">
+        <h3 class="font-serif text-xl">{s.title}</h3>
+        <p class="mt-2 text-muted">{s.description}</p>
+      </li>
+    ))}
+  </ul>
+</Section>

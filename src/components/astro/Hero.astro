@@ -1,0 +1,32 @@
+---
+import { localizePath, t, type Locale } from '../../i18n/utils';
+import type { ProfileData } from '../../lib/types';
+
+interface Props {
+  lang: Locale;
+  profile: ProfileData;
+}
+const { lang, profile } = Astro.props;
+const home = localizePath('/', lang);
+---
+
+<section class="py-20 sm:py-28">
+  {profile.availability && (
+    <p class="mb-6 inline-block rounded-full border border-line px-3 py-1 text-xs text-muted">
+      {profile.availability}
+    </p>
+  )}
+  <p class="mb-3 text-sm uppercase tracking-widest text-muted">{profile.role}</p>
+  <h1 class="font-serif text-5xl leading-[1.05] sm:text-7xl">{profile.name}</h1>
+  <p class="mt-6 max-w-2xl font-serif text-2xl italic text-accent sm:text-3xl">
+    {profile.headline}
+  </p>
+  <div class="mt-10 flex flex-wrap gap-4 text-sm">
+    <a href={`${home}#work`} class="rounded-full bg-fg px-5 py-2.5 font-medium text-bg">
+      {t(lang, 'hero.viewWork')}
+    </a>
+    <a href={`${home}#contact`} class="rounded-full border border-line px-5 py-2.5 hover:border-fg">
+      {t(lang, 'hero.contact')}
+    </a>
+  </div>
+</section>

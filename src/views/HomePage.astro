@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/astro/Hero.astro';
+import ProjectsSection from '../components/astro/ProjectsSection.astro';
+import About from '../components/astro/About.astro';
+import Services from '../components/astro/Services.astro';
+import Experience from '../components/astro/Experience.astro';
+import Contact from '../components/astro/Contact.astro';
+import type { Locale } from '../i18n/utils';
+import { featuredProjects } from '../lib/projects';
+import { getProfile, getProjects } from '../lib/site-data';
+import { personJsonLd, websiteJsonLd } from '../lib/seo';
+
+interface Props {
+  lang: Locale;
+}
+const { lang } = Astro.props;
+const profile = await getProfile(lang);
+const projects = featuredProjects(await getProjects(lang));
+const site = Astro.site!.href;
+---
+
+<BaseLayout
+  lang={lang}
+  title={`${profile.name} — ${profile.role}`}
+  description={`${profile.headline} ${profile.bio}`.slice(0, 160)}
+  path="/"
+  jsonLd={[personJsonLd(profile, site), websiteJsonLd(profile, site)]}
+>
+  <Hero lang={lang} profile={profile} />
+  <ProjectsSection lang={lang} projects={projects} />
+  <About lang={lang} profile={profile} />
+  <Services lang={lang} profile={profile} />
+  <Experience lang={lang} profile={profile} />
+  <Contact lang={lang} profile={profile} />
+</BaseLayout>

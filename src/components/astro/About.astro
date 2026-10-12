@@ -1,0 +1,31 @@
+---
+import Section from './Section.astro';
+import { t, type Locale, type UiKey } from '../../i18n/utils';
+import type { ProfileData } from '../../lib/types';
+
+interface Props {
+  lang: Locale;
+  profile: ProfileData;
+}
+const { lang, profile } = Astro.props;
+const groups = (['frontend', 'backend', 'tools'] as const)
+  .map((key) => ({ key, label: t(lang, `stack.${key}` as UiKey), items: profile.stack[key] }))
+  .filter((g) => g.items.length > 0);
+---
+
+<Section id="about" title={t(lang, 'about.title')}>
+  <div class="grid gap-12 md:grid-cols-[3fr_2fr]">
+    <p class="text-lg leading-relaxed">{profile.bio}</p>
+    <div>
+      <h3 class="mb-4 text-sm uppercase tracking-widest text-muted">{t(lang, 'about.stack')}</h3>
+      <dl class="space-y-4">
+        {groups.map((g) => (
+          <div>
+            <dt class="text-sm text-muted">{g.label}</dt>
+            <dd class="mt-1">{g.items.join(' · ')}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </div>
+</Section>

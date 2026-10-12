@@ -1,0 +1,42 @@
+---
+import Section from './Section.astro';
+import { t, type Locale } from '../../i18n/utils';
+import type { ProfileData } from '../../lib/types';
+
+interface Props {
+  lang: Locale;
+  profile: ProfileData;
+}
+const { lang, profile } = Astro.props;
+const hasContent = profile.experience.length > 0 || Boolean(profile.cv);
+---
+
+{hasContent && (
+  <Section id="experience" title={t(lang, 'experience.title')}>
+    <ol class="space-y-8">
+      {profile.experience.map((e) => (
+        <li class="grid gap-1 sm:grid-cols-[10rem_1fr] sm:gap-6">
+          <p class="text-sm text-muted">
+            {e.start} – {e.end ?? t(lang, 'experience.present')}
+          </p>
+          <div>
+            <h3 class="font-medium">
+              {e.role} · {e.company}
+            </h3>
+            <p class="mt-1 text-muted">{e.summary}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+    {profile.cv && (
+      <a
+        href={profile.cv}
+        download
+        data-testid="cv-link"
+        class="mt-10 inline-block text-accent underline underline-offset-4"
+      >
+        {t(lang, 'experience.downloadCv')}
+      </a>
+    )}
+  </Section>
+)}

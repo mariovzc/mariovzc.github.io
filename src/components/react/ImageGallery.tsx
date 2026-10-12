@@ -25,9 +25,13 @@ export default function ImageGallery({ images, labels }: Props) {
     setActive(img);
   }
 
+  // Phone screenshots are portrait: show them in a denser grid without cropping them to landscape.
+  const isPortrait = (img: GalleryImage) => img.height > img.width;
+  const allPortrait = images.length > 0 && images.every(isPortrait);
+
   return (
     <>
-      <ul className="grid gap-4 sm:grid-cols-2">
+      <ul className={`grid gap-4 ${allPortrait ? 'grid-cols-2 sm:grid-cols-3' : 'sm:grid-cols-2'}`}>
         {images.map((img) => (
           <li key={img.full}>
             <button
@@ -43,7 +47,7 @@ export default function ImageGallery({ images, labels }: Props) {
                 height={img.height}
                 loading="lazy"
                 decoding="async"
-                className="aspect-[16/10] w-full object-cover"
+                className={`w-full object-cover ${isPortrait(img) ? 'aspect-[9/16] object-top' : 'aspect-[16/10]'}`}
               />
             </button>
           </li>

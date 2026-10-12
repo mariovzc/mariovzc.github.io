@@ -48,6 +48,16 @@ experience:
     summary: >-
       Built a construction project management system with Ruby on Rails and jQuery, from
       database design to the front end.
+education:
+  - institution: Corporación Universitaria Americana
+    degree: Specialization in Information Security
+    start: '2016'
+    end: '2017'
+  - institution: Politécnico Costa Atlántica
+    degree: B.S. in Systems Engineering
+    start: '2010'
+    end: '2015'
+certifications: []
 stack:
   frontend: [React, JavaScript, Dart]
   backend: [Python, Node.js, Ruby on Rails, REST APIs, Microservices]

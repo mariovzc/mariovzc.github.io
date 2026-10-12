@@ -21,6 +21,20 @@ export function buildLlmsTxt(data: SiteData): string {
     sections.push(`## Projects\n\n${items.join('\n')}`);
   }
 
+  if (p.education.length) {
+    const items = p.education.map(
+      (e) => `- ${e.degree}, ${e.institution} (${e.start}${e.end ? `–${e.end}` : ''})`,
+    );
+    sections.push(`## Education\n\n${items.join('\n')}`);
+  }
+
+  if (p.certifications.length) {
+    const items = p.certifications.map(
+      (c) => `- ${c.name} — ${c.issuer} (${c.year})${c.url ? ` ${c.url}` : ''}`,
+    );
+    sections.push(`## Certifications\n\n${items.join('\n')}`);
+  }
+
   const contact = [
     `- Email: ${p.contact.email}`,
     p.contact.github && `- GitHub: ${p.contact.github}`,

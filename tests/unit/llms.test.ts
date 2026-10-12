@@ -9,6 +9,8 @@ const profile: ProfileData = {
   bio: 'I build web products.',
   services: [{ title: 'Web apps', description: 'React apps.' }],
   experience: [],
+  education: [],
+  certifications: [],
   stack: { frontend: ['React'], backend: ['Node.js'], tools: [] },
   contact: { email: 'a@b.co', github: 'https://github.com/mariovzc' },
 };
@@ -61,5 +63,30 @@ describe('buildLlmsTxt', () => {
   it('omits sections with no content', () => {
     const empty = buildLlmsTxt({ ...data, projects: { en: [], es: [] } });
     expect(empty).not.toContain('## Projects');
+  });
+
+  it('lists education and certifications only when present', () => {
+    expect(txt).not.toContain('## Education');
+    expect(txt).not.toContain('## Certifications');
+    const full = buildLlmsTxt({
+      ...data,
+      profiles: {
+        ...data.profiles,
+        en: {
+          ...profile,
+          education: [{ institution: 'Uni', degree: 'B.S. Systems', start: '2010', end: '2015' }],
+          certifications: [
+            { name: 'Cert A', issuer: 'Org', year: '2024', url: 'https://example.com/a' },
+            { name: 'Cert B', issuer: 'Org2', year: '2023' },
+          ],
+        },
+      },
+    });
+    expect(full).toContain('## Education\n\n- B.S. Systems, Uni (2010–2015)');
+    expect(full).toContain(
+      '## Certifications\n\n- Cert A — Org (2024) https://example.com/a\n- Cert B — Org2 (2023)',
+    );
+    expect(full.indexOf('## Projects')).toBeLessThan(full.indexOf('## Education'));
+    expect(full.indexOf('## Certifications')).toBeLessThan(full.indexOf('## Contact'));
   });
 });

@@ -45,6 +45,26 @@ const profile = defineCollection({
         }),
       )
       .default([]),
+    education: z
+      .array(
+        z.object({
+          institution: z.string().min(1),
+          degree: z.string().min(1),
+          start: z.string().min(4),
+          end: z.string().optional(),
+        }),
+      )
+      .default([]),
+    certifications: z
+      .array(
+        z.object({
+          name: z.string().min(1),
+          issuer: z.string().min(1),
+          year: z.string().min(4),
+          url: z.url().optional(),
+        }),
+      )
+      .default([]),
     stack: z.object({
       frontend: z.array(z.string()).default([]),
       backend: z.array(z.string()).default([]),

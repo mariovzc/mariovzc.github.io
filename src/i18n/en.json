@@ -42,6 +42,9 @@
   "section.about": "Profile",
   "section.services": "Services",
   "section.experience": "Career",
+  "section.education": "Education",
+  "education.title": "Education & certifications",
+  "education.certifications": "Certifications",
   "section.contact": "Contact",
   "stats.years": "years of experience",
   "bento.featured": "Featured project"

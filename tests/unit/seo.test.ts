@@ -20,6 +20,8 @@ const profile: ProfileData = {
   bio: 'bio',
   services: [{ title: 's', description: 'd' }],
   experience: [],
+  education: [],
+  certifications: [],
   stack: { frontend: [], backend: [], tools: [] },
   contact: { email: 'a@b.co', github: 'https://github.com/mariovzc' },
 };
@@ -61,6 +63,38 @@ describe('json-ld', () => {
     expect(p.name).toBe('Mario Vizcaino');
     expect(p.jobTitle).toBe('Full-stack developer');
     expect(p.sameAs).toEqual(['https://github.com/mariovzc']);
+  });
+
+  it('person omits alumniOf and hasCredential when empty', () => {
+    const p = personJsonLd(profile, SITE);
+    expect(p).not.toHaveProperty('alumniOf');
+    expect(p).not.toHaveProperty('hasCredential');
+  });
+
+  it('person adds deduplicated alumniOf and hasCredential', () => {
+    const p = personJsonLd(
+      {
+        ...profile,
+        education: [
+          { institution: 'Uni', degree: 'A', start: '2010', end: '2012' },
+          { institution: 'Uni', degree: 'B', start: '2013' },
+          { institution: 'Other', degree: 'C', start: '2014' },
+        ],
+        certifications: [{ name: 'Cert', issuer: 'Org', year: '2024' }],
+      },
+      SITE,
+    );
+    expect(p.alumniOf).toEqual([
+      { '@type': 'EducationalOrganization', name: 'Uni' },
+      { '@type': 'EducationalOrganization', name: 'Other' },
+    ]);
+    expect(p.hasCredential).toEqual([
+      {
+        '@type': 'EducationalOccupationalCredential',
+        name: 'Cert',
+        recognizedBy: { '@type': 'Organization', name: 'Org' },
+      },
+    ]);
   });
 
   it('website', () => {

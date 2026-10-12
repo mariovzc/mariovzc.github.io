@@ -5,6 +5,7 @@ import ProjectsSection from '../components/astro/ProjectsSection.astro';
 import About from '../components/astro/About.astro';
 import Services from '../components/astro/Services.astro';
 import Experience from '../components/astro/Experience.astro';
+import Education from '../components/astro/Education.astro';
 import Contact from '../components/astro/Contact.astro';
 import type { Locale } from '../i18n/utils';
 import { featuredProjects } from '../lib/projects';
@@ -34,5 +35,6 @@ const years = yearsOfExperience(profile.experience);
   <About lang={lang} profile={profile} />
   <Services lang={lang} profile={profile} />
   <Experience lang={lang} profile={profile} />
+  <Education lang={lang} profile={profile} />
   <Contact lang={lang} profile={profile} />
 </BaseLayout>

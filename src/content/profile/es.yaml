@@ -49,6 +49,16 @@ experience:
     summary: >-
       Construí un sistema de gestión de proyectos de construcción con Ruby on Rails y
       jQuery, desde el diseño de la base de datos hasta el front end.
+education:
+  - institution: Corporación Universitaria Americana
+    degree: Especialización en Seguridad Informática
+    start: '2016'
+    end: '2017'
+  - institution: Politécnico Costa Atlántica
+    degree: Ingeniería de Sistemas
+    start: '2010'
+    end: '2015'
+certifications: []
 stack:
   frontend: [React, JavaScript, Dart]
   backend: [Python, Node.js, Ruby on Rails, APIs REST, Microservicios]

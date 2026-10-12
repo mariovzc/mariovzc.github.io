@@ -37,6 +37,7 @@ export function buildAlternates(o: {
 
 export function personJsonLd(profile: ProfileData, site: string): Record<string, unknown> {
   const { github, linkedin, x } = profile.contact;
+  const institutions = [...new Set(profile.education.map((e) => e.institution))];
   return {
     '@context': 'https://schema.org',
     '@type': 'Person',
@@ -46,6 +47,16 @@ export function personJsonLd(profile: ProfileData, site: string): Record<string,
     url: site,
     email: `mailto:${profile.contact.email}`,
     sameAs: [github, linkedin, x].filter((v): v is string => Boolean(v)),
+    ...(institutions.length && {
+      alumniOf: institutions.map((name) => ({ '@type': 'EducationalOrganization', name })),
+    }),
+    ...(profile.certifications.length && {
+      hasCredential: profile.certifications.map((c) => ({
+        '@type': 'EducationalOccupationalCredential',
+        name: c.name,
+        recognizedBy: { '@type': 'Organization', name: c.issuer },
+      })),
+    }),
   };
 }
 

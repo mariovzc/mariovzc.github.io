@@ -136,7 +136,7 @@ Una sola fuente de verdad. Páginas, `llms.txt`, JSON-LD, sitemap y WebMCP leen 
 
 ### 6.2 Perfil — `src/content/profile/{en,es}.yaml`
 
-Campos: `name`, `headline`, `role`, `location`, `bio`, `availability` (opcional), `services[] {title, description}`, `experience[] {company, role, start, end?, summary}`, `stack {frontend[], backend[], tools[]}`, `contact {email, github?, linkedin?, x?}`. No existe campo `cv`.
+Campos: `name`, `headline`, `role`, `location`, `bio`, `availability` (opcional), `services[] {title, description}`, `experience[] {company, role, start, end?, summary}`, `education[] {institution, degree, start, end?}` y `certifications[] {name, issuer, year, url?}` (ambos opcionales, por defecto `[]`), `stack {frontend[], backend[], tools[]}`, `contact {email, github?, linkedin?, x?}`. No existe campo `cv`.
 
 ### 6.3 Textos de interfaz — `src/i18n/{en,es}.json`
 

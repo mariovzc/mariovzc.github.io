@@ -9,6 +9,8 @@ const profile: ProfileData = {
   bio: 'bio',
   services: [{ title: 'Web apps', description: 'd' }],
   experience: [],
+  education: [],
+  certifications: [],
   stack: { frontend: ['React'], backend: [], tools: [] },
   contact: { email: 'a@b.co', github: 'https://github.com/mariovzc' },
 };

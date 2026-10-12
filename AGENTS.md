@@ -21,7 +21,8 @@ Personal portfolio of Mario Vizcaino. Astro 7 static site, bilingual (EN default
 - `src/i18n/{en,es}.json` — UI strings; keys must match in both files (unit test enforces it).
 - `src/lib/` — `projects.ts` (localization/fallback), `sitemap.ts` (fallback-page sitemap exclusion), `seo.ts`, `llms.ts`, `robots.ts`, `theme.ts`, `webmcp-tools.ts`, `site-data.ts` (only file that reads collections).
 - `src/views/` — page bodies shared by EN/ES routes in `src/pages/`.
-- Design tokens in `src/styles/global.css` (B1 Editorial light: warm off-white, Fraunces + Inter, terracotta accent).
+- Design tokens in `src/styles/global.css` ("Bento verde": light gray canvas, white rounded tiles, green accent and gradient, Plus Jakarta Sans 800 headings). Shared component classes there: `.tile`, `.tile-hover`, `.pill*`, `.chip`, `.eyebrow`, `.hero-surface`, `heavy` utility.
+- `src/lib/profile.ts` — `yearsOfExperience()` for the home bento tile.
 
 ## Common tasks
 

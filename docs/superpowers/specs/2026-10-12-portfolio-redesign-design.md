@@ -36,13 +36,16 @@ Reemplazar el sitio estático de 2018 por un portafolio moderno, rápido y fáci
 | Runtime | Node 22 LTS, solo dentro de Docker |
 | Deploy | GitHub Actions → GitHub Pages (source "GitHub Actions" ya configurado) |
 
-## 3. Dirección visual — "B1 Editorial light"
+## 3. Dirección visual — "Bento verde"
 
-- Fondo claro cálido (`#f6f3ee`), texto casi negro (`#1b1a17`), texto secundario (`#6b665d`).
-- Acento terracota: `#c2410c` en modo claro, `#fb923c` en modo oscuro.
-- Modo oscuro: fondo `#1a1816`, texto `#ece6dc`.
-- Tipografía: serif expresiva para titulares (Fraunces o similar) + sans para cuerpo (Inter o similar), auto-alojadas.
-- Mucho espacio en blanco, layout tipo revista, animaciones sutiles.
+> Reemplaza a "B1 Editorial light" desde el 2026-10-12 (ver §17).
+
+- Lienzo gris claro (`#f5f5f7`) con mosaicos blancos (`#ffffff`) redondeados (20px; bloques grandes 24px), sombras suaves en capas y borde sutil (`rgba(0,0,0,.07)`). Texto `#1d1d1f`, secundario `#6e6e73`.
+- Acento verde: `#207936` en modo claro, `#30d158` en modo oscuro; píldoras con fondo verde suave. Bloques destacados (hero, contacto) con degradado `#187a35 → #0f5a26` y patrón de puntos.
+- Chips de color para iconos y stack: morado, naranja, azul y verde.
+- Modo oscuro: fondo `#000000`, mosaicos `#1c1c1e`, texto `#f5f5f7`; sin sombras (solo borde).
+- Tipografía: Plus Jakarta Sans (variable, auto-alojada); titulares en peso 800 con tracking −0.02em. Monoespaciada del sistema para el mosaico de terminal.
+- Inicio en cuadrícula bento (4/2/1 columnas): hero, titular, stack, años de experiencia, terminal, contacto y proyecto destacado; secciones posteriores como mosaicos. Elevación sutil al pasar el cursor y entrada fade-up, ambas desactivadas con `prefers-reduced-motion`.
 - Los valores exactos se fijan como tokens CSS en `src/styles/global.css` y deben cumplir contraste WCAG AA en ambos modos.
 
 ## 4. Estructura del proyecto
@@ -254,3 +257,4 @@ Si cualquier paso falla, no se publica y el sitio anterior sigue en línea. Play
 - `image.dangerouslyProcessSVG` está activo porque las portadas de ejemplo son SVG que sharp rasteriza a WebP.
 - Las páginas de proyecto con contenido de respaldo (fallback) se excluyen del sitemap con `src/lib/sitemap.ts`, que reutiliza `localizeProjects`; los nombres de archivo de proyectos deben ser kebab-case en minúsculas.
 - Las páginas `noindex` (404) no emiten canonical ni hreflang.
+- **2026-10-12 — Restyle "Bento verde":** la dirección visual B1 se sustituye por "Bento verde" (§3). Fraunces + Inter se reemplazan por Plus Jakarta Sans. Se añade `src/lib/profile.ts` (`yearsOfExperience`) para el mosaico de años. Varios tonos se ajustaron respecto a la propuesta para cumplir AA: acento claro `#248a3d → #207936`, chip naranja claro `#b36200 → #9f5700`, chip morado oscuro `#bf5af2 → #c973f4`.

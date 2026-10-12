@@ -32,7 +32,7 @@ export default function ThemeToggle({ labels }: Props) {
       aria-label={label}
       title={label}
       data-testid="theme-toggle"
-      className="rounded-full border border-line px-3 py-1 text-sm text-muted transition-colors hover:text-fg"
+      className="pill pill-neutral min-w-9 justify-center"
     >
       <span aria-hidden="true">{theme === 'dark' ? '☀' : '☾'}</span>
     </button>

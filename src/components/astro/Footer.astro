@@ -10,10 +10,10 @@ const { lang, name } = Astro.props;
 const year = new Date().getFullYear();
 ---
 
-<footer class="mt-24 border-t border-line">
-  <div class="mx-auto flex max-w-5xl flex-col gap-2 px-4 py-8 text-sm text-muted sm:flex-row sm:justify-between sm:px-6">
+<footer class="mt-16 bg-[var(--footer-bg)] text-[#a1a1a6]">
+  <div class="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-10 text-sm sm:flex-row sm:justify-between sm:px-6">
     <p>
-      © {year} {name}
+      © {year} <span class="heavy text-[#f5f5f7]">{name}</span>
     </p>
     <p>{t(lang, 'footer.built')}</p>
   </div>

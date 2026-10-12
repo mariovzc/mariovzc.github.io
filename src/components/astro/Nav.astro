@@ -14,22 +14,22 @@ const home = localizePath('/', lang);
 const other = otherLocale(lang);
 ---
 
-<header class="border-b border-line">
+<header class="sticky top-0 z-50 border-b border-line bg-[color-mix(in_srgb,var(--surface)_85%,transparent)] backdrop-blur-[20px]">
   <nav
-    class="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-4 text-sm sm:px-6"
+    class="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 text-sm sm:px-6"
     aria-label="Main"
   >
-    <a href={home} class="font-semibold text-fg">
+    <a href={home} class="heavy truncate text-base text-fg">
       {name}
     </a>
-    <div class="flex items-center gap-4 text-muted sm:gap-6">
-      <a href={`${home}#work`} class="hidden hover:text-fg sm:inline">
+    <div class="flex shrink-0 items-center gap-1.5 sm:gap-2">
+      <a href={`${home}#work`} class="pill pill-neutral hidden sm:inline-flex">
         {t(lang, 'nav.work')}
       </a>
-      <a href={`${home}#about`} class="hidden hover:text-fg sm:inline">
+      <a href={`${home}#about`} class="pill pill-neutral hidden sm:inline-flex">
         {t(lang, 'nav.about')}
       </a>
-      <a href={`${home}#contact`} class="hover:text-fg">
+      <a href={`${home}#contact`} class="pill pill-neutral">
         {t(lang, 'nav.contact')}
       </a>
       <a
@@ -37,7 +37,7 @@ const other = otherLocale(lang);
         hreflang={other}
         lang={other}
         data-testid="lang-switch"
-        class="font-medium hover:text-fg"
+        class="pill pill-soft"
       >
         {t(lang, 'lang.short')}
         <span class="sr-only"> — {t(lang, 'lang.switchLabel')}</span>

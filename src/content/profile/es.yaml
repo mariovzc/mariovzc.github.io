@@ -81,7 +81,18 @@ highlights: [Python, JavaScript, Flutter, Gemini]
 stack:
   frontend: [React, JavaScript, jQuery, Tailwind CSS, Flutter, Dart, Swift]
   backend:
-    [Python, FastAPI, Node.js, Express, PHP, Ruby on Rails, APIs REST, Microservicios, MongoDB]
+    [
+      Python,
+      FastAPI,
+      Flask,
+      Node.js,
+      Express,
+      PHP,
+      Ruby on Rails,
+      APIs REST,
+      Microservicios,
+      MongoDB,
+    ]
   tools:
     [
       Google Cloud,

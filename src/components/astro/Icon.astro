@@ -1,5 +1,6 @@
 ---
 // Decorative 20px stroke icons for chips. Always aria-hidden.
+import type { IconName } from '../../lib/icons';
 const paths = {
   code: 'M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16',
   spark: 'M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5L18 18M6 18l2.5-2.5M15.5 8.5L18 6',
@@ -10,10 +11,17 @@ const paths = {
   cap: 'M12 4L2 9l10 5 10-5-10-5zM6 11.5V16c0 1.5 2.7 3 6 3s6-1.5 6-3v-4.5M22 9v6',
   lock: 'M5 11h14v10H5zM8 11V7a4 4 0 118 0v4',
   badge: 'M12 14a5 5 0 100-10 5 5 0 000 10zM8.5 13.5L7 21l5-3 5 3-1.5-7.5',
-} as const;
+  sparkles:
+    'M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8L12 3zM19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15z',
+  phone: 'M8 2h8a2 2 0 012 2v16a2 2 0 01-2 2H8a2 2 0 01-2-2V4a2 2 0 012-2zM11 18h2',
+  cloud: 'M7 18a5 5 0 01-.7-9.95A6 6 0 0117.7 9 4.5 4.5 0 0117.5 18H7z',
+  shield: 'M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6l8-3zM9 12l2 2 4-4',
+  database:
+    'M12 3c4.4 0 8 1.3 8 3s-3.6 3-8 3-8-1.3-8-3 3.6-3 8-3zM4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6',
+} satisfies Record<IconName, string>;
 
 interface Props {
-  name: keyof typeof paths;
+  name: IconName;
 }
 const { name } = Astro.props;
 ---

@@ -13,16 +13,22 @@ availability: Open to new conversations
 services:
   - title: Applied AI
     description: LLM integrations with Gemini and Vertex AI, data extraction from documents, process automation and AI agents — with human review where it matters.
+    icon: sparkles
   - title: Full-stack development
     description: Web platforms end to end — REST APIs, scalable backends in Python, Node.js and Ruby on Rails, and React frontends.
+    icon: code
   - title: Mobile apps
     description: Cross-platform iOS and Android apps with Flutter and native iOS apps with Swift — from first build to App Store and Google Play releases.
+    icon: phone
   - title: Cloud & DevOps
     description: Containerized microservices on Google Cloud with Docker and Kubernetes, plus CI/CD for web and mobile — automated builds, signing and store releases with Codemagic and GitHub Actions.
+    icon: cloud
   - title: Security & quality (ISO 27001 · ISO 25010)
     description: Secure coding (OWASP), access control and development processes aligned with ISO 27001 audits, plus software quality evaluated against ISO 25010.
+    icon: shield
   - title: Integrations & data
     description: API integrations with third-party systems and automated web scraping pipelines for business intelligence.
+    icon: database
 experience:
   - company: Alto
     role: Tech Leader

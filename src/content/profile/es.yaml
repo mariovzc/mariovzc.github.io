@@ -14,16 +14,22 @@ availability: Abierto a nuevas conversaciones
 services:
   - title: IA aplicada
     description: Integración de LLMs con Gemini y Vertex AI, extracción de datos de documentos, automatización de procesos y agentes de IA — con revisión humana donde importa.
+    icon: sparkles
   - title: Desarrollo full-stack
     description: Plataformas web de punta a punta — APIs REST, backends escalables en Python, Node.js y Ruby on Rails, y frontends en React.
+    icon: code
   - title: Apps móviles
     description: Apps multiplataforma para iOS y Android con Flutter y apps nativas de iOS con Swift — desde el primer build hasta la publicación en App Store y Google Play.
+    icon: phone
   - title: Cloud y DevOps
     description: Microservicios en contenedores sobre Google Cloud con Docker y Kubernetes, y CI/CD para web y móvil — builds, firmado y publicación automática en tiendas con Codemagic y GitHub Actions.
+    icon: cloud
   - title: Seguridad y calidad (ISO 27001 · ISO 25010)
     description: Código seguro (OWASP), control de accesos y procesos de desarrollo alineados con auditorías ISO 27001, y calidad del software evaluada según ISO 25010.
+    icon: shield
   - title: Integraciones y datos
     description: Integraciones de APIs con sistemas de terceros y pipelines automatizados de web scraping para inteligencia de negocio.
+    icon: database
 experience:
   - company: Alto
     role: Tech Leader

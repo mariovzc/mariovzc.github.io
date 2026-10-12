@@ -1,4 +1,5 @@
 import type { Locale } from '../i18n/utils';
+import type { IconName } from './icons';
 
 export interface ProfileData {
   name: string;
@@ -7,7 +8,7 @@ export interface ProfileData {
   location?: string;
   bio: string;
   availability?: string;
-  services: { title: string; description: string }[];
+  services: { title: string; description: string; icon?: IconName }[];
   experience: { company: string; role: string; start: string; end?: string; summary: string }[];
   education: { institution: string; degree: string; start: string; end?: string }[];
   certifications: { name: string; issuer: string; year: string; url?: string }[];

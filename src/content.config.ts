@@ -1,6 +1,7 @@
 import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
+import { ICON_NAMES } from './lib/icons';
 import { contentRoot } from './lib/content-root.ts';
 
 const root = contentRoot();
@@ -38,7 +39,13 @@ const profile = defineCollection({
     bio: z.string().min(1),
     availability: z.string().optional(),
     services: z
-      .array(z.object({ title: z.string().min(1), description: z.string().min(1) }))
+      .array(
+        z.object({
+          title: z.string().min(1),
+          description: z.string().min(1),
+          icon: z.enum(ICON_NAMES).optional(),
+        }),
+      )
       .min(1),
     experience: z
       .array(

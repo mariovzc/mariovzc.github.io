@@ -19,7 +19,7 @@ Personal portfolio of Mario Vizcaino. Astro 7 static site, bilingual (EN default
 ## Layout
 
 - `src/content/projects/{en,es}/<slug>.mdx` — one file per project per language; same slug links translations. Schema in `src/content.config.ts`.
-- `src/content/profile/{en,es}.yaml` — bio, services, experience, education, certifications (both optional, default `[]`; the Education section hides when both are empty), highlights (optional, default `[]`: technologies shown on the home bento Stack tile; empty falls back to the first 3 of frontend + backend), stack, contact. There is deliberately no CV download (visitors must contact first); do not add a `cv` field or public PDF.
+- `src/content/profile/{en,es}.yaml` — bio, services, experience, education, certifications (both optional, default `[]`; the Education section hides when both are empty), services (each may set an optional `icon` from `src/lib/icons.ts`; without it the chip icon cycles), highlights (optional, default `[]`: technologies shown on the home bento Stack tile; empty falls back to the first 3 of frontend + backend), stack, contact. There is deliberately no CV download (visitors must contact first); do not add a `cv` field or public PDF.
 - `src/i18n/{en,es}.json` — UI strings; keys must match in both files (unit test enforces it).
 - `src/lib/` — `projects.ts` (localization/fallback), `sitemap.ts` (fallback-page sitemap exclusion), `seo.ts`, `llms.ts`, `robots.ts`, `theme.ts`, `webmcp-tools.ts`, `site-data.ts` (only file that reads collections).
 - `src/views/` — page bodies shared by EN/ES routes in `src/pages/`.

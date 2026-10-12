@@ -24,7 +24,7 @@ const chips = [
       return (
         <li class="tile tile-hover p-7">
           <span class:list={['chip', c.cls]}>
-            <Icon name={c.icon} />
+            <Icon name={s.icon ?? c.icon} />
           </span>
           <h3 class="heavy mt-5 text-xl">{s.title}</h3>
           <p class="mt-2 text-muted">{s.description}</p>

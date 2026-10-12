@@ -49,8 +49,6 @@ Priority: **P1** = soon / high impact · **P2** = valuable, not urgent · **P3**
 
 ## Design & UX
 
-- [ ] **P3 · Service icons** — services reuse a cycling set of generic icons; give each service a specific icon
-      (AI, web, mobile, cloud, security, data).
 - [ ] **P3 · Visual QA pass** — manual review on real devices (iOS Safari, Android Chrome) in light and dark mode.
 
 ## Tech debt (from code reviews)
@@ -70,6 +68,7 @@ Priority: **P1** = soon / high impact · **P2** = valuable, not urgent · **P3**
 
 ## Done
 
+- [x] 2026-10-12 — Specific icon per service (optional `icon` on each profile service; names in `src/lib/icons.ts`).
 - [x] 2026-10-12 — Sitemap draft detection moved to `isDraftSource()` (tolerates `# comments` and YAML casing),
       unit-tested.
 - [x] 2026-10-12 — Featured bento tile: optional `cardCover` (square diagram) for the AI project so the

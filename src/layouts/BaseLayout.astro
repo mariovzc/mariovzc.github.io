@@ -1,0 +1,81 @@
+---
+import '../styles/global.css';
+import SEO from '../components/astro/SEO.astro';
+import Nav from '../components/astro/Nav.astro';
+import Footer from '../components/astro/Footer.astro';
+import { LOCALES, t, type Locale } from '../i18n/utils';
+import { getProfile } from '../lib/site-data';
+
+interface Props {
+  lang: Locale;
+  title: string;
+  description: string;
+  /** Unlocalized route, e.g. "/" or "/projects/foo/". */
+  path: string;
+  translations?: Locale[];
+  image?: string;
+  jsonLd?: Record<string, unknown>[];
+  type?: 'website' | 'article';
+  noindex?: boolean;
+}
+
+const {
+  lang,
+  title,
+  description,
+  path,
+  translations = [...LOCALES],
+  image = '/og-default.png',
+  jsonLd = [],
+  type = 'website',
+  noindex = false,
+} = Astro.props;
+
+const profile = await getProfile(lang);
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <script is:inline>
+      // Mirrors resolveTheme() in src/lib/theme.ts. Runs before first paint.
+      (function () {
+        var stored = null;
+        try {
+          stored = localStorage.getItem('theme');
+        } catch (e) {}
+        var dark =
+          stored === 'dark' ||
+          (stored !== 'light' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        document.documentElement.classList.toggle('dark', dark);
+      })();
+    </script>
+    <SEO
+      lang={lang}
+      title={title}
+      description={description}
+      path={path}
+      translations={translations}
+      image={image}
+      type={type}
+      jsonLd={jsonLd}
+      noindex={noindex}
+    />
+  </head>
+  <body class="min-h-screen bg-bg text-fg">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:rounded focus:bg-surface focus:px-3 focus:py-2"
+    >
+      {t(lang, 'nav.skip')}
+    </a>
+    <Nav lang={lang} path={path} name={profile.name} />
+    <main id="main" class="mx-auto max-w-5xl px-4 sm:px-6">
+      <slot />
+    </main>
+    <Footer lang={lang} name={profile.name} />
+  </body>
+</html>

@@ -1,0 +1,50 @@
+---
+import ThemeToggle from '../react/ThemeToggle';
+import { localizePath, otherLocale, t, type Locale } from '../../i18n/utils';
+
+interface Props {
+  lang: Locale;
+  path: string;
+  name: string;
+}
+
+const { lang, path, name } = Astro.props;
+const home = localizePath('/', lang);
+const other = otherLocale(lang);
+---
+
+<header class="border-b border-line">
+  <nav
+    class="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-4 text-sm sm:px-6"
+    aria-label="Main"
+  >
+    <a href={home} class="font-semibold text-fg">
+      {name}
+    </a>
+    <div class="flex items-center gap-4 text-muted sm:gap-6">
+      <a href={`${home}#work`} class="hidden hover:text-fg sm:inline">
+        {t(lang, 'nav.work')}
+      </a>
+      <a href={`${home}#about`} class="hidden hover:text-fg sm:inline">
+        {t(lang, 'nav.about')}
+      </a>
+      <a href={`${home}#contact`} class="hover:text-fg">
+        {t(lang, 'nav.contact')}
+      </a>
+      <a
+        href={localizePath(path, other)}
+        hreflang={other}
+        lang={other}
+        aria-label={t(lang, 'lang.switchLabel')}
+        data-testid="lang-switch"
+        class="font-medium hover:text-fg"
+      >
+        {t(lang, 'lang.short')}
+      </a>
+      <ThemeToggle
+        client:load
+        labels={{ toLight: t(lang, 'theme.toLight'), toDark: t(lang, 'theme.toDark') }}
+      />
+    </div>
+  </nav>
+</header>

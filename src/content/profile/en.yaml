@@ -4,7 +4,7 @@ role: Full Stack & AI Engineer · Tech Leader
 location: Barranquilla, Colombia
 bio: >-
   I'm a Full Stack & AI Engineer and Tech Leader with more than ten years building software.
-  I design cloud-native systems on Google Cloud with Docker and Kubernetes, connect platforms
+  I build web and mobile apps, design cloud-native systems on Google Cloud with Docker and Kubernetes, connect platforms
   through secure API integrations and data pipelines, and build AI solutions — LLMs, document
   data extraction and process automation. I also use AI-assisted development to ship faster
   without lowering quality, and I lead development teams through ISO 27001 audits. I like
@@ -15,8 +15,10 @@ services:
     description: LLM integrations with Gemini and Vertex AI, data extraction from documents, process automation and AI agents — with human review where it matters.
   - title: Full-stack development
     description: Web platforms end to end — REST APIs, scalable backends in Python and Node.js, and React frontends.
+  - title: Mobile apps
+    description: Cross-platform iOS and Android apps with Flutter and native iOS apps with Swift — from first build to App Store and Google Play releases.
   - title: Cloud & DevOps
-    description: Containerized microservices on Google Cloud with Docker and Kubernetes, plus CI/CD for web and mobile — automated builds, signing and App Store / Google Play releases with Codemagic.
+    description: Containerized microservices on Google Cloud with Docker and Kubernetes, plus CI/CD for web and mobile — automated builds, signing and store releases with Codemagic and GitHub Actions.
   - title: Security & quality (ISO 27001 · ISO 25010)
     description: Secure coding (OWASP), access control and development processes aligned with ISO 27001 audits, plus software quality evaluated against ISO 25010.
   - title: Integrations & data

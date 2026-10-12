@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { stackHighlights, yearsOfExperience } from '../../src/lib/profile';
+import { remainingStackCount, stackHighlights, yearsOfExperience } from '../../src/lib/profile';
 
 const now = new Date('2026-06-01T00:00:00Z');
 
@@ -55,5 +55,29 @@ describe('stackHighlights', () => {
     expect(
       stackHighlights({ highlights: [], stack: { frontend: [], backend: [], tools: ['Docker'] } }),
     ).toEqual([]);
+  });
+});
+
+describe('remainingStackCount', () => {
+  const stack = {
+    frontend: ['React', 'JavaScript'],
+    backend: ['Python', 'Flask'],
+    tools: ['Docker'],
+  };
+
+  it('counts stack items not shown on the tile', () => {
+    expect(remainingStackCount(stack, ['Python', 'JavaScript'])).toBe(3);
+  });
+
+  it('ignores shown items that are not in the stack and counts duplicates once', () => {
+    expect(
+      remainingStackCount({ ...stack, tools: ['Docker', 'React'] }, ['Gemini', 'Python']),
+    ).toBe(4);
+  });
+
+  it('is zero when everything is shown', () => {
+    expect(remainingStackCount(stack, ['React', 'JavaScript', 'Python', 'Flask', 'Docker'])).toBe(
+      0,
+    );
   });
 });

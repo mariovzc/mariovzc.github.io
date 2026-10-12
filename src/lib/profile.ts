@@ -27,3 +27,10 @@ export function stackHighlights(
   if (profile.highlights && profile.highlights.length > 0) return profile.highlights;
   return [...profile.stack.frontend, ...profile.stack.backend].slice(0, 3);
 }
+
+/** How many distinct stack technologies are not shown on the bento Stack tile. */
+export function remainingStackCount(stack: ProfileData['stack'], shown: string[]): number {
+  const all = new Set([...stack.frontend, ...stack.backend, ...stack.tools]);
+  for (const s of shown) all.delete(s);
+  return all.size;
+}

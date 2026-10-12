@@ -6,7 +6,7 @@ import type { LocalizedProject } from '../../lib/projects';
 import type { ProjectEntry } from '../../lib/site-data';
 import type { ProfileData } from '../../lib/types';
 import { bentoSpans } from '../../lib/bento';
-import { stackHighlights } from '../../lib/profile';
+import { remainingStackCount, stackHighlights } from '../../lib/profile';
 
 interface Props {
   lang: Locale;
@@ -17,6 +17,7 @@ interface Props {
 const { lang, profile, featured, years } = Astro.props;
 const home = localizePath('/', lang);
 const stack = stackHighlights(profile);
+const moreStack = remainingStackCount(profile.stack, stack);
 // 1x1 tiles present (stack?, years?, terminal, contact); spans keep rows full.
 const singles = (stack.length > 0 ? 1 : 0) + (years !== null ? 1 : 0) + 2;
 const spans = bentoSpans(singles, Boolean(featured));
@@ -57,11 +58,22 @@ const f = featured?.entry.data;
       <span class="chip bg-chip-purple-bg text-chip-purple">
         <Icon name="code" />
       </span>
-      <p class="mt-4 text-sm font-semibold text-muted">{t(lang, 'about.stack')}</p>
+      <p class="mt-4 text-sm font-semibold text-muted">{t(lang, 'stack.core')}</p>
       <ul class="mt-2 flex flex-wrap gap-1.5">
         {stack.map((s) => (
           <li class="pill pill-neutral px-2.5 py-0.5 text-xs">{s}</li>
         ))}
+        {moreStack > 0 && (
+          <li>
+            <a
+              href={`${home}#about`}
+              data-testid="stack-more"
+              class="pill pill-soft px-2.5 py-0.5 text-xs font-semibold"
+            >
+              +{moreStack} {t(lang, 'stack.more')}
+            </a>
+          </li>
+        )}
       </ul>
     </div>
   )}

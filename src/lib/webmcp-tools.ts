@@ -60,7 +60,6 @@ function str(args: Record<string, unknown> | undefined, key: string): string | u
 }
 
 export function createTools(data: SiteData): ToolDef[] {
-  const abs = (path: string) => new URL(path, data.site).href;
   const readOnly = { readOnlyHint: true } as const;
 
   return [
@@ -124,12 +123,12 @@ export function createTools(data: SiteData): ToolDef[] {
     },
     {
       name: 'get_contact',
-      description: 'Get contact details for Mario Vizcaino: email, social profiles and CV link.',
+      description: 'Get contact details for Mario Vizcaino: email and social profiles.',
       inputSchema: { type: 'object', properties: {} },
       annotations: readOnly,
       async execute() {
         const p = data.profiles[DEFAULT_LOCALE];
-        return ok({ ...p.contact, ...(p.cv ? { cv: abs(p.cv) } : {}) });
+        return ok(p.contact);
       },
     },
   ];

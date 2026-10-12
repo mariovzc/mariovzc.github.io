@@ -8,10 +8,9 @@ interface Props {
   profile: ProfileData;
 }
 const { lang, profile } = Astro.props;
-const hasContent = profile.experience.length > 0 || Boolean(profile.cv);
 ---
 
-{hasContent && (
+{profile.experience.length > 0 && (
   <Section
     id="experience"
     title={t(lang, 'experience.title')}
@@ -35,16 +34,6 @@ const hasContent = profile.experience.length > 0 || Boolean(profile.cv);
           </li>
         ))}
       </ol>
-      {profile.cv && (
-        <a
-          href={profile.cv}
-          download
-          data-testid="cv-link"
-          class="mt-10 inline-block text-accent underline underline-offset-4"
-        >
-          {t(lang, 'experience.downloadCv')}
-        </a>
-      )}
     </div>
   </Section>
 )}

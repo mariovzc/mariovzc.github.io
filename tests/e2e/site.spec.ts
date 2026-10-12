@@ -24,11 +24,6 @@ test.describe('home', () => {
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `${SITE}/es/`);
     await expect(page.getByRole('heading', { name: 'Proyectos destacados' })).toBeVisible();
   });
-
-  test('no CV link when profile has no cv', async ({ page }) => {
-    await page.goto('/');
-    await expect(page.getByTestId('cv-link')).toHaveCount(0);
-  });
 });
 
 test.describe('projects', () => {

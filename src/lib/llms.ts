@@ -26,7 +26,6 @@ export function buildLlmsTxt(data: SiteData): string {
     p.contact.github && `- GitHub: ${p.contact.github}`,
     p.contact.linkedin && `- LinkedIn: ${p.contact.linkedin}`,
     p.contact.x && `- X: ${p.contact.x}`,
-    p.cv && `- CV: ${abs(p.cv)}`,
   ].filter(Boolean);
   sections.push(`## Contact\n\n${contact.join('\n')}`);
 

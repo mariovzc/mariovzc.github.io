@@ -11,8 +11,6 @@ export interface ProfileData {
   experience: { company: string; role: string; start: string; end?: string; summary: string }[];
   stack: { frontend: string[]; backend: string[]; tools: string[] };
   contact: { email: string; github?: string; linkedin?: string; x?: string };
-  /** Site-relative path to a PDF in public/, e.g. /cv/mario-vizcaino-en.pdf */
-  cv?: string;
 }
 
 export interface ProjectSummary {

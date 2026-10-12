@@ -11,7 +11,6 @@ const profile: ProfileData = {
   experience: [],
   stack: { frontend: ['React'], backend: [], tools: [] },
   contact: { email: 'a@b.co', github: 'https://github.com/mariovzc' },
-  cv: '/cv/cv.pdf',
 };
 
 const project = (slug: string, stack: string[], tags: string[] = []): ProjectSummary => ({
@@ -84,7 +83,6 @@ describe('createTools', () => {
     expect(await json('get_contact')).toEqual({
       email: 'a@b.co',
       github: 'https://github.com/mariovzc',
-      cv: 'https://mariovzc.github.io/cv/cv.pdf',
     });
   });
 });

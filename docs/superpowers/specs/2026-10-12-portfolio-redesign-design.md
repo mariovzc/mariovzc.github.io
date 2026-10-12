@@ -12,7 +12,7 @@ Reemplazar el sitio estático de 2018 por un portafolio moderno, rápido y fáci
 **Audiencias, en orden de prioridad:**
 1. Marca personal / comunidad: mostrar proyectos y forma de trabajar.
 2. Clientes freelance: entender qué ofrezco y contactarme.
-3. Reclutadores: experiencia, stack y CV.
+3. Reclutadores: experiencia y stack (sin CV descargable; el contacto va primero).
 
 **Criterios de éxito:**
 - Agregar o editar un proyecto = crear o editar un archivo de contenido + `git push`. Sin tocar código.
@@ -63,8 +63,7 @@ mariovzc.github.io/
 ├── docs/superpowers/specs/
 ├── public/
 │   ├── favicon.svg
-│   ├── (robots.txt: generado por un endpoint a partir de `site`)
-│   └── cv/                        # CV público (fase de contenido)
+│   └── (robots.txt: generado por un endpoint a partir de `site`)
 ├── src/
 │   ├── components/
 │   │   ├── astro/                 # Hero, ProjectsSection, ProjectCard, About, Services,
@@ -102,7 +101,7 @@ mariovzc.github.io/
 2. **Proyectos destacados:** tarjetas de proyectos con `featured: true`, ordenadas por `order`.
 3. **Sobre mí + stack.**
 4. **Servicios.**
-5. **Experiencia + descarga de CV** (el CV se oculta si no hay archivo configurado).
+5. **Experiencia** (la sección se oculta si no hay entradas). No hay descarga de CV por decisión: quien quiera más detalle debe contactar primero.
 6. **Contacto:** email y redes. Sin formulario.
 
 **Detalle de proyecto (`/projects/<slug>` y `/es/projects/<slug>`):** portada, resumen, año, rol, stack, links (live/repo), galería y cuerpo MDX (problema, solución, rol, resultados, aprendizajes). Incluye navegación al proyecto anterior/siguiente.
@@ -137,7 +136,7 @@ Una sola fuente de verdad. Páginas, `llms.txt`, JSON-LD, sitemap y WebMCP leen 
 
 ### 6.2 Perfil — `src/content/profile/{en,es}.yaml`
 
-Campos: `name`, `headline`, `role`, `location`, `bio`, `availability` (opcional), `services[] {title, description}`, `experience[] {company, role, start, end?, summary}`, `stack {frontend[], backend[], tools[]}`, `contact {email, github?, linkedin?, x?}`, `cv` (ruta opcional).
+Campos: `name`, `headline`, `role`, `location`, `bio`, `availability` (opcional), `services[] {title, description}`, `experience[] {company, role, start, end?, summary}`, `stack {frontend[], backend[], tools[]}`, `contact {email, github?, linkedin?, x?}`. No existe campo `cv`.
 
 ### 6.3 Textos de interfaz — `src/i18n/{en,es}.json`
 
@@ -189,7 +188,7 @@ Mejora progresiva; sin efecto en navegadores sin soporte.
   - `list_projects({ stack?, tag?, lang? })` → título, resumen, año, stack, URL.
   - `get_project({ slug, lang? })` → detalle completo (sin el cuerpo MDX renderizado; incluye resumen y metadatos).
   - `get_profile({ lang? })` → bio, rol, stack, servicios, experiencia.
-  - `get_contact()` → email, redes, URL del CV.
+  - `get_contact()` → email y redes.
 - Las definiciones y handlers viven en `src/lib/webmcp-tools.ts` (puros, testeables); `webmcp.ts` solo hace el registro.
 - Token de origin trial opcional vía variable de entorno `PUBLIC_WEBMCP_OT_TOKEN`; si existe se inyecta como `<meta http-equiv="origin-trial">`.
 - Nota: la API cambió durante 2026 (de `navigator` a `document`) y está en origin trial en Chrome. Se revisa la spec vigente al implementar.
@@ -244,7 +243,7 @@ Si cualquier paso falla, no se publica y el sitio anterior sigue en línea. Play
 
 ## 16. Fase posterior (no incluida en este spec)
 
-- Contenido real: proyectos (pendiente de confirmar cuáles son públicos), perfil a partir del CV, CV público sin datos sensibles.
+- Contenido real: proyectos (pendiente de confirmar cuáles son públicos) y perfil a partir del CV privado. El CV no se publica en el sitio.
 - Dominio propio.
 - Blog.
 
@@ -258,3 +257,4 @@ Si cualquier paso falla, no se publica y el sitio anterior sigue en línea. Play
 - Las páginas de proyecto con contenido de respaldo (fallback) se excluyen del sitemap con `src/lib/sitemap.ts`, que reutiliza `localizeProjects`; los nombres de archivo de proyectos deben ser kebab-case en minúsculas.
 - Las páginas `noindex` (404) no emiten canonical ni hreflang.
 - **2026-10-12 — Restyle "Bento verde":** la dirección visual B1 se sustituye por "Bento verde" (§3). Fraunces + Inter se reemplazan por Plus Jakarta Sans. Se añade `src/lib/profile.ts` (`yearsOfExperience`) para el mosaico de años. Varios tonos se ajustaron respecto a la propuesta para cumplir AA: acento claro `#248a3d → #207936`, chip naranja claro `#b36200 → #9f5700`, chip morado oscuro `#bf5af2 → #c973f4`.
+- **2026-10-12 — Sin CV descargable:** por decisión del usuario el sitio no ofrece CV (los visitantes deben contactar primero). Se eliminan el campo `cv` del perfil, el enlace en Experiencia, la clave `experience.downloadCv`, la línea CV de `llms.txt` y el campo `cv` de `get_contact`.

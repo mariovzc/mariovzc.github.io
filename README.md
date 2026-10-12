@@ -27,7 +27,7 @@ make dev       # http://localhost:4321 with hot reload
 ## Content
 
 - Projects: `src/content/projects/{en,es}/<slug>.mdx`
-- Profile: `src/content/profile/{en,es}.yaml`
+- Profile: `src/content/profile/{en,es}.yaml` (no CV download by design: visitors contact first)
 - UI strings: `src/i18n/{en,es}.json`
 
 ## Deploy

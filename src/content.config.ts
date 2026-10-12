@@ -56,10 +56,6 @@ const profile = defineCollection({
       linkedin: z.url().optional(),
       x: z.url().optional(),
     }),
-    cv: z
-      .string()
-      .regex(/^\/.*\.pdf$/, 'cv must be a site-relative path to a PDF, e.g. /cv/file.pdf')
-      .optional(),
   }),
 });
 

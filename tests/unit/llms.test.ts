@@ -11,7 +11,6 @@ const profile: ProfileData = {
   experience: [],
   stack: { frontend: ['React'], backend: ['Node.js'], tools: [] },
   contact: { email: 'a@b.co', github: 'https://github.com/mariovzc' },
-  cv: '/cv/cv.pdf',
 };
 
 const data: SiteData = {
@@ -52,7 +51,7 @@ describe('buildLlmsTxt', () => {
     );
     expect(txt).toContain('- Email: a@b.co');
     expect(txt).toContain('- GitHub: https://github.com/mariovzc');
-    expect(txt).toContain('- CV: https://mariovzc.github.io/cv/cv.pdf');
+    expect(txt).not.toContain('CV');
   });
 
   it('links the Spanish version under Optional', () => {

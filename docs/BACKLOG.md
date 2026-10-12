@@ -10,10 +10,6 @@ Priority: **P1** = soon / high impact · **P2** = valuable, not urgent · **P3**
 - [ ] **P2 · Check indexing** — in a week or two, search `site:mariovzc.github.io` and review Search Console
       (Pages / Sitemaps) for errors. When the custom domain is live, add a **Domain** property verified with a
       DNS TXT record in Cloudflare and resubmit the sitemap.
-- [ ] **P1 · LinkedIn update** — new headline ("Senior Full Stack & AI Engineer · Tech Leader | …"), new
-      "About" text (EN/ES drafts agreed in the session of 2026-10-12), add the portfolio link to *Featured*,
-      add ISO 25010 and the AI project to the Alto experience, add skills (Gemini/Vertex AI, LLMs, Flutter,
-      Swift, FastAPI, Airflow, ISO 25010). (Owner action.)
 - [ ] **P2 · Refresh social previews** — run the link through LinkedIn Post Inspector; WhatsApp may keep the old
       coming-soon preview for a while (OG images are now content-hashed, so new shares pick up the new one).
 - [ ] **P3 · Clean up the remote `redesign` branch** — no longer used (everything is on `master`).
@@ -68,6 +64,8 @@ Priority: **P1** = soon / high impact · **P2** = valuable, not urgent · **P3**
 
 ## Done
 
+- [x] 2026-10-12 — LinkedIn updated: headline, About (EN/ES), website + Featured link to the portfolio, Alto
+      experience (ISO 25010, AI pipeline, background-check platform), new skills.
 - [x] 2026-10-12 — Specific icon per service (optional `icon` on each profile service; names in `src/lib/icons.ts`).
 - [x] 2026-10-12 — Sitemap draft detection moved to `isDraftSource()` (tolerates `# comments` and YAML casing),
       unit-tested.

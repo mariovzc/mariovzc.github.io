@@ -1,0 +1,48 @@
+---
+title: Apps de resultados de imágenes dentales
+summary: Tres apps marca blanca para iOS y Android — Clin2Cloud, Odontólogo Digital e Imágenes Dentales — con un solo wrapper en Flutter, publicadas en dos meses.
+year: 2024
+role: Desarrollador móvil y gestión de publicación
+stack: [Flutter, Dart, PHP, jQuery, Codemagic]
+tags: [mobile, freelance, ci-cd]
+cover: ../../../assets/projects/dental-results-apps/cover.png
+coverAlt: Pantallas de las apps Clin2Cloud, Odontólogo Digital e Imágenes Dentales lado a lado
+gallery:
+  - src: ../../../assets/projects/dental-results-apps/clin2cloud.png
+    alt: App Clin2Cloud mostrando la lista de órdenes de imágenes dentales con opciones para ver y descargar cada examen
+  - src: ../../../assets/projects/dental-results-apps/odontologo-digital.png
+    alt: Pantalla de inicio de Odontólogo Digital con ingreso separado para pacientes y odontólogos
+  - src: ../../../assets/projects/dental-results-apps/imagenes-dentales.png
+    alt: Pantalla de inicio de Imágenes Dentales invitando a pacientes y especialistas a consultar sus resultados
+featured: true
+order: 0
+---
+
+## El reto
+
+**NUBALAB S.A.S** opera una plataforma web donde los centros de imágenes dentales entregan resultados
+— radiografías panorámicas, periapicales, modelos 3D en STL — a pacientes y odontólogos. Varias marcas
+la usan, y cada una necesitaba su propia app en App Store y Google Play, sin mantener un código nativo
+distinto por marca.
+
+## Lo que construí
+
+- **Un wrapper en Flutter, varias apps.** Una base en Flutter reutilizable que muestra la plataforma
+  web dentro de una app nativa, configurada por marca (nombre, ícono, colores, URL). El mismo código
+  publica **Clin2Cloud**, **Odontólogo Digital** e **Imágenes Dentales**.
+- **Apoyo en la web.** Ayudé a adaptar partes de la plataforma en PHP/jQuery para que funcione bien
+  dentro de la app.
+- **Publicación automatizada con Codemagic.** Un pipeline de CI/CD que compila, firma y sube los
+  binarios de iOS y Android, para que una nueva marca o versión no implique una publicación manual.
+- **Gestión de tiendas de punta a punta.** Cuentas de desarrollador, certificados y firmado, fichas,
+  capturas, formularios de privacidad, envío a revisión y seguimiento hasta la aprobación.
+
+## Resultado
+
+Tres apps publicadas en ambas tiendas en **dos meses**, desde una sola base de código: agregar una
+marca nueva es configuración, no desarrollo nuevo. Las apps se publican bajo la cuenta de desarrollador
+de Saludtec.
+
+- [Clin2Cloud en App Store](https://apps.apple.com/co/app/clin2cloud/id6475777516)
+- [Odontólogo Digital en App Store](https://apps.apple.com/co/app/odont%C3%B3logo-digital/id6478245021)
+- [Imágenes Dentales en App Store](https://apps.apple.com/app/id6739231122)

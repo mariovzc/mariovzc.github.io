@@ -1,0 +1,46 @@
+---
+title: Dental imaging results apps
+summary: Three white-label iOS and Android apps — Clin2Cloud, Odontólogo Digital and Imágenes Dentales — built from one Flutter wrapper, published in two months.
+year: 2024
+role: Mobile developer & release manager
+stack: [Flutter, Dart, PHP, jQuery, Codemagic]
+tags: [mobile, freelance, ci-cd]
+cover: ../../../assets/projects/dental-results-apps/cover.png
+coverAlt: Screens of the Clin2Cloud, Odontólogo Digital and Imágenes Dentales apps side by side
+gallery:
+  - src: ../../../assets/projects/dental-results-apps/clin2cloud.png
+    alt: Clin2Cloud app showing the list of dental imaging orders with options to view and download each exam
+  - src: ../../../assets/projects/dental-results-apps/odontologo-digital.png
+    alt: Odontólogo Digital app home screen with separate sign-in for patients and dentists
+  - src: ../../../assets/projects/dental-results-apps/imagenes-dentales.png
+    alt: Imágenes Dentales app home screen inviting patients and specialists to check their results
+featured: true
+order: 0
+---
+
+## The challenge
+
+**NUBALAB S.A.S** runs a web platform where dental imaging centers deliver results — panoramic X-rays,
+periapicals, 3D STL models — to patients and dentists. Several imaging brands use it, and each one needed
+its own app on the App Store and Google Play, without maintaining a separate native codebase per brand.
+
+## What I built
+
+- **One Flutter wrapper, many apps.** A reusable Flutter shell that renders the existing web platform
+  inside a native app, configured per brand (name, icon, colors, URL). The same code ships
+  **Clin2Cloud**, **Odontólogo Digital** and **Imágenes Dentales**.
+- **Web support.** Helped adapt parts of the PHP/jQuery platform so it works well inside the app.
+- **Automated releases with Codemagic.** A CI/CD pipeline that builds, signs and uploads the iOS and
+  Android binaries, so a new brand or version doesn't mean a manual release.
+- **Store management end to end.** Developer accounts, certificates and signing, store listings,
+  screenshots, privacy forms, review submissions and follow-up until approval.
+
+## Result
+
+Three apps live on both stores within **two months**, all from a single codebase — new brands can be
+added with configuration instead of new development. The apps are published under the Saludtec
+developer account.
+
+- [Clin2Cloud on the App Store](https://apps.apple.com/co/app/clin2cloud/id6475777516)
+- [Odontólogo Digital on the App Store](https://apps.apple.com/co/app/odont%C3%B3logo-digital/id6478245021)
+- [Imágenes Dentales on the App Store](https://apps.apple.com/app/id6739231122)

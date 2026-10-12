@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { readdirSync } from 'node:fs';
-import { fallbackUrls } from '../../src/lib/sitemap';
+import { fallbackUrls, isDraftSource } from '../../src/lib/sitemap';
 
 const SITE = 'https://example.com';
 const f = (lang: 'en' | 'es', slug: string, draft = false) => ({ lang, slug, draft });
@@ -40,5 +40,23 @@ describe('project file names', () => {
         }
       }
     }
+  });
+});
+
+describe('isDraftSource', () => {
+  const mdx = (fm: string) => `---\ntitle: X\n${fm}\n---\n\nBody with draft: true in the text.\n`;
+
+  it('detects draft: true', () => {
+    expect(isDraftSource(mdx('draft: true'))).toBe(true);
+  });
+
+  it('tolerates a trailing comment and YAML casing', () => {
+    expect(isDraftSource(mdx('draft: true # hide for now'))).toBe(true);
+    expect(isDraftSource(mdx('draft: True'))).toBe(true);
+  });
+
+  it('is false for draft: false, a missing key, or "draft" only in the body', () => {
+    expect(isDraftSource(mdx('draft: false # keep'))).toBe(false);
+    expect(isDraftSource(mdx('featured: true'))).toBe(false);
   });
 });

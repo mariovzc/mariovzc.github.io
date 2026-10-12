@@ -55,8 +55,6 @@ Priority: **P1** = soon / high impact · **P2** = valuable, not urgent · **P3**
 
 ## Tech debt (from code reviews)
 
-- [ ] **P2 · Sitemap draft regex** — `astro.config.mjs` reads `draft:` with a regex that misses
-      `draft: true # comment`; tolerate trailing comments.
 - [ ] **P3 · `og-image.mjs` reads `SITE` by regex** — breaks if the constant is renamed; share the value from one
       module instead.
 - [ ] **P3 · `lighthouse.mjs` robustness** — handle `spawn` errors, kill the preview process group, add a
@@ -72,6 +70,8 @@ Priority: **P1** = soon / high impact · **P2** = valuable, not urgent · **P3**
 
 ## Done
 
+- [x] 2026-10-12 — Sitemap draft detection moved to `isDraftSource()` (tolerates `# comments` and YAML casing),
+      unit-tested.
 - [x] 2026-10-12 — Featured bento tile: optional `cardCover` (square diagram) for the AI project so the
       narrow tile isn't cropped.
 - [x] 2026-10-12 — Google Search Console: URL-prefix property verified (meta tag in `BaseLayout.astro`),

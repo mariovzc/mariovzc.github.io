@@ -25,3 +25,12 @@ export function fallbackUrls(site: string, files: ProjectFile[]): Set<string> {
   }
   return urls;
 }
+
+/**
+ * Whether an MDX source has `draft: true` in its frontmatter (tolerates YAML casing and a
+ * trailing `# comment`). Used by astro.config.mjs, which runs before content collections load.
+ */
+export function isDraftSource(source: string): boolean {
+  const frontmatter = source.split(/^---\s*$/m)[1] ?? '';
+  return /^draft:\s*(?:true|True|TRUE)\s*(?:#.*)?$/m.test(frontmatter);
+}

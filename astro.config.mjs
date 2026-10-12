@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { contentRoot } from './src/lib/content-root.ts';
-import { fallbackUrls } from './src/lib/sitemap.ts';
+import { fallbackUrls, isDraftSource } from './src/lib/sitemap.ts';
 import { comingSoonSitemapAllows, isComingSoon } from './src/lib/site-mode.ts';
 
 const SITE = 'https://mariovzc.github.io';
@@ -18,14 +18,11 @@ function projectFiles() {
     if (!existsSync(dir)) return [];
     return readdirSync(dir)
       .filter((f) => f.endsWith('.mdx'))
-      .map((f) => {
-        const head = readFileSync(`${dir}/${f}`, 'utf8').split(/^---\s*$/m)[1] ?? '';
-        return {
-          lang,
-          slug: f.replace(/\.mdx$/, ''),
-          draft: /^draft:\s*true\s*$/m.test(head),
-        };
-      });
+      .map((f) => ({
+        lang,
+        slug: f.replace(/\.mdx$/, ''),
+        draft: isDraftSource(readFileSync(`${dir}/${f}`, 'utf8')),
+      }));
   });
 }
 

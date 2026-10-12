@@ -32,6 +32,7 @@ const excluded = fallbackUrls();
 export default defineConfig({
   site: SITE,
   trailingSlash: 'always',
+  // Sample/placeholder covers are repo-owned SVGs that sharp must rasterize; drop once all project images are raster.
   image: { dangerouslyProcessSVG: true },
   i18n: {
     locales: ['en', 'es'],

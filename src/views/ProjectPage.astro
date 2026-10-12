@@ -61,9 +61,13 @@ const projectHref = (slug: string) => localizePath(`/projects/${slug}/`, lang);
       </p>
     )}
 
-    <div lang={project.contentLang}>
-      <h1 class="mt-6 font-serif text-4xl leading-tight sm:text-6xl">{d.title}</h1>
-      <p class="mt-4 max-w-2xl text-xl text-muted">{d.summary}</p>
+    <div>
+      <h1 lang={project.contentLang} class="mt-6 font-serif text-4xl leading-tight sm:text-6xl">
+        {d.title}
+      </h1>
+      <p lang={project.contentLang} class="mt-4 max-w-2xl text-xl text-muted">
+        {d.summary}
+      </p>
 
       <dl class="mt-10 grid gap-6 border-y border-line py-6 text-sm sm:grid-cols-3">
         <div>
@@ -72,7 +76,9 @@ const projectHref = (slug: string) => localizePath(`/projects/${slug}/`, lang);
         </div>
         <div>
           <dt class="text-muted">{t(lang, 'project.role')}</dt>
-          <dd class="mt-1">{d.role}</dd>
+          <dd lang={project.contentLang} class="mt-1">
+            {d.role}
+          </dd>
         </div>
         <div>
           <dt class="text-muted">{t(lang, 'project.stack')}</dt>
@@ -118,7 +124,7 @@ const projectHref = (slug: string) => localizePath(`/projects/${slug}/`, lang);
         />
       </div>
 
-      <div class="prose-content mt-12 max-w-2xl">
+      <div lang={project.contentLang} class="prose-content mt-12 max-w-2xl">
         <Content />
       </div>
 

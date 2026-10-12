@@ -1,0 +1,48 @@
+---
+import type { Locale } from '../../i18n/utils';
+import { buildAlternates, canonicalFor, safeJson } from '../../lib/seo';
+
+interface Props {
+  lang: Locale;
+  title: string;
+  description: string;
+  path: string;
+  translations: Locale[];
+  image: string;
+  type: 'website' | 'article';
+  jsonLd: Record<string, unknown>[];
+  noindex: boolean;
+  contentLang: Locale;
+}
+
+const { lang, title, description, path, translations, image, type, jsonLd, noindex, contentLang } =
+  Astro.props;
+const site = Astro.site!.href;
+// noindex pages (404) have no stable URL of their own: no canonical or alternates.
+const canonical = noindex ? undefined : canonicalFor({ site, path, lang, translations });
+const alternates = noindex ? [] : buildAlternates({ site, path, translations });
+const imageUrl = new URL(image, site).href;
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+{canonical && <link rel="canonical" href={canonical} />}
+{noindex && <meta name="robots" content="noindex" />}
+{alternates.map((a) => (
+  <link rel="alternate" hreflang={a.hreflang} href={a.href} />
+))}
+
+<meta property="og:type" content={type} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+{canonical && <meta property="og:url" content={canonical} />}
+<meta property="og:image" content={imageUrl} />
+<meta property="og:locale" content={contentLang === 'es' ? 'es_ES' : 'en_US'} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={imageUrl} />
+
+{jsonLd.map((data) => (
+  <script type="application/ld+json" set:html={safeJson(data)} />
+))}

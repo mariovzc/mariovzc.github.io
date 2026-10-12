@@ -1,0 +1,41 @@
+---
+import Section from './Section.astro';
+import { t, type Locale } from '../../i18n/utils';
+import type { ProfileData } from '../../lib/types';
+
+interface Props {
+  lang: Locale;
+  profile: ProfileData;
+}
+const { lang, profile } = Astro.props;
+---
+
+{profile.experience.length > 0 && (
+  <Section
+    id="experience"
+    title={t(lang, 'experience.title')}
+    label={t(lang, 'section.experience')}
+  >
+    <div class="tile p-7 sm:p-8">
+      <ol class="space-y-8 border-l-2 border-line pl-6">
+        {profile.experience.map((e) => (
+          <li class="relative">
+            <span
+              class="absolute top-1.5 -left-[calc(1.5rem+7px)] size-3 rounded-full bg-accent ring-4 ring-[var(--accent-soft)]"
+              aria-hidden="true"
+            ></span>
+            <p class="text-sm font-semibold text-muted">
+              {e.end === e.start
+                ? e.start
+                : `${e.start} – ${e.end ?? t(lang, 'experience.present')}`}
+            </p>
+            <h3 class="heavy mt-1 text-lg">
+              {e.role} · {e.company}
+            </h3>
+            <p class="mt-1 text-muted">{e.summary}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </Section>
+)}

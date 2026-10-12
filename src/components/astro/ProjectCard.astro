@@ -1,0 +1,43 @@
+---
+import { Image } from 'astro:assets';
+import { localizePath, t, type Locale } from '../../i18n/utils';
+import type { LocalizedProject } from '../../lib/projects';
+import type { ProjectEntry } from '../../lib/site-data';
+
+interface Props {
+  lang: Locale;
+  project: LocalizedProject<ProjectEntry>;
+}
+const { lang, project } = Astro.props;
+const d = project.entry.data;
+const href = localizePath(`/projects/${project.slug}/`, lang);
+---
+
+<article data-testid="project-card" class="tile tile-hover overflow-hidden">
+  <a href={href} class="block" aria-label={`${t(lang, 'projects.view')}: ${d.title}`}>
+    <Image
+      src={d.cover}
+      alt={d.coverAlt}
+      widths={[480, 960]}
+      sizes="(min-width: 768px) 50vw, 100vw"
+      format="webp"
+      class="aspect-[16/10] w-full bg-bg object-cover"
+    />
+    <div class="p-6">
+      <div class="flex items-baseline justify-between gap-4">
+        <h3 class="heavy text-xl sm:text-2xl" lang={project.contentLang}>
+          {d.title}
+        </h3>
+        <span class="text-sm font-semibold text-muted">{d.year}</span>
+      </div>
+      <p class="mt-2 text-muted" lang={project.contentLang}>
+        {d.summary}
+      </p>
+      <ul class="mt-4 flex flex-wrap gap-1.5">
+        {d.stack.map((s) => (
+          <li class="pill pill-soft px-2.5 py-0.5 text-xs">{s}</li>
+        ))}
+      </ul>
+    </div>
+  </a>
+</article>

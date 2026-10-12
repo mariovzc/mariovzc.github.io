@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.astro/
+reports/
+test-results/
+playwright-report/
+.superpowers/
+.DS_Store
+.env
+/*.pdf

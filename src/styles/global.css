@@ -1,0 +1,282 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/plus-jakarta-sans';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * "Bento verde": light gray canvas, white rounded tiles, green accent.
+ * Some shades are slightly darker/lighter than the design brief so every
+ * text/background pair meets WCAG AA (see .superpowers/restyle/report.md).
+ */
+:root {
+  --bg: #f5f5f7;
+  --surface: #ffffff;
+  --fg: #1d1d1f;
+  --muted: #6e6e73;
+  --line: rgba(0, 0, 0, 0.07);
+  --line-strong: rgba(0, 0, 0, 0.14);
+  --accent: #207936;
+  --accent-soft: rgba(52, 199, 89, 0.12);
+  --on-accent: #ffffff;
+  --pill-bg: rgba(0, 0, 0, 0.06);
+  --pill-bg-hover: rgba(0, 0, 0, 0.11);
+  --hero-from: #187a35;
+  --hero-to: #0f5a26;
+  --chip-purple: #8e3fc4;
+  --chip-purple-bg: rgba(191, 90, 242, 0.14);
+  --chip-orange: #9f5700;
+  --chip-orange-bg: rgba(255, 159, 10, 0.15);
+  --chip-blue: #0058c5;
+  --chip-blue-bg: rgba(0, 113, 227, 0.1);
+  --chip-green: var(--accent);
+  --chip-green-bg: var(--accent-soft);
+  --footer-bg: #1d1d1f;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08), 0 16px 40px rgba(0, 0, 0, 0.07);
+  color-scheme: light;
+}
+
+.dark {
+  --bg: #000000;
+  --surface: #1c1c1e;
+  --fg: #f5f5f7;
+  --muted: #98989d;
+  --line: rgba(255, 255, 255, 0.1);
+  --line-strong: rgba(255, 255, 255, 0.22);
+  --accent: #30d158;
+  --accent-soft: rgba(48, 209, 88, 0.16);
+  --on-accent: #000000;
+  --pill-bg: rgba(255, 255, 255, 0.08);
+  --pill-bg-hover: rgba(255, 255, 255, 0.15);
+  --chip-purple: #c973f4;
+  --chip-purple-bg: rgba(191, 90, 242, 0.2);
+  --chip-orange: #ff9f0a;
+  --chip-orange-bg: rgba(255, 159, 10, 0.2);
+  --chip-blue: #64d2ff;
+  --chip-blue-bg: rgba(10, 132, 255, 0.2);
+  --footer-bg: #0a0a0a;
+  --shadow-sm: none;
+  --shadow-md: none;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-surface: var(--surface);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-on-accent: var(--on-accent);
+  --color-chip-purple: var(--chip-purple);
+  --color-chip-purple-bg: var(--chip-purple-bg);
+  --color-chip-orange: var(--chip-orange);
+  --color-chip-orange-bg: var(--chip-orange-bg);
+  --color-chip-blue: var(--chip-blue);
+  --color-chip-blue-bg: var(--chip-blue-bg);
+  --color-chip-green: var(--chip-green);
+  --color-chip-green-bg: var(--chip-green-bg);
+  --font-sans: 'Plus Jakarta Sans Variable', system-ui, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', monospace;
+  --radius-tile: 20px;
+  --radius-block: 24px;
+}
+
+/* Heavy display type used for every heading. */
+@utility heavy {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+html {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Unlayered and more specific than :focus-visible, so it wins on green surfaces. */
+.hero-surface :focus-visible {
+  outline-color: #fff;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .tile {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-tile);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .tile-dark {
+    background: #1d1d1f;
+    color: #f5f5f7;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-tile);
+  }
+
+  .hero-surface {
+    color: #fff;
+    background:
+      radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px) 0 0 / 20px 20px,
+      linear-gradient(135deg, var(--hero-from), var(--hero-to));
+  }
+
+  .eyebrow {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    border-radius: 9999px;
+    padding: 0.375rem 0.875rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1.25rem;
+    border: 1px solid transparent;
+  }
+  .pill-neutral {
+    background: var(--pill-bg);
+    color: var(--fg);
+  }
+  .pill-soft {
+    background: var(--accent-soft);
+    color: var(--accent);
+  }
+  .pill-accent {
+    background: var(--accent);
+    color: var(--on-accent);
+  }
+  .pill-outline {
+    border-color: var(--line-strong);
+    color: var(--fg);
+  }
+  .pill-white {
+    background: #fff;
+    color: var(--hero-from);
+  }
+  .pill-outline-white {
+    border-color: rgba(255, 255, 255, 0.7);
+    color: #fff;
+  }
+  /* Hover states only for interactive pills (static list pills stay put). */
+  a.pill-neutral:hover,
+  button.pill-neutral:hover,
+  a.pill-outline:hover {
+    background: var(--pill-bg-hover);
+  }
+  a.pill-soft:hover {
+    border-color: var(--accent);
+  }
+  a.pill-accent:hover {
+    filter: brightness(1.1);
+  }
+  a.pill-white:hover {
+    background: #e8f5ec;
+  }
+  a.pill-outline-white:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: #fff;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 12px;
+    flex-shrink: 0;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    a.pill,
+    button.pill {
+      transition:
+        background-color 0.15s ease,
+        border-color 0.15s ease,
+        filter 0.15s ease;
+    }
+    .tile-hover {
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+    }
+    .tile-hover:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--line-strong);
+    }
+    .fade-up {
+      /* backwards (not both): no transform is held after the animation, so hover lift works. */
+      animation: fade-up 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+      animation-delay: var(--delay, 0ms);
+    }
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.prose-content h2 {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  font-size: 1.5rem;
+  margin: 2.25rem 0 1rem;
+}
+.prose-content h2:first-child {
+  margin-top: 0;
+}
+.prose-content p {
+  margin: 0 0 1.25rem;
+  line-height: 1.75;
+}
+.prose-content a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.prose-content ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+  margin: 0 0 1.25rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

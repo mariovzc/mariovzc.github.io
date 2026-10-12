@@ -1,0 +1,9 @@
+---
+import HomePage from '../../views/HomePage.astro';
+import ComingSoonPage from '../../views/ComingSoonPage.astro';
+import { isComingSoon } from '../../lib/site-mode';
+
+const soon = isComingSoon(import.meta.env);
+---
+
+{soon ? <ComingSoonPage lang="es" /> : <HomePage lang="es" />}

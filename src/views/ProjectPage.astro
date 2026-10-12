@@ -1,0 +1,177 @@
+---
+import { Image, getImage } from 'astro:assets';
+import { render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ImageGallery from '../components/react/ImageGallery';
+import { localizePath, t, type Locale } from '../i18n/utils';
+import { adjacentProjects, type LocalizedProject } from '../lib/projects';
+import { getProfile, toSummary, type ProjectEntry } from '../lib/site-data';
+import { projectJsonLd } from '../lib/seo';
+
+interface Props {
+  lang: Locale;
+  project: LocalizedProject<ProjectEntry>;
+  all: LocalizedProject<ProjectEntry>[];
+}
+
+const { lang, project, all } = Astro.props;
+const d = project.entry.data;
+const { Content } = await render(project.entry);
+const profile = await getProfile(lang);
+// On fallback pages the JSON-LD url is the canonical (content-language) URL.
+const summary = toSummary({ ...project, lang: project.contentLang }, Astro.site!);
+const { prev, next } = adjacentProjects(all, project.slug);
+const og = await getImage({ src: d.cover, width: 1200, height: 630, fit: 'cover', format: 'png' });
+const gallery = await Promise.all(
+  d.gallery.map(async (g) => {
+    const thumb = await getImage({ src: g.src, width: 800, format: 'webp' });
+    const full = await getImage({ src: g.src, width: 1600, format: 'webp' });
+    return {
+      thumb: thumb.src,
+      full: full.src,
+      alt: g.alt,
+      width: Number(thumb.attributes.width ?? 800),
+      height: Number(thumb.attributes.height ?? 500),
+    };
+  }),
+);
+const projectHref = (slug: string) => localizePath(`/projects/${slug}/`, lang);
+---
+
+<BaseLayout
+  lang={lang}
+  title={`${d.title} — ${profile.name}`}
+  description={d.summary}
+  path={`/projects/${project.slug}/`}
+  translations={project.translations}
+  image={og.src}
+  type="article"
+  contentLang={project.contentLang}
+  jsonLd={[projectJsonLd(summary, profile)]}
+>
+  <article class="py-8 sm:py-12">
+    <a href={`${localizePath('/', lang)}#work`} class="pill pill-neutral">
+      ← {t(lang, 'project.back')}
+    </a>
+
+    {project.isFallback && (
+      <p
+        data-testid="fallback-notice"
+        class="mt-6 rounded-tile bg-chip-orange-bg px-5 py-3 text-sm font-semibold text-chip-orange"
+      >
+        {t(lang, 'project.fallbackNotice')}
+      </p>
+    )}
+
+    <div>
+      <h1 lang={project.contentLang} class="heavy mt-8 text-4xl leading-tight sm:text-6xl">
+        {d.title}
+      </h1>
+      <p lang={project.contentLang} class="mt-4 max-w-2xl text-xl text-muted">
+        {d.summary}
+      </p>
+
+      <dl class="mt-8 grid gap-4 text-sm sm:grid-cols-3">
+        <div class="tile p-5">
+          <dt class="eyebrow">{t(lang, 'project.year')}</dt>
+          <dd class="heavy mt-2 text-lg">{d.year}</dd>
+        </div>
+        <div class="tile p-5">
+          <dt class="eyebrow">{t(lang, 'project.role')}</dt>
+          <dd lang={project.contentLang} class="heavy mt-2 text-lg">
+            {d.role}
+          </dd>
+        </div>
+        <div class="tile p-5">
+          <dt class="eyebrow">{t(lang, 'project.stack')}</dt>
+          <dd class="mt-2 font-semibold">{d.stack.join(' · ')}</dd>
+        </div>
+      </dl>
+
+      {(d.links.live || d.links.repo) && (
+        <p class="mt-6 flex flex-wrap gap-3">
+          {d.links.live && (
+            <a
+              href={d.links.live}
+              data-testid="project-live"
+              target="_blank"
+              rel="noopener"
+              class="pill pill-accent px-5 py-2.5"
+            >
+              {t(lang, 'project.live')} ↗
+            </a>
+          )}
+          {d.links.repo && (
+            <a
+              href={d.links.repo}
+              data-testid="project-repo"
+              target="_blank"
+              rel="noopener"
+              class="pill pill-outline px-5 py-2.5"
+            >
+              {t(lang, 'project.repo')} ↗
+            </a>
+          )}
+        </p>
+      )}
+
+      <div class="tile mt-8 overflow-hidden rounded-block">
+        <Image
+          src={d.cover}
+          alt={d.coverAlt}
+          widths={[800, 1600]}
+          sizes="(min-width: 1152px) 1152px, 100vw"
+          class="w-full"
+          format="webp"
+          loading="eager"
+        />
+      </div>
+
+      <div class="tile mt-8 p-7 sm:p-10">
+        <div lang={project.contentLang} class="prose-content max-w-2xl">
+          <Content />
+        </div>
+      </div>
+
+      {gallery.length > 0 && (
+        <section data-testid="project-gallery" class="mt-12">
+          <h2 class="heavy mb-5 text-2xl">{t(lang, 'project.gallery')}</h2>
+          <ImageGallery
+            client:visible
+            images={gallery}
+            labels={{ open: t(lang, 'gallery.open'), close: t(lang, 'gallery.close') }}
+          />
+        </section>
+      )}
+    </div>
+
+    <nav class="mt-12 grid gap-4 text-sm sm:grid-cols-2" aria-label={t(lang, 'project.navLabel')}>
+      {prev ? (
+        <a
+          href={projectHref(prev.slug)}
+          data-testid="project-prev"
+          class="tile tile-hover block p-6 text-muted"
+        >
+          ← {t(lang, 'project.prev')}
+          <span lang={prev.contentLang} class="heavy mt-1 block text-lg text-fg">
+            {prev.entry.data.title}
+          </span>
+        </a>
+      ) : (
+        <span class="hidden sm:block"></span>
+      )}
+      {next && (
+        <a
+          href={projectHref(next.slug)}
+          data-testid="project-next"
+          class="tile tile-hover block p-6 text-right text-muted"
+        >
+          {t(lang, 'project.next')} →
+          <span lang={next.contentLang} class="heavy mt-1 block text-lg text-fg">
+            {next.entry.data.title}
+          </span>
+        </a>
+      )}
+    </nav>
+  </article>
+</BaseLayout>

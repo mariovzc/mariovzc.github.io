@@ -1,0 +1,21 @@
+---
+import Section from './Section.astro';
+import ProjectCard from './ProjectCard.astro';
+import { t, type Locale } from '../../i18n/utils';
+import type { LocalizedProject } from '../../lib/projects';
+import type { ProjectEntry } from '../../lib/site-data';
+
+interface Props {
+  lang: Locale;
+  projects: LocalizedProject<ProjectEntry>[];
+}
+const { lang, projects } = Astro.props;
+---
+
+<Section id="work" title={t(lang, 'projects.title')} label={t(lang, 'section.work')}>
+  <div class="grid gap-5 md:grid-cols-2">
+    {projects.map((p) => (
+      <ProjectCard lang={lang} project={p} />
+    ))}
+  </div>
+</Section>

@@ -1,0 +1,119 @@
+---
+import '../styles/global.css';
+import SEO from '../components/astro/SEO.astro';
+import Nav from '../components/astro/Nav.astro';
+import Footer from '../components/astro/Footer.astro';
+import { LOCALES, t, type Locale } from '../i18n/utils';
+import { getProfile, getSiteData } from '../lib/site-data';
+import { safeJson } from '../lib/seo';
+
+interface Props {
+  lang: Locale;
+  title: string;
+  description: string;
+  /** Unlocalized route, e.g. "/" or "/projects/foo/". */
+  path: string;
+  translations?: Locale[];
+  image?: string;
+  jsonLd?: Record<string, unknown>[];
+  type?: 'website' | 'article';
+  noindex?: boolean;
+  /** Language the content is written in (og:locale); defaults to `lang`. */
+  contentLang?: Locale;
+  /** Overrides the language-switch target (e.g. the 404 page). */
+  langSwitchHref?: string;
+  /** Coming-soon mode: no nav, footer or WebMCP data; the page renders its own controls. */
+  minimal?: boolean;
+  /** Nav with only the brand link and theme toggle (404 page). */
+  brandOnlyNav?: boolean;
+}
+
+const {
+  lang,
+  title,
+  description,
+  path,
+  translations = [...LOCALES],
+  image = '/og-default.png',
+  jsonLd = [],
+  type = 'website',
+  noindex = false,
+  contentLang = lang,
+  langSwitchHref,
+  minimal = false,
+  brandOnlyNav = false,
+} = Astro.props;
+
+const profile = await getProfile(lang);
+const siteData = minimal ? null : await getSiteData(Astro.site!);
+const originTrialToken = import.meta.env.PUBLIC_WEBMCP_OT_TOKEN;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    {originTrialToken && <meta http-equiv="origin-trial" content={originTrialToken} />}
+    <script is:inline>
+      // Mirrors resolveTheme() in src/lib/theme.ts. Runs before first paint.
+      (function () {
+        var stored = null;
+        try {
+          stored = localStorage.getItem('theme');
+        } catch (e) {}
+        var dark =
+          stored === 'dark' ||
+          (stored !== 'light' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        document.documentElement.classList.toggle('dark', dark);
+      })();
+    </script>
+    <SEO
+      lang={lang}
+      title={title}
+      description={description}
+      path={path}
+      translations={translations}
+      image={image}
+      type={type}
+      jsonLd={jsonLd}
+      noindex={noindex}
+      contentLang={contentLang}
+    />
+  </head>
+  <body class="flex min-h-screen flex-col bg-bg text-fg">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-surface focus:px-4 focus:py-2 focus:font-semibold focus:shadow-lg"
+    >
+      {t(lang, 'nav.skip')}
+    </a>
+    {minimal ? (
+      <main id="main" class="mx-auto flex min-h-screen max-w-3xl flex-col px-4 py-6 sm:px-6">
+        <slot />
+      </main>
+    ) : (
+      <>
+        <Nav
+          lang={lang}
+          path={path}
+          name={profile.name}
+          langSwitchHref={langSwitchHref}
+          brandOnly={brandOnlyNav}
+        />
+        <main id="main" class="mx-auto w-full max-w-6xl flex-1 px-4 sm:px-6">
+          <slot />
+        </main>
+        <Footer name={profile.name} />
+        <script type="application/json" id="webmcp-data" set:html={safeJson(siteData)} />
+      </>
+    )}
+    {!minimal && <script>
+      import '../scripts/webmcp.ts';
+    </script>}
+  </body>
+</html>

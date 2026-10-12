@@ -48,7 +48,10 @@ const originTrialToken = import.meta.env.PUBLIC_WEBMCP_OT_TOKEN;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     {originTrialToken && <meta http-equiv="origin-trial" content={originTrialToken} />}
     <script is:inline>
       // Mirrors resolveTheme() in src/lib/theme.ts. Runs before first paint.

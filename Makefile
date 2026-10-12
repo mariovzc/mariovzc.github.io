@@ -2,7 +2,7 @@ DC  := docker compose
 RUN := $(DC) run --rm app
 E2E := $(DC) run --rm e2e
 
-.PHONY: install dev stop build preview check test test-unit test-e2e lighthouse og add add-dev format clean
+.PHONY: install dev stop build preview check test test-unit test-e2e lighthouse og favicons add add-dev format clean
 
 install: ## Install dependencies inside the container
 	$(DC) build app
@@ -36,6 +36,9 @@ lighthouse: build ## Lighthouse audit, reports in reports/
 
 og: ## Regenerate public/og-default.png
 	$(E2E) npm run og
+
+favicons: ## Regenerate favicons/app icons in public/ from src/assets/brand/avatar.png
+	$(RUN) npm run favicons
 
 add: ## make add pkg="name other"
 	$(RUN) npm install $(pkg)

@@ -14,6 +14,7 @@
     "test:e2e": "playwright test",
     "lighthouse": "node scripts/lighthouse.mjs",
     "og": "node scripts/og-image.mjs",
+    "favicons": "node scripts/favicons.mjs",
     "format": "prettier --write ."
   },
   "dependencies": {

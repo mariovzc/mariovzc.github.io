@@ -21,6 +21,7 @@ make dev       # http://localhost:4321 with hot reload
 | `make test`                   | Unit (Vitest) + browser (Playwright) tests            |
 | `make lighthouse`             | Lighthouse audit (≥ 95 target), reports in `reports/` |
 | `make og`                     | Regenerate `public/og-default.png`                    |
+| `make favicons`               | Regenerate favicons/app icons from the avatar         |
 | `make add pkg="name"`         | Add a dependency inside the container                 |
 | `make clean`                  | Remove containers, volumes and build output           |
 

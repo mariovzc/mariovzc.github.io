@@ -5,7 +5,7 @@ Personal portfolio of Mario Vizcaino. Astro 7 static site, bilingual (EN default
 ## Hard rules
 
 - **Never run `node`, `npm` or `npx` on the host.** Everything runs in Docker via `make`:
-  `make install | dev | stop | build | preview | check | test | test-unit | test-e2e | lighthouse | og | add pkg="x" | add-dev pkg="x" | format | clean`.
+  `make install | dev | stop | build | preview | check | test | test-unit | test-e2e | lighthouse | og | favicons | add pkg="x" | add-dev pkg="x" | format | clean`.
 - Never commit `resume2026.pdf` or any root `*.pdf` (personal data).
 - Zod comes from `astro/zod`, not `astro:content`.
 - Astro 7 uses a Rust compiler: close every non-void tag; no block elements inside `<p>`.
@@ -22,6 +22,7 @@ Personal portfolio of Mario Vizcaino. Astro 7 static site, bilingual (EN default
 - `src/lib/` — `projects.ts` (localization/fallback), `sitemap.ts` (fallback-page sitemap exclusion), `seo.ts`, `llms.ts`, `robots.ts`, `theme.ts`, `webmcp-tools.ts`, `site-data.ts` (only file that reads collections).
 - `src/views/` — page bodies shared by EN/ES routes in `src/pages/`.
 - Design tokens in `src/styles/global.css` ("Bento verde": light gray canvas, white rounded tiles, green accent and gradient, Plus Jakarta Sans 800 headings). Shared component classes there: `.tile`, `.tile-hover`, `.pill*`, `.chip`, `.eyebrow`, `.hero-surface`, `heavy` utility.
+- Favicons (`public/favicon-{32,48}.png`, `apple-touch-icon.png`, `icon-{192,512}.png`) are generated from `src/assets/brand/avatar.png` by `scripts/favicons.mjs` (`make favicons`); `public/site.webmanifest` references the 192/512 icons. Regenerate after changing the avatar.
 - `src/lib/profile.ts` — `yearsOfExperience()` and `stackHighlights()` for the home bento tiles.
 
 ## Common tasks
@@ -34,6 +35,4 @@ Personal portfolio of Mario Vizcaino. Astro 7 static site, bilingual (EN default
 
 ## AI surfaces
 
-- `/llms.txt` — generated from content (`src/lib/llms.ts`).
-- JSON-LD in `src/components/astro/SEO.astro`.
-- WebMCP read-only tools (`src/lib/webmcp-tools.ts`, registered by `src/scripts/webmcp.ts`). The API is experimental; detection supports `document.modelContext` and `navigator.modelContext`.
+- `/llms.txt`

@@ -8,21 +8,34 @@ interface Props {
   profile: ProfileData;
 }
 const { lang, profile } = Astro.props;
+const chip = {
+  frontend: 'bg-chip-purple-bg text-chip-purple',
+  backend: 'bg-chip-orange-bg text-chip-orange',
+  tools: 'bg-chip-blue-bg text-chip-blue',
+} as const;
 const groups = (['frontend', 'backend', 'tools'] as const)
   .map((key) => ({ key, label: t(lang, `stack.${key}` as UiKey), items: profile.stack[key] }))
   .filter((g) => g.items.length > 0);
 ---
 
-<Section id="about" title={t(lang, 'about.title')}>
-  <div class="grid gap-12 md:grid-cols-[3fr_2fr]">
-    <p class="text-lg leading-relaxed">{profile.bio}</p>
-    <div>
-      <h3 class="mb-4 text-sm uppercase tracking-widest text-muted">{t(lang, 'about.stack')}</h3>
-      <dl class="space-y-4">
+<Section id="about" title={t(lang, 'about.title')} label={t(lang, 'section.about')}>
+  <div class="grid gap-5 md:grid-cols-[3fr_2fr]">
+    <div class="tile p-7 sm:p-8">
+      <p class="text-lg leading-relaxed">{profile.bio}</p>
+    </div>
+    <div class="tile p-7 sm:p-8">
+      <h3 class="heavy mb-5 text-lg">{t(lang, 'about.stack')}</h3>
+      <dl class="space-y-5">
         {groups.map((g) => (
           <div>
-            <dt class="text-sm text-muted">{g.label}</dt>
-            <dd class="mt-1">{g.items.join(' · ')}</dd>
+            <dt class="text-sm font-semibold text-muted">{g.label}</dt>
+            <dd class="mt-2">
+              <ul class="flex flex-wrap gap-1.5">
+                {g.items.map((item) => (
+                  <li class:list={['pill px-2.5 py-0.5 text-xs', chip[g.key]]}>{item}</li>
+                ))}
+              </ul>
+            </dd>
           </div>
         ))}
       </dl>

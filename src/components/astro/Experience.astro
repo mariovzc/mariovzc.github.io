@@ -12,31 +12,39 @@ const hasContent = profile.experience.length > 0 || Boolean(profile.cv);
 ---
 
 {hasContent && (
-  <Section id="experience" title={t(lang, 'experience.title')}>
-    <ol class="space-y-8">
-      {profile.experience.map((e) => (
-        <li class="grid gap-1 sm:grid-cols-[10rem_1fr] sm:gap-6">
-          <p class="text-sm text-muted">
-            {e.start} – {e.end ?? t(lang, 'experience.present')}
-          </p>
-          <div>
-            <h3 class="font-medium">
+  <Section
+    id="experience"
+    title={t(lang, 'experience.title')}
+    label={t(lang, 'section.experience')}
+  >
+    <div class="tile p-7 sm:p-8">
+      <ol class="space-y-8 border-l-2 border-line pl-6">
+        {profile.experience.map((e) => (
+          <li class="relative">
+            <span
+              class="absolute top-1.5 -left-[calc(1.5rem+7px)] size-3 rounded-full bg-accent ring-4 ring-[var(--accent-soft)]"
+              aria-hidden="true"
+            ></span>
+            <p class="text-sm font-semibold text-muted">
+              {e.start} – {e.end ?? t(lang, 'experience.present')}
+            </p>
+            <h3 class="heavy mt-1 text-lg">
               {e.role} · {e.company}
             </h3>
             <p class="mt-1 text-muted">{e.summary}</p>
-          </div>
-        </li>
-      ))}
-    </ol>
-    {profile.cv && (
-      <a
-        href={profile.cv}
-        download
-        data-testid="cv-link"
-        class="mt-10 inline-block text-accent underline underline-offset-4"
-      >
-        {t(lang, 'experience.downloadCv')}
-      </a>
-    )}
+          </li>
+        ))}
+      </ol>
+      {profile.cv && (
+        <a
+          href={profile.cv}
+          download
+          data-testid="cv-link"
+          class="mt-10 inline-block text-accent underline underline-offset-4"
+        >
+          {t(lang, 'experience.downloadCv')}
+        </a>
+      )}
+    </div>
   </Section>
 )}

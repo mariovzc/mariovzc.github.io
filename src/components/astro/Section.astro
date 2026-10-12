@@ -2,12 +2,15 @@
 interface Props {
   id: string;
   title: string;
+  /** Small uppercase label above the heading. */
+  label?: string;
 }
-const { id, title } = Astro.props;
+const { id, title, label } = Astro.props;
 ---
 
-<section id={id} aria-labelledby={`${id}-title`} class="scroll-mt-20 border-t border-line py-16">
-  <h2 id={`${id}-title`} class="mb-10 font-serif text-3xl sm:text-4xl">
+<section id={id} aria-labelledby={`${id}-title`} class="fade-up scroll-mt-20 py-10 sm:py-12">
+  {label && <p class="eyebrow mb-2">{label}</p>}
+  <h2 id={`${id}-title`} class="heavy mb-6 text-3xl sm:text-4xl">
     {title}
   </h2>
   <slot />

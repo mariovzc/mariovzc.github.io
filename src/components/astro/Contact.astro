@@ -1,5 +1,4 @@
 ---
-import Section from './Section.astro';
 import { t, type Locale } from '../../i18n/utils';
 import type { ProfileData } from '../../lib/types';
 
@@ -16,21 +15,36 @@ const socials = [
 ].filter((s): s is { label: string; href: string } => Boolean(s.href));
 ---
 
-<Section id="contact" title={t(lang, 'contact.title')}>
-  <p class="max-w-xl text-lg text-muted">{t(lang, 'contact.text')}</p>
-  <a
-    href={`mailto:${email}`}
-    class="mt-6 inline-block font-serif text-3xl text-accent underline underline-offset-8 sm:text-4xl"
-  >
-    {email}
-  </a>
-  <ul class="mt-8 flex gap-6 text-sm">
-    {socials.map((s) => (
-      <li>
-        <a href={s.href} rel="me noopener" target="_blank" class="text-muted hover:text-fg">
-          {s.label}
-        </a>
-      </li>
-    ))}
-  </ul>
-</Section>
+<section id="contact" aria-labelledby="contact-title" class="fade-up scroll-mt-20 py-10 sm:py-12">
+  <div class="hero-surface relative overflow-hidden rounded-block px-7 py-12 sm:px-12 sm:py-16">
+    <span
+      class="pointer-events-none absolute -top-24 -right-24 size-72 rounded-full border border-white/15"
+      aria-hidden="true"
+    ></span>
+    <span
+      class="pointer-events-none absolute -right-8 -bottom-32 size-80 rounded-full border border-white/10"
+      aria-hidden="true"
+    ></span>
+    <div class="relative">
+      <p class="text-xs font-bold uppercase tracking-[0.14em]">{t(lang, 'section.contact')}</p>
+      <h2 id="contact-title" class="heavy mt-3 text-3xl sm:text-5xl">
+        {t(lang, 'contact.title')}
+      </h2>
+      <p class="mt-4 max-w-xl text-lg">{t(lang, 'contact.text')}</p>
+      <a href={`mailto:${email}`} class="pill pill-white mt-8 px-6 py-3 text-base break-all">
+        {email}
+      </a>
+      {socials.length > 0 && (
+        <ul class="mt-6 flex flex-wrap gap-2">
+          {socials.map((s) => (
+            <li>
+              <a href={s.href} rel="me noopener" target="_blank" class="pill pill-outline-white">
+                {s.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  </div>
+</section>

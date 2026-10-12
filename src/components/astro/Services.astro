@@ -1,5 +1,6 @@
 ---
 import Section from './Section.astro';
+import Icon from './Icon.astro';
 import { t, type Locale } from '../../i18n/utils';
 import type { ProfileData } from '../../lib/types';
 
@@ -8,15 +9,27 @@ interface Props {
   profile: ProfileData;
 }
 const { lang, profile } = Astro.props;
+const chips = [
+  { cls: 'bg-chip-purple-bg text-chip-purple', icon: 'layers' },
+  { cls: 'bg-chip-orange-bg text-chip-orange', icon: 'bolt' },
+  { cls: 'bg-chip-blue-bg text-chip-blue', icon: 'compass' },
+  { cls: 'bg-chip-green-bg text-chip-green', icon: 'code' },
+] as const;
 ---
 
-<Section id="services" title={t(lang, 'services.title')}>
-  <ul class="grid gap-8 md:grid-cols-2">
-    {profile.services.map((s) => (
-      <li class="rounded-lg border border-line p-6">
-        <h3 class="font-serif text-xl">{s.title}</h3>
-        <p class="mt-2 text-muted">{s.description}</p>
-      </li>
-    ))}
+<Section id="services" title={t(lang, 'services.title')} label={t(lang, 'section.services')}>
+  <ul class="grid gap-5 md:grid-cols-2">
+    {profile.services.map((s, i) => {
+      const c = chips[i % chips.length]!;
+      return (
+        <li class="tile tile-hover p-7">
+          <span class:list={['chip', c.cls]}>
+            <Icon name={c.icon} />
+          </span>
+          <h3 class="heavy mt-5 text-xl">{s.title}</h3>
+          <p class="mt-2 text-muted">{s.description}</p>
+        </li>
+      );
+    })}
   </ul>
 </Section>

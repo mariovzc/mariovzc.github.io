@@ -39,5 +39,12 @@
   "notFound.title": "Página no encontrada",
   "notFound.text": "La página que buscas no existe o fue movida.",
   "notFound.home": "Volver al inicio",
-  "footer.built": "Hecho con Astro."
+  "footer.built": "Hecho con Astro.",
+  "section.work": "Portafolio",
+  "section.about": "Perfil",
+  "section.services": "Servicios",
+  "section.experience": "Trayectoria",
+  "section.contact": "Contacto",
+  "stats.years": "años de experiencia",
+  "bento.featured": "Proyecto destacado"
 }

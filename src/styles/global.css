@@ -4,57 +4,55 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /*
- * "Bento verde": light gray canvas, white rounded tiles, green accent.
- * Some shades are slightly darker/lighter than the design brief so every
- * text/background pair meets WCAG AA (see .superpowers/restyle/report.md).
+ * "Lime on ink": dark by default (near-black with a green tint, lime accent);
+ * light mode is a paper variant with a darker lime for text contrast.
+ * One accent: purple/blue chips map to it; orange stays only for confidential notices.
+ * Every text/background pair meets WCAG AA.
  */
 :root {
-  --bg: #f5f5f7;
+  --bg: #f3f4ef;
   --surface: #ffffff;
-  --fg: #1d1d1f;
-  --muted: #6e6e73;
-  --line: rgba(0, 0, 0, 0.07);
-  --line-strong: rgba(0, 0, 0, 0.14);
-  --accent: #207936;
-  --accent-soft: rgba(52, 199, 89, 0.12);
+  --fg: #0f1a12;
+  --muted: #556157;
+  --line: rgba(0, 0, 0, 0.08);
+  --line-strong: rgba(0, 0, 0, 0.16);
+  --accent: #3f6e0b;
+  --accent-soft: rgba(132, 204, 22, 0.16);
   --on-accent: #ffffff;
   --pill-bg: rgba(0, 0, 0, 0.06);
   --pill-bg-hover: rgba(0, 0, 0, 0.11);
-  --hero-from: #187a35;
-  --hero-to: #0f5a26;
-  --chip-purple: #8e3fc4;
-  --chip-purple-bg: rgba(191, 90, 242, 0.14);
+  /* Lime field (contact block, coming-soon) with ink text, same in both modes. */
+  --field: #b8f24a;
+  --on-field: #0c100d;
+  --chip-purple: var(--accent);
+  --chip-purple-bg: var(--accent-soft);
   --chip-orange: #9f5700;
   --chip-orange-bg: rgba(255, 159, 10, 0.15);
-  --chip-blue: #0058c5;
-  --chip-blue-bg: rgba(0, 113, 227, 0.1);
+  --chip-blue: var(--accent);
+  --chip-blue-bg: var(--accent-soft);
   --chip-green: var(--accent);
   --chip-green-bg: var(--accent-soft);
-  --footer-bg: #1d1d1f;
+  --footer-bg: #0c100d;
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.04);
   --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08), 0 16px 40px rgba(0, 0, 0, 0.07);
   color-scheme: light;
 }
 
 .dark {
-  --bg: #000000;
-  --surface: #1c1c1e;
-  --fg: #f5f5f7;
-  --muted: #98989d;
+  --bg: #0c100d;
+  --surface: #161d18;
+  --fg: #f2f5f0;
+  --muted: #a9b3ab;
   --line: rgba(255, 255, 255, 0.1);
   --line-strong: rgba(255, 255, 255, 0.22);
-  --accent: #30d158;
-  --accent-soft: rgba(48, 209, 88, 0.16);
-  --on-accent: #000000;
+  --accent: #b8f24a;
+  --accent-soft: rgba(184, 242, 74, 0.14);
+  --on-accent: #0c100d;
   --pill-bg: rgba(255, 255, 255, 0.08);
   --pill-bg-hover: rgba(255, 255, 255, 0.15);
-  --chip-purple: #c973f4;
-  --chip-purple-bg: rgba(191, 90, 242, 0.2);
   --chip-orange: #ff9f0a;
   --chip-orange-bg: rgba(255, 159, 10, 0.2);
-  --chip-blue: #64d2ff;
-  --chip-blue-bg: rgba(10, 132, 255, 0.2);
-  --footer-bg: #0a0a0a;
+  --footer-bg: #070a08;
   --shadow-sm: none;
   --shadow-md: none;
   color-scheme: dark;
@@ -101,9 +99,9 @@ html {
   outline-offset: 3px;
 }
 
-/* Unlayered and more specific than :focus-visible, so it wins on green surfaces. */
+/* Unlayered and more specific than :focus-visible, so it wins on the lime field. */
 .hero-surface :focus-visible {
-  outline-color: #fff;
+  outline-color: var(--on-field);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -128,10 +126,8 @@ html {
   }
 
   .hero-surface {
-    color: #fff;
-    background:
-      radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px) 0 0 / 20px 20px,
-      linear-gradient(135deg, var(--hero-from), var(--hero-to));
+    color: var(--on-field);
+    background: var(--field);
   }
 
   .eyebrow {
@@ -169,13 +165,14 @@ html {
     border-color: var(--line-strong);
     color: var(--fg);
   }
+  /* "white" = high-contrast pills on the lime field (names kept to avoid churn). */
   .pill-white {
-    background: #fff;
-    color: var(--hero-from);
+    background: var(--on-field);
+    color: var(--field);
   }
   .pill-outline-white {
-    border-color: rgba(255, 255, 255, 0.7);
-    color: #fff;
+    border-color: rgba(12, 16, 13, 0.55);
+    color: var(--on-field);
   }
   /* Hover states only for interactive pills (static list pills stay put). */
   a.pill-neutral:hover,
@@ -190,11 +187,11 @@ html {
     filter: brightness(1.1);
   }
   a.pill-white:hover {
-    background: #e8f5ec;
+    background: #26302a;
   }
   a.pill-outline-white:hover {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: #fff;
+    background: rgba(12, 16, 13, 0.08);
+    border-color: var(--on-field);
   }
 
   .chip {

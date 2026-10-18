@@ -1,5 +1,28 @@
 import { describe, expect, it } from 'vitest';
-import { remainingStackCount, stackHighlights, yearsOfExperience } from '../../src/lib/profile';
+import { splitHeadline, yearsOfExperience } from '../../src/lib/profile';
+
+describe('splitHeadline', () => {
+  it('splits at the em dash into a sentence and a capitalized lead', () => {
+    expect(splitHeadline('Simple, secure, scalable software — built fast with AI.')).toEqual({
+      main: 'Simple, secure, scalable software.',
+      lead: 'Built fast with AI',
+    });
+    expect(
+      splitHeadline('Software simple, seguro y escalable — construido rápido con IA.'),
+    ).toEqual({ main: 'Software simple, seguro y escalable.', lead: 'Construido rápido con IA' });
+  });
+
+  it('returns the whole headline when there is no em dash', () => {
+    expect(splitHeadline('Building tools.')).toEqual({ main: 'Building tools.', lead: null });
+  });
+
+  it('splits only at the first em dash and keeps existing end punctuation', () => {
+    expect(splitHeadline('Ship it! — fast — and safe')).toEqual({
+      main: 'Ship it!',
+      lead: 'Fast — and safe',
+    });
+  });
+});
 
 const now = new Date('2026-06-01T00:00:00Z');
 
@@ -26,58 +49,5 @@ describe('yearsOfExperience', () => {
 
   it('never returns a negative number', () => {
     expect(yearsOfExperience([{ start: '2030' }], now)).toBe(0);
-  });
-});
-
-describe('stackHighlights', () => {
-  const stack = {
-    frontend: ['React', 'JavaScript'],
-    backend: ['Python', 'Node.js'],
-    tools: ['Docker'],
-  };
-
-  it('returns highlights when present', () => {
-    expect(stackHighlights({ highlights: ['Python', 'Flutter'], stack })).toEqual([
-      'Python',
-      'Flutter',
-    ]);
-  });
-
-  it('falls back to the first 3 of frontend + backend when highlights is empty', () => {
-    expect(stackHighlights({ highlights: [], stack })).toEqual(['React', 'JavaScript', 'Python']);
-  });
-
-  it('falls back when highlights is missing', () => {
-    expect(stackHighlights({ stack })).toEqual(['React', 'JavaScript', 'Python']);
-  });
-
-  it('returns an empty list when nothing is available', () => {
-    expect(
-      stackHighlights({ highlights: [], stack: { frontend: [], backend: [], tools: ['Docker'] } }),
-    ).toEqual([]);
-  });
-});
-
-describe('remainingStackCount', () => {
-  const stack = {
-    frontend: ['React', 'JavaScript'],
-    backend: ['Python', 'Flask'],
-    tools: ['Docker'],
-  };
-
-  it('counts stack items not shown on the tile', () => {
-    expect(remainingStackCount(stack, ['Python', 'JavaScript'])).toBe(3);
-  });
-
-  it('ignores shown items that are not in the stack and counts duplicates once', () => {
-    expect(
-      remainingStackCount({ ...stack, tools: ['Docker', 'React'] }, ['Gemini', 'Python']),
-    ).toBe(4);
-  });
-
-  it('is zero when everything is shown', () => {
-    expect(remainingStackCount(stack, ['React', 'JavaScript', 'Python', 'Flask', 'Docker'])).toBe(
-      0,
-    );
   });
 });

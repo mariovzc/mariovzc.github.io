@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import HomeBento from '../components/astro/HomeBento.astro';
+import HomeHero from '../components/astro/HomeHero.astro';
 import ProjectsSection from '../components/astro/ProjectsSection.astro';
 import About from '../components/astro/About.astro';
 import Services from '../components/astro/Services.astro';
@@ -30,7 +30,7 @@ const years = yearsOfExperience(profile.experience);
   path="/"
   jsonLd={[personJsonLd(profile, site), websiteJsonLd(profile, site)]}
 >
-  <HomeBento lang={lang} profile={profile} featured={projects[0]} years={years} />
+  <HomeHero lang={lang} profile={profile} featured={projects[0]} years={years} />
   <ProjectsSection lang={lang} projects={projects} />
   <About lang={lang} profile={profile} />
   <Services lang={lang} profile={profile} />

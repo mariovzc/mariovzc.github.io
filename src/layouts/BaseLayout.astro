@@ -73,9 +73,8 @@ const originTrialToken = import.meta.env.PUBLIC_WEBMCP_OT_TOKEN;
         try {
           stored = localStorage.getItem('theme');
         } catch (e) {}
-        var dark =
-          stored === 'dark' ||
-          (stored !== 'light' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        // Dark ("lime on ink") is the brand default; only an explicit choice switches to light.
+        var dark = stored !== 'light';
         document.documentElement.classList.toggle('dark', dark);
       })();
     </script>
@@ -115,7 +114,7 @@ const originTrialToken = import.meta.env.PUBLIC_WEBMCP_OT_TOKEN;
         <main id="main" class="mx-auto w-full max-w-6xl flex-1 px-4 sm:px-6">
           <slot />
         </main>
-        <Footer name={profile.name} />
+        <Footer name={profile.name} fullName={profile.fullName} />
         <script type="application/json" id="webmcp-data" set:html={safeJson(siteData)} />
       </>
     )}

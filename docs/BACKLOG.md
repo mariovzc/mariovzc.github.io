@@ -1,12 +1,13 @@
 # Backlog — pending work
 
 Living list of future work for the portfolio. Update it when something is done (move it to **Done** with the
-date) or when a new idea comes up. Last reviewed: 2026-10-12.
+date) or when a new idea comes up. Last reviewed: 2026-10-18.
 
 Priority: **P1** = soon / high impact · **P2** = valuable, not urgent · **P3** = nice to have.
 
 ## Launch follow-up
 
+- [ ] **P1 · Name SEO, off-site** — same full name ("Mario Alberto Vizcaino Soto") on LinkedIn, GitHub (name, Website field, profile README) and Credly/Coursera, all linking to the site; request indexing of `/` and `/es/` in Search Console; check Performance → Queries in 2–4 weeks for the name variants.
 - [ ] **P2 · Check indexing** — in a week or two, search `site:mariovzc.github.io` and review Search Console
       (Pages / Sitemaps) for errors. When the custom domain is live, add a **Domain** property verified with a
       DNS TXT record in Cloudflare and resubmit the sitemap.
@@ -45,6 +46,10 @@ Priority: **P1** = soon / high impact · **P2** = valuable, not urgent · **P3**
 
 ## Design & UX
 
+- [ ] **P1 · Recolor images to "lime on ink"** — the other 4 project covers (`.superpowers/tmp/*.mjs` render scripts) and the OG images (`scripts/og-image.mjs`, `make og`) still use the old green gradient.
+- [ ] **P2 · "What do you need built?" skills section** — pick a capability → what I do, tools, the project that proves it and a mailto with subject (prototype in the design canvas).
+- [ ] **P2 · End-of-project CTA** — "Have a similar problem?" block before prev/next on every project page.
+- [ ] **P3 · Drop section eyebrows** — small uppercase labels ("PORTFOLIO") above section titles read as template.
 - [ ] **P3 · Visual QA pass** — manual review on real devices (iOS Safari, Android Chrome) in light and dark mode.
 
 ## Tech debt (from code reviews)
@@ -55,7 +60,7 @@ Priority: **P1** = soon / high impact · **P2** = valuable, not urgent · **P3**
       per-request timeout in `waitForServer`.
 - [ ] **P3 · Dist collision** — `make test-e2e` (fixture content) and `make build` share `dist/`; consider a
       separate output dir for the fixture build.
-- [ ] **P3 · ThemeToggle hydration** — server render always shows the "switch to dark" label until hydration.
+- [ ] **P3 · ThemeToggle hydration** — server render shows the "switch to dark" label until hydration (now wrong on first paint, since dark is the default).
 - [ ] **P3 · Remove `dangerouslyProcessSVG`** — only needed for the SVG fixture covers; drop it if fixtures move
       to raster images.
 - [ ] **P3 · WebMCP** — the API is still an origin trial and changed during 2026 (`navigator` →
@@ -64,6 +69,9 @@ Priority: **P1** = soon / high impact · **P2** = valuable, not urgent · **P3**
 
 ## Done
 
+- [x] 2026-10-18 — Redesign: "lime on ink" palette (dark by default), new home hero (headline + AI pipeline panel with Gemini 2.5 Pro, facts row), bento removed; AI project now says Gemini 2.5 Pro (covers re-rendered).
+- [x] 2026-10-18 — Name SEO on-site: `fullName` + `alternateNames` in the profile → JSON-LD `alternateName`, full name in bio, meta description, footer and `llms.txt`.
+- [x] 2026-10-18 — `make dev` uses `--ignore-lock` (stale `.astro/dev.json` blocked startup in Docker).
 - [x] 2026-10-12 — LinkedIn updated: headline, About (EN/ES), website + Featured link to the portfolio, Alto
       experience (ISO 25010, AI pipeline, background-check platform), new skills.
 - [x] 2026-10-12 — Specific icon per service (optional `icon` on each profile service; names in `src/lib/icons.ts`).

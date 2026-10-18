@@ -6,7 +6,12 @@ test.describe('home', () => {
   test('english home has SEO essentials', async ({ page }) => {
     await page.goto('/');
     await expect(page.locator('html')).toHaveAttribute('lang', 'en');
-    await expect(page.locator('h1')).toContainText('Sample Person');
+    await expect(page.locator('h1')).toHaveText('Sample headline for end-to-end tests.');
+    await expect(page.locator('main strong').first()).toHaveText('Sample Person');
+    await expect(page.getByRole('link', { name: "Let's talk about your project" })).toHaveAttribute(
+      'href',
+      /^mailto:.+\?subject=Project%20inquiry$/,
+    );
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `${SITE}/`);
     await expect(page.locator('link[hreflang="es"]')).toHaveAttribute('href', `${SITE}/es/`);
     await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /.+/);
@@ -83,8 +88,8 @@ test.describe('projects', () => {
 });
 
 test.describe('theme', () => {
-  test('follows system preference on first visit', async ({ browser }) => {
-    const ctx = await browser.newContext({ colorScheme: 'dark' });
+  test('is dark on first visit even with a light system theme', async ({ browser }) => {
+    const ctx = await browser.newContext({ colorScheme: 'light' });
     const page = await ctx.newPage();
     await page.goto('/');
     await expect(page.locator('html')).toHaveClass(/dark/);
@@ -92,13 +97,12 @@ test.describe('theme', () => {
   });
 
   test('toggle persists across reloads', async ({ page }) => {
-    await page.emulateMedia({ colorScheme: 'light' });
     await page.goto('/');
-    await expect(page.locator('html')).not.toHaveClass(/dark/);
+    await expect(page.locator('html')).toHaveClass(/dark/);
     await page.getByTestId('theme-toggle').click();
-    await expect(page.locator('html')).toHaveClass(/dark/);
+    await expect(page.locator('html')).not.toHaveClass(/dark/);
     await page.reload();
-    await expect(page.locator('html')).toHaveClass(/dark/);
+    await expect(page.locator('html')).not.toHaveClass(/dark/);
   });
 
   test('works when localStorage is blocked', async ({ page }) => {
@@ -111,10 +115,9 @@ test.describe('theme', () => {
         },
       });
     });
-    await page.emulateMedia({ colorScheme: 'light' });
     await page.goto('/');
     await page.getByTestId('theme-toggle').click();
-    await expect(page.locator('html')).toHaveClass(/dark/);
+    await expect(page.locator('html')).not.toHaveClass(/dark/);
     expect(errors).toEqual([]);
   });
 });

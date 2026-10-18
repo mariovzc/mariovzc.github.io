@@ -17,8 +17,6 @@ const projects = defineCollection({
       stack: z.array(z.string().min(1)).min(1),
       tags: z.array(z.string().min(1)).default([]),
       cover: image(),
-      // Optional square-ish variant for the narrow featured tile on the home bento.
-      cardCover: image().optional(),
       coverAlt: z.string().min(1),
       gallery: z.array(z.object({ src: image(), alt: z.string().min(1) })).default([]),
       links: z.object({ live: z.url().optional(), repo: z.url().optional() }).default({}),
@@ -33,11 +31,18 @@ const profile = defineCollection({
   loader: glob({ pattern: '*.yaml', base: `./${root}/profile` }),
   schema: z.object({
     name: z.string().min(1),
+    fullName: z.string().min(1).optional(),
+    alternateNames: z.array(z.string().min(1)).default([]),
     headline: z.string().min(1),
     role: z.string().min(1),
     location: z.string().optional(),
     bio: z.string().min(1),
     availability: z.string().optional(),
+    // Short proof points under the home hero (e.g. "ISO 27001" / "led the team that passed the audit").
+    heroFacts: z
+      .array(z.object({ value: z.string().min(1), label: z.string().min(1) }))
+      .max(2)
+      .default([]),
     services: z
       .array(
         z.object({
@@ -78,7 +83,6 @@ const profile = defineCollection({
         }),
       )
       .default([]),
-    highlights: z.array(z.string().min(1)).default([]),
     stack: z.object({
       frontend: z.array(z.string()).default([]),
       backend: z.array(z.string()).default([]),

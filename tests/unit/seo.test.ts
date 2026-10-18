@@ -22,7 +22,8 @@ const profile: ProfileData = {
   experience: [],
   education: [],
   certifications: [],
-  highlights: [],
+  heroFacts: [],
+  alternateNames: [],
   stack: { frontend: [], backend: [], tools: [] },
   contact: { email: 'a@b.co', github: 'https://github.com/mariovzc' },
 };
@@ -64,6 +65,22 @@ describe('json-ld', () => {
     expect(p.name).toBe('Mario Vizcaino');
     expect(p.jobTitle).toBe('Full-stack developer');
     expect(p.sameAs).toEqual(['https://github.com/mariovzc']);
+  });
+
+  it('person lists the full name and alternates once, without repeating the main name', () => {
+    const p = personJsonLd(
+      {
+        ...profile,
+        fullName: 'Mario Alberto Vizcaino Soto',
+        alternateNames: ['Mario Vizcaino Soto', 'Mario Alberto Vizcaino Soto', 'Mario Vizcaino'],
+      },
+      SITE,
+    );
+    expect(p.alternateName).toEqual(['Mario Alberto Vizcaino Soto', 'Mario Vizcaino Soto']);
+  });
+
+  it('person omits alternateName when there are no other names', () => {
+    expect(personJsonLd(profile, SITE)).not.toHaveProperty('alternateName');
   });
 
   it('person omits alumniOf and hasCredential when empty', () => {

@@ -38,10 +38,15 @@ export function buildAlternates(o: {
 export function personJsonLd(profile: ProfileData, site: string): Record<string, unknown> {
   const { github, linkedin, x } = profile.contact;
   const institutions = [...new Set(profile.education.map((e) => e.institution))];
+  // Other names people search for (full legal name, partial combinations) → same Person.
+  const alternates = [
+    ...new Set([profile.fullName, ...profile.alternateNames].filter((n): n is string => !!n)),
+  ].filter((n) => n !== profile.name);
   return {
     '@context': 'https://schema.org',
     '@type': 'Person',
     name: profile.name,
+    ...(alternates.length && { alternateName: alternates }),
     jobTitle: profile.role,
     description: profile.bio,
     url: site,

@@ -30,7 +30,6 @@ certifications:
     issuer: Sample Issuer
     year: '2024'
     url: https://example.com/certification
-highlights: [TypeScript, Python, Docker]
 stack:
   frontend: [React, TypeScript]
   backend: [Node.js, Python]

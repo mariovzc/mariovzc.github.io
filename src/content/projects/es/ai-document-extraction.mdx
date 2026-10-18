@@ -1,6 +1,6 @@
 ---
 title: Extracción de datos de documentos legales con IA
-summary: Pipeline con LLM en Vertex AI (Gemini Flash) que lee formularios legales escaneados y llena la plataforma, reduciendo considerablemente el tiempo de carga.
+summary: Pipeline con LLM en Vertex AI (Gemini 2.5 Pro) que lee formularios legales escaneados y llena la plataforma, reduciendo considerablemente el tiempo de carga.
 year: 2026
 role: Líder, gestor de proyecto y desarrollador
 stack:
@@ -10,7 +10,7 @@ stack:
     React,
     JavaScript,
     Vertex AI,
-    Gemini Flash,
+    Gemini 2.5 Pro,
     Docker,
     Kubernetes,
     Airflow,
@@ -18,8 +18,7 @@ stack:
   ]
 tags: [ai, llm, automation]
 cover: ../../../assets/projects/ai-document-extraction/cover-es.png
-cardCover: ../../../assets/projects/ai-document-extraction/card-es.png
-coverAlt: Diagrama del pipeline — carga de PDFs y fotos, unión en un solo documento, Gemini Flash en Vertex AI extrae los campos, el abogado los revisa y los datos se guardan en la plataforma
+coverAlt: Diagrama del pipeline — carga de PDFs y fotos, unión en un solo documento, Gemini 2.5 Pro en Vertex AI extrae los campos, el abogado los revisa y los datos se guardan en la plataforma
 featured: true
 confidential: true
 order: 0
@@ -35,7 +34,7 @@ plataforma interna: un trabajo lento, repetitivo y propenso a errores.
 1. **Carga.** El abogado sube el formulario como PDFs y/o fotos tomadas con el celular.
 2. **Unión.** Todas las páginas se combinan en un solo documento, para que el modelo vea el formulario
    completo.
-3. **Extracción con Gemini Flash en Vertex AI.** Un prompt de extracción define los campos que necesita la
+3. **Extracción con Gemini 2.5 Pro en Vertex AI.** Un prompt de extracción define los campos que necesita la
    plataforma; el modelo lee el documento y los devuelve como datos estructurados, que se validan contra esa
    estructura esperada.
 4. **Revisión humana.** Una pantalla de revisión muestra los datos extraídos para que el abogado los confirme

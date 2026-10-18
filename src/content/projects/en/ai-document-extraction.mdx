@@ -1,6 +1,6 @@
 ---
 title: AI data extraction from legal documents
-summary: An LLM pipeline on Vertex AI (Gemini Flash) that reads scanned legal forms and fills the platform for lawyers, considerably cutting data entry time.
+summary: An LLM pipeline on Vertex AI (Gemini 2.5 Pro) that reads scanned legal forms and fills the platform for lawyers, considerably cutting data entry time.
 year: 2026
 role: Lead, project manager & developer
 stack:
@@ -10,7 +10,7 @@ stack:
     React,
     JavaScript,
     Vertex AI,
-    Gemini Flash,
+    Gemini 2.5 Pro,
     Docker,
     Kubernetes,
     Airflow,
@@ -18,8 +18,7 @@ stack:
   ]
 tags: [ai, llm, automation]
 cover: ../../../assets/projects/ai-document-extraction/cover.png
-cardCover: ../../../assets/projects/ai-document-extraction/card.png
-coverAlt: Pipeline diagram — upload PDFs and photos, merge into one document, Gemini Flash on Vertex AI extracts structured fields, the lawyer reviews them and the data is saved to the platform
+coverAlt: Pipeline diagram — upload PDFs and photos, merge into one document, Gemini 2.5 Pro on Vertex AI extracts structured fields, the lawyer reviews them and the data is saved to the platform
 featured: true
 confidential: true
 order: 0
@@ -34,7 +33,7 @@ a slow, repetitive task that was easy to get wrong.
 
 1. **Upload.** The lawyer uploads the form as PDFs and/or photos taken with a phone.
 2. **Merge.** All pages are combined into a single document, so the model sees the full form at once.
-3. **Extract with Gemini Flash on Vertex AI.** An extraction prompt defines the fields the platform needs;
+3. **Extract with Gemini 2.5 Pro on Vertex AI.** An extraction prompt defines the fields the platform needs;
    the model reads the document and returns them as structured data, which is validated against that
    expected structure.
 4. **Human review.** A review screen shows the extracted data so the lawyer can confirm it and fix anything

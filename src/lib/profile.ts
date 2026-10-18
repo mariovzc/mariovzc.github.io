@@ -1,5 +1,3 @@
-import type { ProfileData } from './types';
-
 /**
  * Years since the earliest experience start. Each `start` must begin with a 4-digit
  * year (e.g. "2019" or "2019-03"); entries that don't are ignored.
@@ -18,19 +16,20 @@ export function yearsOfExperience(
 }
 
 /**
- * Technologies shown on the home bento Stack tile: the curated `highlights` when
- * non-empty, otherwise the first 3 of frontend + backend.
+ * Splits the profile headline at its first " — " so the home hero can set the
+ * first part as the h1 and the rest as the lead line. The h1 gets a full stop
+ * when it has no end punctuation; the lead is capitalized without its full stop.
  */
-export function stackHighlights(
-  profile: Pick<ProfileData, 'stack'> & { highlights?: string[] },
-): string[] {
-  if (profile.highlights && profile.highlights.length > 0) return profile.highlights;
-  return [...profile.stack.frontend, ...profile.stack.backend].slice(0, 3);
-}
-
-/** How many distinct stack technologies are not shown on the bento Stack tile. */
-export function remainingStackCount(stack: ProfileData['stack'], shown: string[]): number {
-  const all = new Set([...stack.frontend, ...stack.backend, ...stack.tools]);
-  for (const s of shown) all.delete(s);
-  return all.size;
+export function splitHeadline(headline: string): { main: string; lead: string | null } {
+  const i = headline.indexOf(' — ');
+  if (i === -1) return { main: headline, lead: null };
+  const first = headline.slice(0, i).trim();
+  const rest = headline
+    .slice(i + 3)
+    .trim()
+    .replace(/\.$/, '');
+  return {
+    main: /[.!?]$/.test(first) ? first : `${first}.`,
+    lead: rest ? rest.charAt(0).toUpperCase() + rest.slice(1) : null,
+  };
 }

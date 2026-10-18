@@ -1,15 +1,21 @@
 name: Mario Vizcaino
+fullName: Mario Alberto Vizcaino Soto
+# Other ways people search for the name (JSON-LD alternateName).
+alternateNames: [Mario Vizcaino Soto, Mario Alberto Vizcaino, Mario Soto, mariovzc]
 headline: Simple, secure, scalable software — built fast with AI.
 role: Full Stack & AI Engineer · Tech Leader
 location: Barranquilla, Colombia
 bio: >-
-  I'm a Full Stack & AI Engineer and Tech Leader with more than ten years building software.
+  I'm Mario Alberto Vizcaino Soto, a Full Stack & AI Engineer and Tech Leader with more than ten years building software.
   I build web and mobile apps, design cloud-native systems on Google Cloud with Docker and Kubernetes, connect platforms
   through secure API integrations and data pipelines, and build AI solutions — LLMs, document
   data extraction and process automation. I also use AI-assisted development to ship faster
   without lowering quality, and I lead development teams through ISO 27001 audits. I like
   software that is simple, secure by default and quick to deliver.
 availability: Open to new conversations
+heroFacts:
+  - value: ISO 27001
+    label: led the team that passed the audit
 services:
   - title: Applied AI
     description: LLM integrations with Gemini and Vertex AI, data extraction from documents, process automation and AI agents — with human review where it matters.
@@ -81,7 +87,6 @@ certifications:
     issuer: Coursera
     year: '2024'
     url: https://www.credly.com/badges/02db8e22-c0c2-416a-89f8-6dee2f9e7860
-highlights: [Python, JavaScript, Flutter, Gemini]
 stack:
   frontend: [React, JavaScript, jQuery, Tailwind CSS, Flutter, Dart, Swift]
   backend:

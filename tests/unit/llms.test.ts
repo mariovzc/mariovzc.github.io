@@ -13,7 +13,7 @@ const profile: ProfileData = {
   certifications: [],
   heroFacts: [],
   alternateNames: [],
-  stack: { frontend: ['React'], backend: ['Node.js'], tools: [] },
+  stack: { frontend: ['React'], backend: ['Node.js'], tools: [], practices: [] },
   contact: { email: 'a@b.co', github: 'https://github.com/mariovzc' },
 };
 

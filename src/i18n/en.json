@@ -27,6 +27,7 @@
   "stack.frontend": "Frontend",
   "stack.backend": "Backend",
   "stack.tools": "Tools",
+  "stack.practices": "Security & quality",
   "services.title": "What do you need built?",
   "services.hint": "Pick one and I'll show you the work that proves it.",
   "services.tools": "Tools",

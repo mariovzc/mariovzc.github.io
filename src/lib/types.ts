@@ -16,7 +16,7 @@ export interface ProfileData {
   experience: { company: string; role: string; start: string; end?: string; summary: string }[];
   education: { institution: string; degree: string; start: string; end?: string }[];
   certifications: { name: string; issuer: string; year: string; url?: string }[];
-  stack: { frontend: string[]; backend: string[]; tools: string[] };
+  stack: { frontend: string[]; backend: string[]; tools: string[]; practices: string[] };
   contact: { email: string; github?: string; linkedin?: string; x?: string; credly?: string };
 }
 

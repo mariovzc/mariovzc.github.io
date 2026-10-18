@@ -12,8 +12,9 @@ const chip = {
   frontend: 'bg-chip-purple-bg text-chip-purple',
   backend: 'bg-chip-orange-bg text-chip-orange',
   tools: 'bg-chip-blue-bg text-chip-blue',
+  practices: 'bg-chip-green-bg text-chip-green',
 } as const;
-const groups = (['frontend', 'backend', 'tools'] as const)
+const groups = (['frontend', 'backend', 'tools', 'practices'] as const)
   .map((key) => ({ key, label: t(lang, `stack.${key}` as UiKey), items: profile.stack[key] }))
   .filter((g) => g.items.length > 0);
 ---

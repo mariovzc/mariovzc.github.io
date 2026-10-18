@@ -24,7 +24,7 @@ const profile: ProfileData = {
   certifications: [],
   heroFacts: [],
   alternateNames: [],
-  stack: { frontend: [], backend: [], tools: [] },
+  stack: { frontend: [], backend: [], tools: [], practices: [] },
   contact: { email: 'a@b.co', github: 'https://github.com/mariovzc' },
 };
 

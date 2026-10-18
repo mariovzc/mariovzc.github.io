@@ -33,9 +33,6 @@ services:
     description: Containerized microservices on Google Cloud with Docker and Kubernetes, plus CI/CD for web and mobile — automated builds, signing and store releases with Codemagic and GitHub Actions.
     tools: Google Cloud, Docker, Kubernetes, Airflow, GitHub Actions
     project: portfolio-site
-  - title: Security & quality (ISO 27001 · ISO 25010)
-    description: Secure coding (OWASP), access control and development processes aligned with ISO 27001 audits, plus software quality evaluated against ISO 25010.
-    tools: ISO 27001, ISO 25010, OWASP
   - title: Integrations & data
     description: API integrations with third-party systems and data providers, and web scrapers when there is no API — automated batch and background pipelines for business intelligence.
     tools: REST APIs, Airflow, MongoDB, MySQL, scrapers
@@ -108,20 +105,8 @@ stack:
       MongoDB,
       MySQL,
     ]
-  tools:
-    [
-      Google Cloud,
-      Vertex AI,
-      Gemini,
-      Docker,
-      Kubernetes,
-      Airflow,
-      CI/CD,
-      Codemagic,
-      ISO 27001,
-      ISO 25010,
-      OWASP,
-    ]
+  tools: [Google Cloud, Vertex AI, Gemini, Docker, Kubernetes, Airflow, CI/CD, Codemagic]
+  practices: [ISO 27001, ISO 25010, OWASP]
 contact:
   email: vzcdeveloper@gmail.com
   github: https://github.com/mariovzc

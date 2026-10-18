@@ -88,6 +88,8 @@ const profile = defineCollection({
       frontend: z.array(z.string()).default([]),
       backend: z.array(z.string()).default([]),
       tools: z.array(z.string()).default([]),
+      // Security & quality practices (ISO 27001, OWASP…) shown as skills, not sold as a service.
+      practices: z.array(z.string()).default([]),
     }),
     contact: z.object({
       email: z.email(),

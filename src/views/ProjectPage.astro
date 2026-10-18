@@ -156,6 +156,25 @@ const projectHref = (slug: string) => localizePath(`/projects/${slug}/`, lang);
       )}
     </div>
 
+    <section
+      data-testid="project-cta"
+      aria-labelledby="project-cta-title"
+      class="hero-surface mt-12 flex flex-wrap items-center justify-between gap-8 rounded-block px-7 py-10 sm:px-12 sm:py-12"
+    >
+      <div class="max-w-xl">
+        <h2 id="project-cta-title" class="heavy text-3xl sm:text-4xl">
+          {t(lang, 'project.cta.title')}
+        </h2>
+        <p class="mt-3 text-lg">{t(lang, 'project.cta.text')}</p>
+      </div>
+      <a
+        href={`mailto:${profile.contact.email}?subject=${encodeURIComponent(`${t(lang, 'project.cta.subject')} ${d.title}`)}`}
+        class="pill pill-white px-6 py-3 text-base"
+      >
+        {t(lang, 'project.cta.button')}
+      </a>
+    </section>
+
     <nav class="mt-12 grid gap-4 text-sm sm:grid-cols-2" aria-label={t(lang, 'project.navLabel')}>
       {prev ? (
         <a

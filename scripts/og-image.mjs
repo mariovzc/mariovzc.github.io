@@ -17,15 +17,14 @@ const font = readFileSync(
 const render = (profile) => `<!doctype html><html><head><style>
 @font-face{font-family:'Plus Jakarta Sans';src:url(data:font/woff2;base64,${font}) format('woff2');font-weight:200 800}
 </style></head><body style="margin:0">
-<div style="width:1200px;height:630px;box-sizing:border-box;padding:80px;color:#fff;
-  font-family:'Plus Jakarta Sans',system-ui,sans-serif;display:flex;flex-direction:column;justify-content:space-between;
-  background:radial-gradient(rgba(255,255,255,.15) 1.5px,transparent 1.5px) 0 0/28px 28px,linear-gradient(135deg,#187a35,#0f5a26)">
-  <div style="font-size:26px;font-weight:700;letter-spacing:5px;text-transform:uppercase">${esc(profile.role)}</div>
+<div style="width:1200px;height:630px;box-sizing:border-box;padding:80px;color:#f2f5f0;background:#0c100d;
+  font-family:'Plus Jakarta Sans',system-ui,sans-serif;display:flex;flex-direction:column;justify-content:space-between">
+  <div style="font-size:28px;font-weight:600;color:#a9b3ab">${esc(profile.role)}</div>
   <div>
-    <div style="font-size:112px;line-height:1;font-weight:800;letter-spacing:-0.02em">${esc(profile.name)}</div>
-    <div style="font-size:48px;font-weight:700;letter-spacing:-0.01em;margin-top:28px;opacity:.92">${esc(profile.headline)}</div>
+    <div style="font-size:112px;line-height:1;font-weight:800;letter-spacing:-0.03em">${esc(profile.name)}<span style="color:#b8f24a;margin-left:-0.06em">.</span></div>
+    <div style="font-size:46px;font-weight:700;letter-spacing:-0.015em;margin-top:28px;color:#d8ded9">${esc(profile.headline)}</div>
   </div>
-  <div style="align-self:flex-start;font-size:26px;font-weight:700;color:#187a35;background:#fff;border-radius:9999px;padding:12px 28px">${esc(domain)}</div>
+  <div style="font-size:28px;font-weight:700;color:#b8f24a">${esc(domain)}</div>
 </div></body></html>`;
 
 const browser = await chromium.launch();

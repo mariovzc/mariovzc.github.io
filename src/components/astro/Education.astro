@@ -13,7 +13,7 @@ const { education, certifications } = profile;
 ---
 
 {(education.length > 0 || certifications.length > 0) && (
-  <Section id="education" title={t(lang, 'education.title')} label={t(lang, 'section.education')}>
+  <Section id="education" title={t(lang, 'education.title')}>
     {education.length > 0 && (
       <ul class="grid gap-5 md:grid-cols-2">
         {education.map((e) => (

@@ -11,11 +11,7 @@ const { lang, profile } = Astro.props;
 ---
 
 {profile.experience.length > 0 && (
-  <Section
-    id="experience"
-    title={t(lang, 'experience.title')}
-    label={t(lang, 'section.experience')}
-  >
+  <Section id="experience" title={t(lang, 'experience.title')}>
     <div class="tile p-7 sm:p-8">
       <ol class="space-y-8 border-l-2 border-line pl-6">
         {profile.experience.map((e) => (

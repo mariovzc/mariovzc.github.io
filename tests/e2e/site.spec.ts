@@ -23,6 +23,19 @@ test.describe('home', () => {
     expect(ld.map((s) => JSON.parse(s)['@type'])).toEqual(['Person', 'WebSite']);
   });
 
+  test('services: picking a capability shows its panel', async ({ page }) => {
+    await page.goto('/');
+    const panels = page.getByTestId('service-panel');
+    await expect(panels.nth(0)).toBeVisible();
+    await expect(panels.nth(1)).toBeHidden();
+    await page.getByText('Sample service two').click();
+    await expect(panels.nth(1)).toBeVisible();
+    await expect(panels.nth(0)).toBeHidden();
+    await expect(
+      panels.nth(1).getByRole('link', { name: "Let's talk about this" }),
+    ).toHaveAttribute('href', /subject=Project%3A%20Sample%20service%20two$/);
+  });
+
   test('spanish home', async ({ page }) => {
     await page.goto('/es/');
     await expect(page.locator('html')).toHaveAttribute('lang', 'es');
@@ -80,6 +93,10 @@ test.describe('projects', () => {
     await expect(page.locator('dialog[open]')).toBeVisible();
     await page.keyboard.press('Escape');
     await expect(page.locator('dialog[open]')).toHaveCount(0);
+    await expect(page.getByTestId('project-cta').getByRole('link')).toHaveAttribute(
+      'href',
+      /^mailto:.+\?subject=Similar%20to%3A%20/,
+    );
     await expect(page.getByTestId('project-next')).toHaveAttribute(
       'href',
       '/projects/sample-en-only/',

@@ -18,7 +18,7 @@ const groups = (['frontend', 'backend', 'tools'] as const)
   .filter((g) => g.items.length > 0);
 ---
 
-<Section id="about" title={t(lang, 'about.title')} label={t(lang, 'section.about')}>
+<Section id="about" title={t(lang, 'about.title')}>
   <div class="grid gap-5 md:grid-cols-[3fr_2fr]">
     <div class="tile p-7 sm:p-8">
       <p class="text-lg leading-relaxed">{profile.bio}</p>

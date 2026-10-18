@@ -130,12 +130,11 @@ html {
     background: var(--field);
   }
 
+  /* Small data label (project year/role/stack, 404): sentence case, no tracking. */
   .eyebrow {
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--accent);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--muted);
   }
 
   .pill {

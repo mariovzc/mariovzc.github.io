@@ -12,7 +12,7 @@ interface Props {
 const { lang, projects } = Astro.props;
 ---
 
-<Section id="work" title={t(lang, 'projects.title')} label={t(lang, 'section.work')}>
+<Section id="work" title={t(lang, 'projects.title')}>
   <div class="grid gap-5 md:grid-cols-2">
     {projects.map((p) => (
       <ProjectCard lang={lang} project={p} />

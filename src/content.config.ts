@@ -1,7 +1,6 @@
 import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
-import { ICON_NAMES } from './lib/icons';
 import { contentRoot } from './lib/content-root.ts';
 
 const root = contentRoot();
@@ -48,7 +47,9 @@ const profile = defineCollection({
         z.object({
           title: z.string().min(1),
           description: z.string().min(1),
-          icon: z.enum(ICON_NAMES).optional(),
+          tools: z.string().min(1).optional(),
+          // Slug of the project that proves this service (linked from the home "What do you need built?" panel).
+          project: z.string().min(1).optional(),
         }),
       )
       .min(1),

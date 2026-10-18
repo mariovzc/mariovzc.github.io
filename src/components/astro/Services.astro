@@ -1,35 +1,112 @@
 ---
 import Section from './Section.astro';
-import Icon from './Icon.astro';
-import { t, type Locale } from '../../i18n/utils';
+import { localizePath, t, type Locale } from '../../i18n/utils';
+import type { LocalizedProject } from '../../lib/projects';
+import type { ProjectEntry } from '../../lib/site-data';
 import type { ProfileData } from '../../lib/types';
 
 interface Props {
   lang: Locale;
   profile: ProfileData;
+  projects: LocalizedProject<ProjectEntry>[];
 }
-const { lang, profile } = Astro.props;
-const chips = [
-  { cls: 'bg-chip-purple-bg text-chip-purple', icon: 'layers' },
-  { cls: 'bg-chip-orange-bg text-chip-orange', icon: 'bolt' },
-  { cls: 'bg-chip-blue-bg text-chip-blue', icon: 'compass' },
-  { cls: 'bg-chip-green-bg text-chip-green', icon: 'code' },
-] as const;
+const { lang, profile, projects } = Astro.props;
+const items = profile.services.map((s) => ({
+  ...s,
+  proof: projects.find((p) => p.slug === s.project),
+  mailto: `mailto:${profile.contact.email}?subject=${encodeURIComponent(`${t(lang, 'services.subject')} ${s.title}`)}`,
+}));
+// Pick one capability, see its panel: radios + :has(), no JavaScript. Without :has() every panel shows.
+const panelCss = items
+  .map((_, i) => `.svc:has(#svc-${i}:checked) .svc-p-${i}{display:block}`)
+  .join('');
 ---
 
-<Section id="services" title={t(lang, 'services.title')} label={t(lang, 'section.services')}>
-  <ul class="grid gap-5 md:grid-cols-2">
-    {profile.services.map((s, i) => {
-      const c = chips[i % chips.length]!;
-      return (
-        <li class="tile tile-hover p-7">
-          <span class:list={['chip', c.cls]}>
-            <Icon name={s.icon ?? c.icon} />
-          </span>
-          <h3 class="heavy mt-5 text-xl">{s.title}</h3>
-          <p class="mt-2 text-muted">{s.description}</p>
-        </li>
-      );
-    })}
-  </ul>
+<Section id="services" title={t(lang, 'services.title')}>
+  <p class="-mt-3 mb-8 max-w-2xl text-lg text-muted">{t(lang, 'services.hint')}</p>
+  <div class="svc grid gap-8 lg:grid-cols-12 lg:gap-12">
+    <fieldset class="lg:col-span-6">
+      <legend class="sr-only">{t(lang, 'services.title')}</legend>
+      <ul class="flex flex-col">
+        {items.map((s, i) => (
+          <li>
+            <label class="svc-opt heavy flex cursor-pointer items-center gap-3 py-2.5 text-2xl leading-tight sm:text-3xl">
+              <input
+                type="radio"
+                name="service"
+                id={`svc-${i}`}
+                class="sr-only"
+                checked={i === 0}
+              />
+              <span aria-hidden="true" class="svc-mark text-accent">
+                →
+              </span>
+              <span>{s.title}</span>
+            </label>
+          </li>
+        ))}
+      </ul>
+    </fieldset>
+    <div class="lg:col-span-6">
+      {items.map((s, i) => (
+        <div data-testid="service-panel" class:list={['svc-p tile p-7 sm:p-8', `svc-p-${i}`]}>
+          <p class="text-lg leading-relaxed">{s.description}</p>
+          {s.tools && (
+            <p class="mt-5">
+              <span class="eyebrow block">{t(lang, 'services.tools')}</span>
+              {s.tools}
+            </p>
+          )}
+          {s.proof && (
+            <p class="mt-5">
+              <span class="eyebrow block">{t(lang, 'services.proof')}</span>
+              <a
+                href={localizePath(`/projects/${s.proof.slug}/`, lang)}
+                lang={s.proof.contentLang}
+                class="font-semibold text-accent underline underline-offset-4"
+              >
+                {s.proof.entry.data.title}
+              </a>
+            </p>
+          )}
+          <a href={s.mailto} class="pill pill-accent mt-7 px-5 py-2.5">
+            {t(lang, 'services.cta')}
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+  <style is:inline set:html={panelCss}></style>
 </Section>
+
+<style>
+  .svc-p {
+    display: none;
+  }
+  @supports not selector(:has(*)) {
+    .svc-p {
+      display: block;
+      margin-bottom: 1rem;
+    }
+  }
+  .svc-opt {
+    color: var(--muted);
+    transition: color 0.15s ease;
+  }
+  .svc-opt:hover,
+  .svc-opt:has(input:checked) {
+    color: var(--fg);
+  }
+  .svc-mark {
+    opacity: 0;
+    transition: opacity 0.15s ease;
+  }
+  .svc-opt:has(input:checked) .svc-mark {
+    opacity: 1;
+  }
+  .svc-opt:has(input:focus-visible) {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+    border-radius: 8px;
+  }
+</style>

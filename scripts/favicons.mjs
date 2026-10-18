@@ -1,12 +1,9 @@
-// Generates favicons and app icons in public/ from src/assets/brand/avatar.png.
+// Generates favicons and app icons in public/ from src/assets/brand/avatar.png (the "mv." monogram).
 // Run via `make favicons` (inside the app container).
 import sharp from 'sharp';
 
 const SRC = 'src/assets/brand/avatar.png';
 const OUT = 'public';
-
-// Tight square around the illustrated face so it still reads at tab size.
-const FACE = { left: 105, top: 65, width: 250, height: 250 };
 
 const circleMask = (size) =>
   Buffer.from(
@@ -16,7 +13,6 @@ const circleMask = (size) =>
 async function faceIcon(size) {
   const file = `${OUT}/favicon-${size}.png`;
   await sharp(SRC)
-    .extract(FACE)
     .resize(size, size, { kernel: 'lanczos3' })
     .ensureAlpha()
     .composite([{ input: circleMask(size), blend: 'dest-in' }])

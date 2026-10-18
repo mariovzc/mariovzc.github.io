@@ -13,9 +13,6 @@ bio: >-
   without lowering quality, and I lead development teams through ISO 27001 audits. I like
   software that is simple, secure by default and quick to deliver.
 availability: Open to new conversations
-heroFacts:
-  - value: ISO 27001
-    label: led the team that passed the audit
 services:
   - title: Applied AI
     description: LLM integrations with Gemini and Vertex AI, data extraction from documents, process automation and AI agents — with human review where it matters.

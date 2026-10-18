@@ -14,9 +14,6 @@ bio: >-
   desarrollo en auditorías ISO 27001. Me gusta el software simple, seguro por defecto y rápido
   de entregar.
 availability: Abierto a nuevas conversaciones
-heroFacts:
-  - value: ISO 27001
-    label: lideré el equipo que aprobó la auditoría
 services:
   - title: IA aplicada
     description: Integración de LLMs con Gemini y Vertex AI, extracción de datos de documentos, automatización de procesos y agentes de IA — con revisión humana donde importa.

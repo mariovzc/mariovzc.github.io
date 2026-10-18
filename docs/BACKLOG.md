@@ -19,7 +19,6 @@ Priority: **P1** = soon / high impact · **P2** = valuable, not urgent · **P3**
       2026-10-18 (site, LinkedIn, GitHub positions).
 - [ ] **P2 · Refresh social previews** — run the link through LinkedIn Post Inspector; WhatsApp may keep the old
       coming-soon preview for a while (OG images are now content-hashed, so new shares pick up the new one).
-- [ ] **P3 · Clean up the remote `redesign` branch** — no longer used (everything is on `master`).
 
 ## Custom domain
 
@@ -71,6 +70,7 @@ Priority: **P1** = soon / high impact · **P2** = valuable, not urgent · **P3**
 
 ## Done
 
+- [x] 2026-10-18 — Branches cleaned up (`redesign`, `design-polish` deleted; only `master`). Author meta tag added.
 - [x] 2026-10-18 — Design polish: project covers, portfolio screenshots and OG images in lime on ink;
       "What do you need built?" services picker (tools + proving project + mailto) replaces the icon cards;
       "Have a similar problem?" CTA on project pages; section eyebrows removed; security & quality moved

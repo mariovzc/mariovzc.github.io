@@ -47,6 +47,7 @@ Personal portfolio of Mario Vizcaino. Astro 7 static site, bilingual (EN default
 - The real site only ever contains the projects in `src/content/` (`make dev`, `make build`, deploy, `make lighthouse`). Sample projects do not belong there.
 - `make test-e2e` builds with `CONTENT_ROOT=tests/fixtures/content` (resolved by `src/lib/content-root.ts`, used by `src/content.config.ts` and the sitemap scan in `astro.config.mjs`) and runs Playwright against that build. Fixtures: `tests/fixtures/content/{projects,profile}` (full, EN-only and confidential projects; fixture profile "Sample Person") and `tests/fixtures/assets/projects/sample/`. Fixture mdx image paths are relative (`../../../assets/...`).
 - E2E specs assert on fixture content, never on real content. Add new e2e scenarios as fixtures, not as real projects.
+- The fixture build rewrites the shared `.astro/` (content assets, data store) that a running `make dev` also reads; `make test-e2e` therefore ends with `astro sync` for the real content (even when tests fail). If dev ever shows `LocalImageUsedWrongly` for a real cover, run `make stop && make dev`.
 
 ## Common tasks
 

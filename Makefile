@@ -36,7 +36,10 @@ test-unit:
 
 test-e2e: ## E2E against tests/fixtures/content (never the real content)
 	$(DC) run --rm -e CONTENT_ROOT=tests/fixtures/content app npm run build
-	$(DC) run --rm -e CONTENT_ROOT=tests/fixtures/content e2e npm run test:e2e
+	# The fixture build rewrites .astro/ (shared with `make dev`): always regenerate it for the real
+	# content afterwards, even when tests fail, so a running dev server keeps working.
+	$(DC) run --rm -e CONTENT_ROOT=tests/fixtures/content e2e npm run test:e2e; s=$$?; \
+	$(RUN) npx astro sync >/dev/null; exit $$s
 
 lighthouse: build ## Lighthouse audit, reports in reports/
 	$(E2E) npm run lighthouse

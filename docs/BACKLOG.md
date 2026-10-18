@@ -7,10 +7,16 @@ Priority: **P1** = soon / high impact · **P2** = valuable, not urgent · **P3**
 
 ## Launch follow-up
 
-- [ ] **P1 · Name SEO, off-site** — same full name ("Mario Alberto Vizcaino Soto") on LinkedIn, GitHub (name, Website field, profile README) and Credly/Coursera, all linking to the site; request indexing of `/` and `/es/` in Search Console; check Performance → Queries in 2–4 weeks for the name variants.
-- [ ] **P2 · Check indexing** — in a week or two, search `site:mariovzc.github.io` and review Search Console
-      (Pages / Sitemaps) for errors. When the custom domain is live, add a **Domain** property verified with a
-      DNS TXT record in Cloudflare and resubmit the sitemap.
+- [ ] **P1 · ~2026-10-25 · Sitemap status** — Search Console → Sitemaps: `sitemap-index.xml?v=2` and
+      `sitemap-0.xml` (resubmitted 2026-10-18) should show a "Last read" date, **Success** and 12 discovered
+      pages. The files are valid and reachable (checked 2026-10-18); "Couldn't fetch" with an empty "Last read"
+      only means Google has not tried yet. If still empty on 10-25: run "Test live URL" on the sitemap and
+      search `site:mariovzc.github.io`; the lasting fix is a **Domain** property (DNS TXT in Cloudflare) once
+      the custom domain is live.
+- [ ] **P1 · 2026-11-08 · Measure name SEO** — Search Console → Performance → Search results → Queries (last
+      28 days): look for "mario vizcaino", "mario vizcaino soto", "mario alberto vizcaino soto", "mariovzc"
+      (impressions, clicks, position). Repeat the incognito searches for those names and compare with
+      2026-10-18 (site, LinkedIn, GitHub positions).
 - [ ] **P2 · Refresh social previews** — run the link through LinkedIn Post Inspector; WhatsApp may keep the old
       coming-soon preview for a while (OG images are now content-hashed, so new shares pick up the new one).
 - [ ] **P3 · Clean up the remote `redesign` branch** — no longer used (everything is on `master`).
@@ -69,6 +75,7 @@ Priority: **P1** = soon / high impact · **P2** = valuable, not urgent · **P3**
 
 ## Done
 
+- [x] 2026-10-18 — Name SEO off-site: LinkedIn name "Mario Alberto Vizcaino Soto" (additional name "Mario Vizcaino", public profile on), GitHub name/bio/website + profile README (repo `mariovzc/mariovzc` linking every project), Credly name + summary (profile linked from the site), Search Console indexing requested for `/` and `/es/`, sitemaps resubmitted.
 - [x] 2026-10-18 — Redesign: "lime on ink" palette (dark by default), new home hero (headline + AI pipeline panel with Gemini 2.5 Pro, facts row), bento removed; AI project now says Gemini 2.5 Pro (covers re-rendered).
 - [x] 2026-10-18 — Name SEO on-site: `fullName` + `alternateNames` in the profile → JSON-LD `alternateName`, full name in bio, meta description, footer and `llms.txt`.
 - [x] 2026-10-18 — `make dev` uses `--ignore-lock` (stale `.astro/dev.json` blocked startup in Docker).

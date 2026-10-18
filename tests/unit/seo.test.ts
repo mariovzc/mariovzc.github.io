@@ -79,6 +79,14 @@ describe('json-ld', () => {
     expect(p.alternateName).toEqual(['Mario Alberto Vizcaino Soto', 'Mario Vizcaino Soto']);
   });
 
+  it('person lists Credly in sameAs', () => {
+    const p = personJsonLd(
+      { ...profile, contact: { ...profile.contact, credly: 'https://www.credly.com/users/x' } },
+      SITE,
+    );
+    expect(p.sameAs).toEqual(['https://github.com/mariovzc', 'https://www.credly.com/users/x']);
+  });
+
   it('person omits alternateName when there are no other names', () => {
     expect(personJsonLd(profile, SITE)).not.toHaveProperty('alternateName');
   });

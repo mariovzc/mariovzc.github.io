@@ -12,11 +12,12 @@ interface Props {
 const { lang } = Astro.props;
 const profile = await getProfile(lang);
 const other = otherLocale(lang);
-const { email, github, linkedin, x } = profile.contact;
+const { email, github, linkedin, x, credly } = profile.contact;
 const socials = [
   { label: 'GitHub', href: github },
   { label: 'LinkedIn', href: linkedin },
   { label: 'X', href: x },
+  { label: 'Credly', href: credly },
 ].filter((s): s is { label: string; href: string } => Boolean(s.href));
 ---
 

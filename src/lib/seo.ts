@@ -36,7 +36,7 @@ export function buildAlternates(o: {
 }
 
 export function personJsonLd(profile: ProfileData, site: string): Record<string, unknown> {
-  const { github, linkedin, x } = profile.contact;
+  const { github, linkedin, x, credly } = profile.contact;
   const institutions = [...new Set(profile.education.map((e) => e.institution))];
   // Other names people search for (full legal name, partial combinations) → same Person.
   const alternates = [
@@ -51,7 +51,7 @@ export function personJsonLd(profile: ProfileData, site: string): Record<string,
     description: profile.bio,
     url: site,
     email: `mailto:${profile.contact.email}`,
-    sameAs: [github, linkedin, x].filter((v): v is string => Boolean(v)),
+    sameAs: [github, linkedin, x, credly].filter((v): v is string => Boolean(v)),
     ...(institutions.length && {
       alumniOf: institutions.map((name) => ({ '@type': 'EducationalOrganization', name })),
     }),

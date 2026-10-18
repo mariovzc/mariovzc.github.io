@@ -18,7 +18,7 @@ export interface ProfileData {
   education: { institution: string; degree: string; start: string; end?: string }[];
   certifications: { name: string; issuer: string; year: string; url?: string }[];
   stack: { frontend: string[]; backend: string[]; tools: string[] };
-  contact: { email: string; github?: string; linkedin?: string; x?: string };
+  contact: { email: string; github?: string; linkedin?: string; x?: string; credly?: string };
 }
 
 export interface ProjectSummary {

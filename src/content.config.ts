@@ -92,6 +92,7 @@ const profile = defineCollection({
       email: z.email(),
       github: z.url().optional(),
       linkedin: z.url().optional(),
+      credly: z.url().optional(),
       x: z.url().optional(),
     }),
   }),

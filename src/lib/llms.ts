@@ -6,6 +6,7 @@ function contactLines(p: ProfileData): string {
     p.contact.github && `- GitHub: ${p.contact.github}`,
     p.contact.linkedin && `- LinkedIn: ${p.contact.linkedin}`,
     p.contact.x && `- X: ${p.contact.x}`,
+    p.contact.credly && `- Credly: ${p.contact.credly}`,
   ]
     .filter(Boolean)
     .join('\n');

@@ -52,10 +52,6 @@ Priority: **P1** = soon / high impact · **P2** = valuable, not urgent · **P3**
 
 ## Design & UX
 
-- [ ] **P1 · Recolor images to "lime on ink"** — the other 4 project covers (`.superpowers/tmp/*.mjs` render scripts) and the OG images (`scripts/og-image.mjs`, `make og`) still use the old green gradient.
-- [ ] **P2 · "What do you need built?" skills section** — pick a capability → what I do, tools, the project that proves it and a mailto with subject (prototype in the design canvas).
-- [ ] **P2 · End-of-project CTA** — "Have a similar problem?" block before prev/next on every project page.
-- [ ] **P3 · Drop section eyebrows** — small uppercase labels ("PORTFOLIO") above section titles read as template.
 - [ ] **P3 · Visual QA pass** — manual review on real devices (iOS Safari, Android Chrome) in light and dark mode.
 
 ## Tech debt (from code reviews)
@@ -75,6 +71,12 @@ Priority: **P1** = soon / high impact · **P2** = valuable, not urgent · **P3**
 
 ## Done
 
+- [x] 2026-10-18 — Design polish: project covers, portfolio screenshots and OG images in lime on ink;
+      "What do you need built?" services picker (tools + proving project + mailto) replaces the icon cards;
+      "Have a similar problem?" CTA on project pages; section eyebrows removed; security & quality moved
+      from services to an About skills group; ISO 27001 hero fact and bio mention removed.
+- [x] 2026-10-18 — Brand: "mv." monogram for favicons/icons; same real photo on LinkedIn, GitHub and Credly;
+      LinkedIn banner. `make test-e2e` restores `.astro/` for the real content afterwards.
 - [x] 2026-10-18 — Name SEO off-site: LinkedIn name "Mario Alberto Vizcaino Soto" (additional name "Mario Vizcaino", public profile on), GitHub name/bio/website + profile README (repo `mariovzc/mariovzc` linking every project), Credly name + summary (profile linked from the site), Search Console indexing requested for `/` and `/es/`, sitemaps resubmitted.
 - [x] 2026-10-18 — Redesign: "lime on ink" palette (dark by default), new home hero (headline + AI pipeline panel with Gemini 2.5 Pro, facts row), bento removed; AI project now says Gemini 2.5 Pro (covers re-rendered).
 - [x] 2026-10-18 — Name SEO on-site: `fullName` + `alternateNames` in the profile → JSON-LD `alternateName`, full name in bio, meta description, footer and `llms.txt`.

@@ -15,6 +15,7 @@ test.describe('home', () => {
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `${SITE}/`);
     await expect(page.locator('link[hreflang="es"]')).toHaveAttribute('href', `${SITE}/es/`);
     await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /.+/);
+    await expect(page.locator('meta[name="author"]')).toHaveAttribute('content', 'Sample Person');
     await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
       'content',
       /^https:\/\//,

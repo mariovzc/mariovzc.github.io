@@ -13,10 +13,22 @@ interface Props {
   jsonLd: Record<string, unknown>[];
   noindex: boolean;
   contentLang: Locale;
+  author: string;
 }
 
-const { lang, title, description, path, translations, image, type, jsonLd, noindex, contentLang } =
-  Astro.props;
+const {
+  lang,
+  title,
+  description,
+  path,
+  translations,
+  image,
+  type,
+  jsonLd,
+  noindex,
+  contentLang,
+  author,
+} = Astro.props;
 const site = Astro.site!.href;
 // noindex pages (404) have no stable URL of their own: no canonical or alternates.
 const canonical = noindex ? undefined : canonicalFor({ site, path, lang, translations });
@@ -26,6 +38,7 @@ const imageUrl = new URL(image, site).href;
 
 <title>{title}</title>
 <meta name="description" content={description} />
+<meta name="author" content={author} />
 {canonical && <link rel="canonical" href={canonical} />}
 {noindex && <meta name="robots" content="noindex" />}
 {alternates.map((a) => (

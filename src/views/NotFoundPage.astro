@@ -22,10 +22,11 @@ const blocks: { lang: Locale; fallback: string }[] = [
   noindex
   brandOnlyNav
 >
-  <section class="mx-auto flex w-full max-w-[640px] flex-col items-center gap-8 py-12 sm:py-20">
+  <section class="mx-auto flex w-full max-w-[640px] flex-col items-center gap-10 py-12 sm:py-20">
     <div
-      class="tile-dark w-full overflow-hidden p-5 font-mono text-sm leading-relaxed sm:p-6"
+      class="tile-dark w-full overflow-hidden p-5 text-sm leading-relaxed sm:p-6"
       data-testid="not-found-terminal"
+      data-ui
     >
       <div class="mb-4 flex gap-2" aria-hidden="true">
         <span class="size-3 rounded-full bg-[#ff5f57]"></span>
@@ -61,20 +62,24 @@ const blocks: { lang: Locale; fallback: string }[] = [
       height={88}
       densities={[1, 2]}
       format="webp"
-      class="size-[88px] rounded-full border-2 border-line shadow-lg"
+      class="size-[88px] rounded-full"
     />
 
     <div class="flex w-full flex-col gap-10 text-center">
       {blocks.map((b) => (
         <div data-lang={b.lang} lang={b.lang}>
-          <p class="eyebrow">404</p>
-          <h1 class="heavy mt-3 text-4xl sm:text-5xl">{t(b.lang, 'notFound.title')}</h1>
-          <p class="mt-4 text-lg text-muted">{t(b.lang, 'notFound.text')}</p>
-          <p class="mt-8 flex flex-wrap justify-center gap-3">
-            <a href={localizePath('/', b.lang)} class="pill pill-accent px-5 py-2.5">
+          <h1 class="heavy text-[clamp(2.4rem,7vw,4.5rem)] leading-none">
+            {t(b.lang, 'notFound.title')}
+          </h1>
+          <p class="mt-5 text-lg">{t(b.lang, 'notFound.text')}</p>
+          <p class="mt-9 flex flex-wrap items-center justify-center gap-6">
+            <a href={localizePath('/', b.lang)} class="btn px-5 py-2.5">
               {t(b.lang, 'notFound.home')}
             </a>
-            <a href={`mailto:${email}`} class="pill pill-soft px-5 py-2.5">
+            <a
+              href={`mailto:${email}`}
+              class="font-bold underline underline-offset-4 hover:text-accent"
+            >
               {t(b.lang, 'nav.contact')}
             </a>
           </p>

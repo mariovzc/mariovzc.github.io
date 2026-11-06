@@ -95,15 +95,15 @@ const originTrialToken = import.meta.env.PUBLIC_WEBMCP_OT_TOKEN;
       author={profile.name}
     />
   </head>
-  <body class="flex min-h-screen flex-col bg-bg text-fg">
+  <body class="flex min-h-svh flex-col bg-bg text-fg">
     <a
       href="#main"
-      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-surface focus:px-4 focus:py-2 focus:font-semibold focus:shadow-lg"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[60] focus:bg-accent focus:px-4 focus:py-2 focus:font-bold focus:text-on-accent"
     >
       {t(lang, 'nav.skip')}
     </a>
     {minimal ? (
-      <main id="main" class="mx-auto flex min-h-screen max-w-3xl flex-col px-4 py-6 sm:px-6">
+      <main id="main" class="mx-auto flex min-h-svh w-full max-w-3xl flex-col px-4 py-6 sm:px-6">
         <slot />
       </main>
     ) : (

@@ -32,7 +32,7 @@ export default function ThemeToggle({ labels }: Props) {
       aria-label={label}
       title={label}
       data-testid="theme-toggle"
-      className="pill pill-neutral justify-center px-2.5"
+      className="inline-flex size-9 items-center justify-center text-muted hover:text-fg"
     >
       <svg
         width="16"

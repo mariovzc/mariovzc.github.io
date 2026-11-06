@@ -29,6 +29,8 @@ interface Props {
   minimal?: boolean;
   /** Nav with only the brand link and theme toggle (404 page). */
   brandOnlyNav?: boolean;
+  /** Full-bleed main (home): sections bring their own .chapter-inner container. */
+  wide?: boolean;
 }
 
 const {
@@ -45,6 +47,7 @@ const {
   langSwitchHref,
   minimal = false,
   brandOnlyNav = false,
+  wide = false,
 } = Astro.props;
 
 const profile = await getProfile(lang);
@@ -112,10 +115,13 @@ const originTrialToken = import.meta.env.PUBLIC_WEBMCP_OT_TOKEN;
           langSwitchHref={langSwitchHref}
           brandOnly={brandOnlyNav}
         />
-        <main id="main" class="mx-auto w-full max-w-6xl flex-1 px-4 sm:px-6">
+        <main
+          id="main"
+          class:list={[wide ? 'w-full flex-1' : 'mx-auto w-full max-w-6xl flex-1 px-4 sm:px-6']}
+        >
           <slot />
         </main>
-        <Footer name={profile.name} fullName={profile.fullName} />
+        <Footer name={profile.name} fullName={profile.fullName} contact={profile.contact} />
         <script type="application/json" id="webmcp-data" set:html={safeJson(siteData)} />
       </>
     )}

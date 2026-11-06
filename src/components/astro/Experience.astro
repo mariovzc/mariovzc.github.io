@@ -1,5 +1,4 @@
 ---
-import Section from './Section.astro';
 import { t, type Locale } from '../../i18n/utils';
 import type { ProfileData } from '../../lib/types';
 
@@ -11,27 +10,28 @@ const { lang, profile } = Astro.props;
 ---
 
 {profile.experience.length > 0 && (
-  <Section id="experience" title={t(lang, 'experience.title')}>
-    <div class="tile p-7 sm:p-8">
-      <ol class="space-y-8 border-l-2 border-line pl-6">
+  <section id="experience" aria-labelledby="experience-title" class="scroll-mt-14 bg-surface">
+    <div class="chapter chapter-inner">
+      <h2 id="experience-title" class="fade-up t-large">
+        {t(lang, 'experience.title')}
+      </h2>
+      <ol class="fade-up mt-14 flex flex-col gap-14">
         {profile.experience.map((e) => (
-          <li class="relative">
-            <span
-              class="absolute top-1.5 -left-[calc(1.5rem+7px)] size-3 rounded-full bg-accent ring-4 ring-[var(--accent-soft)]"
-              aria-hidden="true"
-            ></span>
-            <p class="text-sm font-semibold text-muted">
+          <li class="grid gap-x-10 gap-y-2 lg:grid-cols-12">
+            <p class="font-semibold text-muted lg:col-span-2">
               {e.end === e.start
                 ? e.start
                 : `${e.start} – ${e.end ?? t(lang, 'experience.present')}`}
             </p>
-            <h3 class="heavy mt-1 text-lg">
-              {e.role} · {e.company}
-            </h3>
-            <p class="mt-1 text-muted">{e.summary}</p>
+            <div class="max-w-3xl lg:col-span-10">
+              <h3 class="heavy text-2xl">
+                {e.role} · {e.company}
+              </h3>
+              <p class="mt-2 text-lg leading-relaxed">{e.summary}</p>
+            </div>
           </li>
         ))}
       </ol>
     </div>
-  </Section>
+  </section>
 )}

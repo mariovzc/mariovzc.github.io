@@ -4,6 +4,7 @@ import HomeHero from '../components/astro/HomeHero.astro';
 import ProjectsSection from '../components/astro/ProjectsSection.astro';
 import About from '../components/astro/About.astro';
 import Services from '../components/astro/Services.astro';
+import Stats from '../components/astro/Stats.astro';
 import Experience from '../components/astro/Experience.astro';
 import Education from '../components/astro/Education.astro';
 import Contact from '../components/astro/Contact.astro';
@@ -29,11 +30,13 @@ const years = yearsOfExperience(profile.experience);
   description={truncateText(`${profile.headline} ${profile.bio}`, 160)}
   path="/"
   jsonLd={[personJsonLd(profile, site), websiteJsonLd(profile, site)]}
+  wide
 >
-  <HomeHero lang={lang} profile={profile} featured={projects[0]} years={years} />
-  <ProjectsSection lang={lang} projects={projects} />
-  <About lang={lang} profile={profile} />
+  <HomeHero lang={lang} profile={profile} />
   <Services lang={lang} profile={profile} projects={projects} />
+  <ProjectsSection lang={lang} projects={projects} />
+  <Stats lang={lang} profile={profile} years={years} projectCount={projects.length} />
+  <About lang={lang} profile={profile} />
   <Experience lang={lang} profile={profile} />
   <Education lang={lang} profile={profile} />
   <Contact lang={lang} profile={profile} />

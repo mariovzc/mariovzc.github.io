@@ -111,6 +111,63 @@ html {
 }
 
 @layer components {
+  /* Restyle (type-only-statement direction): full-bleed colour chapters, big type, square buttons. */
+  .chapter {
+    padding-block: clamp(4.5rem, 11vh, 9rem);
+  }
+  .chapter-inner {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 72rem;
+    padding-inline: 1rem;
+  }
+  @media (min-width: 640px) {
+    .chapter-inner {
+      padding-inline: 1.5rem;
+    }
+  }
+  .t-display {
+    /* Capped so the 34-char headline holds two lines inside the 72rem container. */
+    font-size: clamp(2.25rem, 8.5vw, 7.75rem);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    font-weight: 800;
+  }
+  .t-large {
+    font-size: clamp(1.9rem, 4.4vw, 3.9rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    font-weight: 800;
+  }
+  .field-invert {
+    background: var(--fg);
+    color: var(--bg);
+  }
+  /* One button shape on the page: square, filled, 44px+ tall. */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    padding: 0.75rem 1.5rem;
+    font-weight: 800;
+    background: var(--accent);
+    color: var(--on-accent);
+  }
+  a.btn:hover,
+  button.btn:hover {
+    filter: brightness(1.08);
+  }
+  .btn-ink {
+    background: var(--on-field);
+    color: var(--field);
+  }
+  a.btn-ink:hover {
+    filter: none;
+    background: #26302a;
+  }
+
   .tile {
     background: var(--surface);
     border: 1px solid var(--line);
@@ -226,6 +283,15 @@ html {
       /* backwards (not both): no transform is held after the animation, so hover lift works. */
       animation: fade-up 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
       animation-delay: var(--delay, 0ms);
+    }
+    /* Where supported, entrances run as each element scrolls into view instead of on load. */
+    @supports (animation-timeline: view()) {
+      .fade-up {
+        animation: fade-up linear both;
+        animation-timeline: view();
+        animation-range: entry 0% entry 45%;
+        animation-delay: 0s;
+      }
     }
   }
 }

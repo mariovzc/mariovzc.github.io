@@ -63,6 +63,11 @@
   "education.title": "Education & certifications",
   "education.certifications": "Certifications",
   "stats.years": "years of experience",
+  "stats.title": "In numbers",
+  "stats.since": "the year of my first production release",
+  "stats.projects": "projects documented on this site",
+  "stats.certifications": "recent certifications",
+  "contact.word": "Email",
   "soon.eyebrow": "Coming soon",
   "soon.title": "Something new is on the way",
   "soon.text": "My new portfolio is almost ready. Meanwhile, let's talk."

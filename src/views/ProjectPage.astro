@@ -50,64 +50,70 @@ const projectHref = (slug: string) => localizePath(`/projects/${slug}/`, lang);
   contentLang={project.contentLang}
   jsonLd={[projectJsonLd(summary, profile)]}
 >
-  <article class="py-8 sm:py-12">
-    <a href={`${localizePath('/', lang)}#work`} class="pill pill-neutral">
+  <article class="py-10 sm:py-14">
+    <a
+      href={`${localizePath('/', lang)}#work`}
+      class="font-bold underline underline-offset-4 hover:text-accent"
+    >
       ← {t(lang, 'project.back')}
     </a>
 
     {project.isFallback && (
       <p
         data-testid="fallback-notice"
-        class="mt-6 rounded-tile bg-chip-orange-bg px-5 py-3 text-sm font-semibold text-chip-orange"
+        class="mt-8 bg-chip-orange-bg px-5 py-3 font-semibold text-chip-orange"
       >
         {t(lang, 'project.fallbackNotice')}
       </p>
     )}
 
     <div>
-      <h1 lang={project.contentLang} class="heavy mt-8 text-4xl leading-tight sm:text-6xl">
+      <h1
+        lang={project.contentLang}
+        class="heavy mt-8 max-w-[18ch] text-[clamp(2.2rem,5.4vw,4.5rem)] leading-[0.98] text-balance"
+      >
         {d.title}
       </h1>
-      <p lang={project.contentLang} class="mt-4 max-w-2xl text-xl text-muted">
+      <p lang={project.contentLang} class="mt-6 max-w-2xl text-xl leading-relaxed">
         {d.summary}
       </p>
 
       {d.confidential && (
         <p
           data-testid="confidential-notice"
-          class="mt-6 flex max-w-2xl items-start gap-2 rounded-tile bg-chip-orange-bg px-5 py-3 text-sm font-semibold text-chip-orange"
+          class="mt-6 flex max-w-2xl items-start gap-2 bg-chip-orange-bg px-5 py-3 font-semibold text-chip-orange"
         >
           <Icon name="lock" />
           <span>{t(lang, 'project.confidentialNotice')}</span>
         </p>
       )}
 
-      <dl class="mt-8 grid gap-4 text-sm sm:grid-cols-3">
-        <div class="tile p-5">
-          <dt class="eyebrow">{t(lang, 'project.year')}</dt>
-          <dd class="heavy mt-2 text-lg">{d.year}</dd>
+      <dl class="mt-10 grid gap-x-10 gap-y-5 sm:grid-cols-3">
+        <div>
+          <dt class="font-bold">{t(lang, 'project.year')}</dt>
+          <dd class="mt-1 text-lg text-muted">{d.year}</dd>
         </div>
-        <div class="tile p-5">
-          <dt class="eyebrow">{t(lang, 'project.role')}</dt>
-          <dd lang={project.contentLang} class="heavy mt-2 text-lg">
+        <div>
+          <dt class="font-bold">{t(lang, 'project.role')}</dt>
+          <dd lang={project.contentLang} class="mt-1 text-lg text-muted">
             {d.role}
           </dd>
         </div>
-        <div class="tile p-5">
-          <dt class="eyebrow">{t(lang, 'project.stack')}</dt>
-          <dd class="mt-2 font-semibold">{d.stack.join(' · ')}</dd>
+        <div>
+          <dt class="font-bold">{t(lang, 'project.stack')}</dt>
+          <dd class="mt-1 text-lg text-muted">{d.stack.join(' · ')}</dd>
         </div>
       </dl>
 
       {(d.links.live || d.links.repo) && (
-        <p class="mt-6 flex flex-wrap gap-3">
+        <p class="mt-8 flex flex-wrap items-center gap-6">
           {d.links.live && (
             <a
               href={d.links.live}
               data-testid="project-live"
               target="_blank"
               rel="noopener"
-              class="pill pill-accent px-5 py-2.5"
+              class="btn"
             >
               {t(lang, 'project.live')} ↗
             </a>
@@ -118,7 +124,7 @@ const projectHref = (slug: string) => localizePath(`/projects/${slug}/`, lang);
               data-testid="project-repo"
               target="_blank"
               rel="noopener"
-              class="pill pill-outline px-5 py-2.5"
+              class="font-bold underline underline-offset-4 hover:text-accent"
             >
               {t(lang, 'project.repo')} ↗
             </a>
@@ -126,27 +132,23 @@ const projectHref = (slug: string) => localizePath(`/projects/${slug}/`, lang);
         </p>
       )}
 
-      <div class="tile mt-8 overflow-hidden rounded-block">
-        <Image
-          src={d.cover}
-          alt={d.coverAlt}
-          widths={[800, 1600]}
-          sizes="(min-width: 1152px) 1152px, 100vw"
-          class="w-full"
-          format="webp"
-          loading="eager"
-        />
-      </div>
+      <Image
+        src={d.cover}
+        alt={d.coverAlt}
+        widths={[800, 1600]}
+        sizes="(min-width: 1152px) 1104px, 100vw"
+        class="mt-12 w-full bg-surface"
+        format="webp"
+        loading="eager"
+      />
 
-      <div class="tile mt-8 p-7 sm:p-10">
-        <div lang={project.contentLang} class="prose-content max-w-2xl">
-          <Content />
-        </div>
+      <div lang={project.contentLang} class="prose-content mt-14 max-w-[68ch] text-lg">
+        <Content />
       </div>
 
       {gallery.length > 0 && (
-        <section data-testid="project-gallery" class="mt-12">
-          <h2 class="heavy mb-5 text-2xl">{t(lang, 'project.gallery')}</h2>
+        <section data-testid="project-gallery" class="mt-16">
+          <h2 class="heavy mb-6 text-3xl">{t(lang, 'project.gallery')}</h2>
           <ImageGallery
             client:visible
             images={gallery}
@@ -159,7 +161,7 @@ const projectHref = (slug: string) => localizePath(`/projects/${slug}/`, lang);
     <section
       data-testid="project-cta"
       aria-labelledby="project-cta-title"
-      class="hero-surface mt-12 flex flex-wrap items-center justify-between gap-8 rounded-block px-7 py-10 sm:px-12 sm:py-12"
+      class="hero-surface mt-16 flex flex-wrap items-center justify-between gap-8 px-7 py-12 sm:px-12 sm:py-14"
     >
       <div class="max-w-xl">
         <h2 id="project-cta-title" class="heavy text-3xl sm:text-4xl">
@@ -169,21 +171,20 @@ const projectHref = (slug: string) => localizePath(`/projects/${slug}/`, lang);
       </div>
       <a
         href={`mailto:${profile.contact.email}?subject=${encodeURIComponent(`${t(lang, 'project.cta.subject')} ${d.title}`)}`}
-        class="pill pill-white px-6 py-3 text-base"
+        class="btn btn-ink px-6 py-3 text-base"
       >
         {t(lang, 'project.cta.button')}
       </a>
     </section>
 
-    <nav class="mt-12 grid gap-4 text-sm sm:grid-cols-2" aria-label={t(lang, 'project.navLabel')}>
+    <nav class="mt-16 grid gap-6 sm:grid-cols-2" aria-label={t(lang, 'project.navLabel')}>
       {prev ? (
-        <a
-          href={projectHref(prev.slug)}
-          data-testid="project-prev"
-          class="tile tile-hover block p-6 text-muted"
-        >
-          ← {t(lang, 'project.prev')}
-          <span lang={prev.contentLang} class="heavy mt-1 block text-lg text-fg">
+        <a href={projectHref(prev.slug)} data-testid="project-prev" class="group block">
+          <span class="font-semibold text-muted">← {t(lang, 'project.prev')}</span>
+          <span
+            lang={prev.contentLang}
+            class="heavy mt-1 block text-xl transition-colors group-hover:text-accent"
+          >
             {prev.entry.data.title}
           </span>
         </a>
@@ -191,13 +192,12 @@ const projectHref = (slug: string) => localizePath(`/projects/${slug}/`, lang);
         <span class="hidden sm:block"></span>
       )}
       {next && (
-        <a
-          href={projectHref(next.slug)}
-          data-testid="project-next"
-          class="tile tile-hover block p-6 text-right text-muted"
-        >
-          {t(lang, 'project.next')} →
-          <span lang={next.contentLang} class="heavy mt-1 block text-lg text-fg">
+        <a href={projectHref(next.slug)} data-testid="project-next" class="group block text-right">
+          <span class="font-semibold text-muted">{t(lang, 'project.next')} →</span>
+          <span
+            lang={next.contentLang}
+            class="heavy mt-1 block text-xl transition-colors group-hover:text-accent"
+          >
             {next.entry.data.title}
           </span>
         </a>

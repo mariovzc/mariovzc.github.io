@@ -29,6 +29,8 @@ interface Props {
   minimal?: boolean;
   /** Nav with only the brand link and theme toggle (404 page). */
   brandOnlyNav?: boolean;
+  /** Full-bleed main (home): sections bring their own .chapter-inner container. */
+  wide?: boolean;
 }
 
 const {
@@ -45,6 +47,7 @@ const {
   langSwitchHref,
   minimal = false,
   brandOnlyNav = false,
+  wide = false,
 } = Astro.props;
 
 const profile = await getProfile(lang);
@@ -92,15 +95,15 @@ const originTrialToken = import.meta.env.PUBLIC_WEBMCP_OT_TOKEN;
       author={profile.name}
     />
   </head>
-  <body class="flex min-h-screen flex-col bg-bg text-fg">
+  <body class="flex min-h-svh flex-col bg-bg text-fg">
     <a
       href="#main"
-      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-surface focus:px-4 focus:py-2 focus:font-semibold focus:shadow-lg"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[60] focus:bg-accent focus:px-4 focus:py-2 focus:font-bold focus:text-on-accent"
     >
       {t(lang, 'nav.skip')}
     </a>
     {minimal ? (
-      <main id="main" class="mx-auto flex min-h-screen max-w-3xl flex-col px-4 py-6 sm:px-6">
+      <main id="main" class="mx-auto flex min-h-svh w-full max-w-3xl flex-col px-4 py-6 sm:px-6">
         <slot />
       </main>
     ) : (
@@ -112,10 +115,13 @@ const originTrialToken = import.meta.env.PUBLIC_WEBMCP_OT_TOKEN;
           langSwitchHref={langSwitchHref}
           brandOnly={brandOnlyNav}
         />
-        <main id="main" class="mx-auto w-full max-w-6xl flex-1 px-4 sm:px-6">
+        <main
+          id="main"
+          class:list={[wide ? 'w-full flex-1' : 'mx-auto w-full max-w-6xl flex-1 px-4 sm:px-6']}
+        >
           <slot />
         </main>
-        <Footer name={profile.name} fullName={profile.fullName} />
+        <Footer name={profile.name} fullName={profile.fullName} contact={profile.contact} />
         <script type="application/json" id="webmcp-data" set:html={safeJson(siteData)} />
       </>
     )}

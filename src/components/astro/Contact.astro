@@ -7,36 +7,57 @@ interface Props {
   profile: ProfileData;
 }
 const { lang, profile } = Astro.props;
-const { email, github, linkedin, x, credly } = profile.contact;
-const socials = [
-  { label: 'GitHub', href: github },
-  { label: 'LinkedIn', href: linkedin },
-  { label: 'X', href: x },
-  { label: 'Credly', href: credly },
-].filter((s): s is { label: string; href: string } => Boolean(s.href));
+const word = t(lang, 'contact.word');
+// One word is the button: size the verb so it spans the viewport on one line.
+const wordSize = `${(94 / (word.length * 0.62)).toFixed(1)}vw`;
 ---
 
-<section id="contact" aria-labelledby="contact-title" class="fade-up scroll-mt-20 py-10 sm:py-12">
-  <div class="hero-surface relative overflow-hidden rounded-block px-7 py-12 sm:px-12 sm:py-16">
-    <div class="relative">
-      <h2 id="contact-title" class="heavy text-3xl sm:text-5xl">
-        {t(lang, 'contact.title')}
-      </h2>
-      <p class="mt-4 max-w-xl text-lg">{t(lang, 'contact.text')}</p>
-      <a href={`mailto:${email}`} class="pill pill-white mt-8 px-6 py-3 text-base break-all">
-        {email}
-      </a>
-      {socials.length > 0 && (
-        <ul class="mt-6 flex flex-wrap gap-2">
-          {socials.map((s) => (
-            <li>
-              <a href={s.href} rel="me noopener" target="_blank" class="pill pill-outline-white">
-                {s.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      )}
+<section id="contact" aria-labelledby="contact-title" class="scroll-mt-14">
+  <h2 id="contact-title" class="sr-only">
+    {t(lang, 'contact.title')}
+  </h2>
+  <a
+    href={`mailto:${profile.contact.email}`}
+    class="cta-band relative flex min-h-[60svh] flex-col justify-between overflow-hidden"
+  >
+    <div class="fade-up flex items-start justify-between gap-8 px-4 pt-8 sm:px-6">
+      <p class="max-w-[32ch] text-lg leading-snug font-semibold sm:text-xl">
+        {t(lang, 'contact.text')}
+        <span class="mt-1 block font-bold break-all">{profile.contact.email}</span>
+      </p>
+      <svg
+        width="48"
+        height="48"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.5"
+        stroke-linecap="square"
+        aria-hidden="true"
+        class="mt-1 shrink-0"
+      >
+        <path d="M7 17 17 7M8 7h9v9" />
+      </svg>
     </div>
-  </div>
+    <span
+      aria-hidden="true"
+      class="heavy block whitespace-nowrap pb-3 pl-2 leading-none tracking-[-0.03em]"
+      style={`font-size: ${wordSize}`}
+    >
+      {word}
+    </span>
+  </a>
 </section>
+
+<style>
+  .cta-band {
+    background: var(--field);
+    color: var(--on-field);
+    transition: none;
+  }
+  .cta-band:hover,
+  .cta-band:focus-visible {
+    background: var(--on-field);
+    color: var(--field);
+  }
+</style>

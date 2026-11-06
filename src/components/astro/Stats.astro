@@ -1,0 +1,43 @@
+---
+import { t, type Locale } from '../../i18n/utils';
+import type { ProfileData } from '../../lib/types';
+
+interface Props {
+  lang: Locale;
+  profile: ProfileData;
+  years: number | null;
+  projectCount: number;
+}
+const { lang, profile, years, projectCount } = Astro.props;
+const since = profile.experience.map((e) => Number(e.start)).filter(Number.isFinite);
+const figures = [
+  ...(years !== null ? [{ value: `${years}+`, label: t(lang, 'stats.years') }] : []),
+  ...(since.length > 0
+    ? [{ value: String(Math.min(...since)), label: t(lang, 'stats.since') }]
+    : []),
+  ...(projectCount > 0 ? [{ value: String(projectCount), label: t(lang, 'stats.projects') }] : []),
+  ...(profile.certifications.length > 0
+    ? [{ value: String(profile.certifications.length), label: t(lang, 'stats.certifications') }]
+    : []),
+];
+---
+
+{figures.length > 0 && (
+  <section aria-labelledby="stats-title" class="field-invert">
+    <div class="chapter chapter-inner grid items-start gap-12 lg:grid-cols-12">
+      <h2 id="stats-title" class="fade-up t-large lg:col-span-5">
+        {t(lang, 'stats.title')}
+      </h2>
+      <ul class="fade-up grid grid-cols-[minmax(4.5ch,max-content)_1fr] items-baseline gap-x-7 gap-y-9 lg:col-span-7">
+        {figures.map((f) => (
+          <li class="col-span-2 grid grid-cols-subgrid items-baseline">
+            <span class="heavy text-right text-[clamp(3rem,6.5vw,6rem)] leading-none tabular-nums">
+              {f.value}
+            </span>
+            <span class="max-w-[26ch] text-lg leading-snug">{f.label}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+)}

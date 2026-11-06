@@ -5,6 +5,15 @@ date) or when a new idea comes up. Last reviewed: 2026-10-18.
 
 Priority: **P1** = soon / high impact · **P2** = valuable, not urgent · **P3** = nice to have.
 
+## Restyle (branch `restyle/type-statement`)
+
+- [ ] **P1 · Merge decision** — 2026-11 restyle (taste-skill "type-only-statement": full-bleed colour
+      chapters, statement hero, square buttons, one-word lime CTA band, cropped `mariovzc` footer wordmark).
+      Home + project pages + 404 + coming-soon done on the branch; owner validates before merging to master
+      (push deploys). After merge: re-check social previews (covers changed) and delete the branch.
+- [ ] **P2 · Restyle polish** — defended inspector WARNs: no video on the page (nothing honest to show under
+      NDA) and the two giant display sizes (CTA word + footer wordmark). Revisit if a honest clip appears.
+
 ## Launch follow-up
 
 - [ ] **P1 · ~2026-10-25 · Sitemap status** — Search Console → Sitemaps: `sitemap-index.xml?v=2` and

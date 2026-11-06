@@ -1,6 +1,4 @@
 ---
-import Section from './Section.astro';
-import Icon from './Icon.astro';
 import { t, type Locale } from '../../i18n/utils';
 import type { ProfileData } from '../../lib/types';
 
@@ -13,49 +11,53 @@ const { education, certifications } = profile;
 ---
 
 {(education.length > 0 || certifications.length > 0) && (
-  <Section id="education" title={t(lang, 'education.title')}>
-    {education.length > 0 && (
-      <ul class="grid gap-5 md:grid-cols-2">
-        {education.map((e) => (
-          <li class="tile tile-hover p-7">
-            <span class="chip bg-chip-green-bg text-chip-green">
-              <Icon name="cap" />
-            </span>
-            <h3 class="heavy mt-5 text-xl">{e.institution}</h3>
-            <p class="mt-2 text-muted">{e.degree}</p>
-            <p class="mt-1 text-sm font-semibold text-muted">
-              {e.start}
-              {e.end ? ` – ${e.end}` : ''}
-            </p>
-          </li>
-        ))}
-      </ul>
-    )}
-    {certifications.length > 0 && (
-      <div class:list={[education.length > 0 && 'mt-10']}>
-        <h3 class="heavy mb-4 text-xl">{t(lang, 'education.certifications')}</h3>
-        <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {certifications.map((c) => (
-            <li class="tile tile-hover flex items-start gap-3 p-5">
-              <span class="chip bg-chip-blue-bg text-chip-blue">
-                <Icon name="badge" />
-              </span>
-              <div>
-                {c.url ? (
-                  <a href={c.url} target="_blank" rel="noopener" class="heavy hover:underline">
-                    {c.name}
-                  </a>
-                ) : (
-                  <p class="heavy">{c.name}</p>
-                )}
-                <p class="text-sm text-muted">
-                  {c.issuer} · {c.year}
+  <section id="education" aria-labelledby="education-title" class="scroll-mt-14">
+    <div class="chapter chapter-inner">
+      <h2 id="education-title" class="fade-up t-large max-w-[14em] text-balance">
+        {t(lang, 'education.title')}
+      </h2>
+      <div class="fade-up mt-14 grid gap-x-14 gap-y-12 lg:grid-cols-2">
+        {education.length > 0 && (
+          <ul class="flex flex-col gap-9">
+            {education.map((e) => (
+              <li>
+                <h3 class="heavy text-2xl">{e.institution}</h3>
+                <p class="mt-1 text-lg">{e.degree}</p>
+                <p class="mt-1 font-semibold text-muted">
+                  {e.start}
+                  {e.end ? ` – ${e.end}` : ''}
                 </p>
-              </div>
-            </li>
-          ))}
-        </ul>
+              </li>
+            ))}
+          </ul>
+        )}
+        {certifications.length > 0 && (
+          <div>
+            <h3 class="heavy text-2xl">{t(lang, 'education.certifications')}</h3>
+            <ul class="mt-5 flex flex-col gap-5">
+              {certifications.map((c) => (
+                <li>
+                  {c.url ? (
+                    <a
+                      href={c.url}
+                      target="_blank"
+                      rel="noopener"
+                      class="heavy text-lg underline-offset-4 hover:text-accent hover:underline"
+                    >
+                      {c.name}
+                    </a>
+                  ) : (
+                    <p class="heavy text-lg">{c.name}</p>
+                  )}
+                  <p class="text-muted">
+                    {c.issuer} · {c.year}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
-    )}
-  </Section>
+    </div>
+  </section>
 )}

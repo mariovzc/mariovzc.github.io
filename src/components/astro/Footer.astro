@@ -1,17 +1,52 @@
 ---
+import type { ProfileData } from '../../lib/types';
+
 interface Props {
   name: string;
   fullName?: string;
+  contact?: ProfileData['contact'];
 }
 
-const { name, fullName } = Astro.props;
+const { name, fullName, contact } = Astro.props;
 const year = new Date().getFullYear();
+const links = contact
+  ? [
+      { label: contact.email, href: `mailto:${contact.email}` },
+      { label: 'GitHub', href: contact.github },
+      { label: 'LinkedIn', href: contact.linkedin },
+      { label: 'X', href: contact.x },
+      { label: 'Credly', href: contact.credly },
+    ].filter((l): l is { label: string; href: string } => Boolean(l.href))
+  : [];
 ---
 
-<footer class="mt-16 bg-[var(--footer-bg)] text-[#a1a1a6]">
-  <div class="mx-auto max-w-6xl px-4 py-10 text-center text-sm sm:px-6">
-    <p>
+<footer class="overflow-hidden bg-[var(--footer-bg)] text-[#a9b3ab]">
+  <div class="mx-auto flex max-w-6xl flex-wrap items-baseline justify-between gap-x-10 gap-y-4 px-4 pt-14 sm:px-6">
+    <p class="text-sm">
       © {year} <span class="heavy text-[#f5f5f7]">{fullName ?? name}</span>
     </p>
+    {links.length > 0 && (
+      <ul class="flex flex-wrap gap-x-6 gap-y-2 text-sm">
+        {links.map((l) => (
+          <li>
+            <a
+              href={l.href}
+              rel={l.href.startsWith('http') ? 'me noopener' : undefined}
+              target={l.href.startsWith('http') ? '_blank' : undefined}
+              class="font-semibold hover:text-[#f5f5f7]"
+            >
+              {l.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
   </div>
+  <!-- Brand handle as a cropped wordmark: the footer's bottom edge cuts through the letters. -->
+  <p
+    aria-hidden="true"
+    class="heavy pointer-events-none mt-8 translate-y-[30%] whitespace-nowrap pl-4 text-[26vw] leading-none text-[#f5f5f7] sm:pl-6"
+  >
+    mariovzc
+  </p>
 </footer>

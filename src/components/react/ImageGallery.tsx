@@ -38,7 +38,7 @@ export default function ImageGallery({ images, labels }: Props) {
               type="button"
               onClick={() => open(img)}
               aria-label={`${labels.open}: ${img.alt}`}
-              className="block w-full overflow-hidden rounded-2xl border border-line bg-surface"
+              className="block w-full overflow-hidden bg-surface"
             >
               <img
                 src={img.thumb}
@@ -58,7 +58,7 @@ export default function ImageGallery({ images, labels }: Props) {
         aria-label={active?.alt ?? labels.open}
         onClose={() => setActive(null)}
         onClick={(e) => e.target === dialog.current && dialog.current?.close()}
-        className="m-auto max-h-[90vh] max-w-[90vw] rounded-tile bg-surface p-0 backdrop:bg-black/70"
+        className="m-auto max-h-[90vh] max-w-[90vw] bg-surface p-0 backdrop:bg-black/70"
       >
         {active && (
           <figure className="relative">
@@ -71,7 +71,7 @@ export default function ImageGallery({ images, labels }: Props) {
               type="button"
               autoFocus
               onClick={() => dialog.current?.close()}
-              className="pill pill-neutral absolute right-3 top-3 bg-surface"
+              className="btn btn-ink absolute top-3 right-3 min-h-0 px-4 py-2"
             >
               {labels.close}
             </button>
